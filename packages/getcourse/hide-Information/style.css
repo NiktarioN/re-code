@@ -1,0 +1,136 @@
+[id='logicRulePluginw1'] .rule-test-block {
+  display: none;
+}
+
+.funnel-create h1 {
+  display: none;
+}
+
+.funnel-line-text a {
+  display: none;
+}
+
+.funnel-parts td.xborder-left b {
+  display: none;
+}
+
+.funnel-parts td.xborder-left + td b {
+  display: none;
+}
+
+.metrika-data-table .text-right {
+  display: none;
+}
+
+.metrika-data-table .metric-value {
+  display: none;
+}
+
+.metrika-data-number-content .number-value {
+  font-size: 0;
+}
+
+.metrika-data-number-content .number-value::before {
+  content: ' ';
+}
+
+.conversions-wrapper {
+  display: none;
+}
+
+.rule-limit-block {
+  display: none;
+}
+
+td:not(.user-name) a[href*='/user/control/user/update/id/'] {
+  filter: blur(6px);
+}
+
+.answers-list {
+  filter: blur(6px);
+}
+
+.stat-table {
+  filter: blur(6px);
+}
+
+/* КАРТОЧКА ПОЛЬЗОВАТЕЛЯ СПРАВА */
+.user-profile-link,
+.user-profile-image,
+.user-avatar[data-reactid],
+.user-email[data-reactid],
+.user-phone[data-reactid],
+.user-manager[data-reactid],
+.user-payed-money[data-reactid],
+.editable-link-wrapper[data-reactid] {
+  filter: blur(6px);
+}
+
+/* ДАННЫЕ НА СТРАНИЦЕ ПОЛЬЗОВАТЕЛЯ */
+form[id='userForm'] .client-form {
+  filter: blur(6px);
+}
+
+/* КАРТЫ */
+.cards[data-x-sp] {
+  filter: blur(6px);
+}
+
+/* ДАННЫЕ НА СТРАНИЦЕ ЗАКАЗА */
+form[id='dealForm'] .deal-state-panel ~ .panel-default .panel-body {
+  filter: blur(6px);
+}
+
+/* ИМЯ ОТВЕТСТВЕННОГО В ЗАДАЧЕ */
+.task-status [data-manager-user-id] {
+  filter: blur(6px);
+}
+
+/* СКРЫТИЕ ДАННЫХ В ЗАДАЧАХ */
+.task-object-mini-card {
+  filter: blur(6px);
+}
+
+.comment-wrapper {
+  filter: blur(6px);
+}
+
+/* tr[data-key] td:not([style="width: 70px; text-align:center"]), .col-md-3, .gc-tags-list {
+	filter: blur(6px);
+} */
+
+/* РАЗДЕЛ "РАССЫЛКИ". СТАТИСТИКА ПО ПИСЬМУ */
+form[action*='/notifications/control/mailings/update/id/'] .col-md-8 > .row > .col-md-6 {
+  filter: blur(6px);
+}
+
+/* СКРЫВАЕМ ИНФОРМАЦИЮ В КАНБАНЕ */
+.v-application--wrap div[title] {
+  filter: blur(6px);
+}
+
+.deal-kanban-header__brief {
+  filter: blur(6px);
+}
+
+.kanban-board__item .deal-custom-fields {
+  filter: blur(6px);
+}
+
+.kanban-card-custom-fields,
+.kanban-card-client,
+.kanban-card-manager {
+  filter: blur(6px);
+}
+
+/* ДОПОЛНИТЕЛЬНО */
+@media print {
+  .page-header,
+  .gc-account-logo,
+  .talks-widget-button,
+  .gc-account-leftbar,
+  .questionaryMenu,
+  .questionaryDetails > table > tbody > tr:nth-child(2) {
+    display: none;
+  }
+}

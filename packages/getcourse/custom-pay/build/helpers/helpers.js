@@ -1,0 +1,1 @@
+(()=>{var c=new URL(window.location.href),o=r=>new URL(r,c.origin);var s=(r,a=[])=>{let e=o(r);return[...typeof a=="string"?[a]:a].forEach(t=>{e.searchParams.delete(t)}),e};var n=(r,a)=>{window.history.pushState({},"",s(r,a).href)},l=n;})();

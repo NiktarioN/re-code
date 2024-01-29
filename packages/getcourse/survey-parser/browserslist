@@ -1,3 +1,0 @@
-defaults
-not op_mini all
-not kaios < 3

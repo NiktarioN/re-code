@@ -1,5 +1,3 @@
-// ШАГИ
-
 /**
  * Plugin Name: gcSurveyParser
  * Description: Парсер анкеты на GetCourse

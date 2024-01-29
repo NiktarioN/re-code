@@ -1,0 +1,17 @@
+{
+	"root": true,
+	"env": {
+		"browser": true
+	},
+	"plugins": [
+		"compat"
+	],
+	"extends": [
+		"plugin:compat/recommended",
+		"airbnb-base",
+		"prettier"
+	],
+	"parserOptions": {
+		"ecmaVersion": "latest"
+	}
+}

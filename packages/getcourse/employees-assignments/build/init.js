@@ -1,0 +1,1 @@
+(()=>{(()=>{let e=setInterval(()=>{window?.recode?.gcEmployeesAssignments&&(clearInterval(e),window.recode.gcEmployeesAssignments.init({employees:{999999:{hideMoneyInformation:!0},777777:{hideMoneyInformation:!0}},notAccessPage:"/not-access-page"}))},100)})();})();

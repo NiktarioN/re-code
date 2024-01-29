@@ -1,0 +1,1 @@
+(()=>{var e=new URL(window.location.href),s=r=>new URL(r,e.origin),a=(r,t)=>s(r).searchParams.has(t);var n=r=>{(a(document.referrer,r)||a(e,r))&&document.querySelectorAll(".xdget-partialpay .btn").forEach(c=>c.classList.add("hide"))},l=n;})();

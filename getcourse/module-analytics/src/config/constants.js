@@ -2,7 +2,7 @@ import { currentUrl, hasSearchParam } from '../../../../utils/url-utils';
 
 const defaultSearchParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
 const ignoreSearchParams = ['id'];
-const dontResetSearchParams = ['sb_id', 'sbid'];
+const dontResetSearchParams = ['sb_id', 'sbid', 'bh_id', 'bhid', 'vk_id', 'vkid'];
 
 // const ignoreSearchParamInLessons = ['id', 'mode'];
 // const getcourseWorkSections = ['page', 'show', 'control/stream', 'control/lesson'];
@@ -31,7 +31,7 @@ const urlModeOptions = {
 
 const formsSelector = 'form.lt-form';
 const offerSelector = '[name="formParams[offer_id][]"]';
-const formCreateDealSelector = 'recode-form-create-deal';
+const formCreateDealSelector = '.recode-form-create-deal';
 
 const { isAdmin, isTeacher } = window.userInfo;
 const isEmployee = isAdmin || isTeacher;

@@ -18,15 +18,15 @@ import {
 	ignoreSearchParams,
 } from './config/constants';
 import { currentUrl, getAllSearchParams } from '../../../utils/url-utils';
-import addAnalyticFields from './modules/add-fields';
+import addAnalyticFields from './features/add-fields';
 import { getReformedFields, getParamFields, getCookieFields, getOtherFields } from './helpers/get-fields-data';
-import setValueManually from './modules/values-manually';
-import setValuesInFields from './modules/values-in-fields';
-import setSearchParamsInElements from './modules/set-search-params';
-import redirectWithSearchParams from './modules/redirect-using-code';
-import redirectUsingClass from './modules/redirect-using-class';
-import validateOfferSettings from './modules/validate-offer-settings';
-import hideSystemOrders from './modules/hide-system-orders';
+import setValueManually from './features/values-manually';
+import setValuesInFields from './features/values-in-fields';
+import setSearchParamsInElements from './features/set-search-params';
+import redirectWithSearchParams from './features/redirect-using-code';
+import redirectUsingClass from './features/redirect-using-class';
+import validateOfferSettings from './features/validate-offer-settings';
+import hideSystemOrders from './features/hide-system-orders';
 import setConfig from './config/config';
 
 window.recode = {

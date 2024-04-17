@@ -13,6 +13,7 @@ import setBigButtonsInTasks from './features/set-big-buttons-in-tasks';
 import showCurrentOrder from './features/show-current-order';
 import createDealTask from './features/create-deal-task';
 import hideSmsSenderType from './features/hide-sms-sender-type';
+import validateTgLogin from './features/validate-tg-login';
 
 window.recode = {
 	...(window.recode || {}),
@@ -53,6 +54,8 @@ window.recode = {
 			if (showCurrentOrderValue === true) {
 				showCurrentOrder();
 			}
+
+			validateTgLogin();
 		},
 	},
 };

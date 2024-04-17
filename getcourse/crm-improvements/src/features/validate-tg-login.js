@@ -1,15 +1,23 @@
+import { isCmsPage } from '../config/constants';
+
 const validateTgLogin = () => {
+	if (!isCmsPage) {
+		return;
+	}
+
 	const reg = /https?:|\.?t\.me|\//gi;
-	const validateSelector = '.recode-validate-tg-login';
+	const validateSelectors = ['.recode-validate-tg-login', '.input__telegram'];
 
 	const validate = ($node) => {
 		const node = $node;
 		node.value = node.value.trim().replace(reg, '').replace(/^@/, '');
 	};
 
-	document.querySelectorAll(`${validateSelector} input`).forEach((node) => {
-		validate(node);
-		node.addEventListener('input', () => validate(node));
+	validateSelectors.forEach((selector) => {
+		document.querySelectorAll(`${selector} input`).forEach((node) => {
+			validate(node);
+			node.addEventListener('input', () => validate(node));
+		});
 	});
 };
 

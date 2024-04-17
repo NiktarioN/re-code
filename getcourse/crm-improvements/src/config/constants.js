@@ -8,5 +8,8 @@ const isPageWithTasks = pageChecker({
 const isPageWithRightUserCard = pageChecker({
 	pages: ['/pl/tasks', '/pl/sales/deal', '/pl/user/user/', '/user/control', '/sales/control', '/pl/tasks/resp'],
 });
+const isCmsPage = ['page', 'show', 'control/stream', 'control/lesson'].some(
+	(section) => window?.controllerId === section
+);
 
-export { dealFieldsNodeSelector, isDealPage, isPageWithTasks, isPageWithRightUserCard };
+export { dealFieldsNodeSelector, isDealPage, isPageWithTasks, isPageWithRightUserCard, isCmsPage };

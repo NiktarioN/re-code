@@ -2,12 +2,12 @@ import { isDealPage } from '../config/constants';
 import { getDealId, getDealStatus } from '../helpers/helpers';
 import { isNumber } from '../../../../utils/checks';
 
-const createDealTask = (config) => {
+const createOrderTask = (config) => {
 	const { id: taskId = undefined, title: taskTitle = undefined, proccessTitle: taskProccessTitle = undefined } = config;
 
 	const hasTask = (title) =>
-		[...document.querySelectorAll('.task-form .task-title > a[href*="/pl/tasks/task/view"]')].some((taskLink) =>
-			taskLink.textContent.trim().includes(title.trim())
+		[...document.querySelectorAll('.task-form .task-title > a[href*="/pl/tasks/task/view"]')].some(({ textContent }) =>
+			textContent.trim().includes(title.trim())
 		);
 
 	const createTask = async (params) => {
@@ -38,6 +38,8 @@ const createDealTask = (config) => {
 		isDealPage &&
 		!!targetNode &&
 		!(getDealStatus() === 'Завершен') &&
+		!(getDealStatus() === 'Отменен') &&
+		!(getDealStatus() === 'Ложный') &&
 		(taskProccessTitle === undefined || !hasTask(taskProccessTitle)) &&
 		!!taskId &&
 		isNumber(taskId) &&
@@ -69,4 +71,4 @@ const createDealTask = (config) => {
 	targetNode.after(taskLi);
 };
 
-export default createDealTask;
+export default createOrderTask;

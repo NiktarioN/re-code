@@ -5,17 +5,7 @@ const hideTrashInTasks = () => {
 		return;
 	}
 
-	const styles = document.createElement('style');
-	styles.id = 'recode-hide-trash-in-tasks';
-	styles.innerHTML += `
-  div:has(> .btn-take-task-link),
-  .btn-take-task-link,
-  .make-delay-btn {
-    display: none !important;
-  }
-  `;
-
-	document.head.appendChild(styles);
+	document.querySelectorAll('.task-form').forEach(({ classList }) => classList.add('recode-task-hide-trash'));
 };
 
 export default hideTrashInTasks;

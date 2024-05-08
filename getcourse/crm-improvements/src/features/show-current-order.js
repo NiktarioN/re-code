@@ -1,4 +1,4 @@
-import { isPageWithTasks } from '../config/constants';
+import { isPageWithDeals } from '../config/constants';
 
 const showCurrentOrder = () => {
 	const userPanelHistorySelector = '#user-panel-history';
@@ -10,13 +10,7 @@ const showCurrentOrder = () => {
 			return;
 		}
 
-		orderInfoBlock.style.cssText += `
-    border-radius: 14px;
-    border: 2px solid #2d73e7;
-    overflow: hidden;
-    box-shadow: 1px 1px 1px rgba(0,0,0,.05);
-    opacity: 1;`;
-
+		orderInfoBlock.classList.add('recode-deal-panel-highlight');
 		orderInfoBlock.classList.remove('collapsed');
 		orderInfoBlock.parentNode.parentNode.scrollIntoView({
 			behavior: 'smooth',
@@ -25,7 +19,7 @@ const showCurrentOrder = () => {
 	};
 
 	const getOrderPanel = (orderTitle, nodes) =>
-		[...nodes].find((node) => node.textContent.trim() === orderTitle.textContent.trim());
+		[...nodes].find(({ textContent }) => textContent.trim() === orderTitle.textContent.trim());
 
 	const handleOrdersInfoLoaded = (orderTitle) => {
 		const observer = new MutationObserver(() => {
@@ -45,13 +39,18 @@ const showCurrentOrder = () => {
 	};
 
 	const handleUserPanelHystoryLoaded = (orderTitle) => {
-		const observer = new MutationObserver(() => {
-			const node = document.querySelector(userPanelHistorySelector);
-			if (!node) {
-				return;
-			}
+		const observer = new MutationObserver((mutations) => {
+			mutations.forEach((mutation) => {
+				if (mutation.type !== 'childList') {
+					return;
+				}
 
-			handleOrdersInfoLoaded(orderTitle);
+				mutation.addedNodes.forEach((node) => {
+					if (node.nodeType === 1 && node.matches(userPanelHistorySelector)) {
+						handleOrdersInfoLoaded(orderTitle);
+					}
+				});
+			});
 		});
 
 		observer.observe(document.querySelector(gcRightActiveBlockSelector), { childList: true, subtree: true });
@@ -71,19 +70,27 @@ const showCurrentOrder = () => {
 		observer.observe(document.body, { childList: true, subtree: true });
 	};
 
-	if (!isPageWithTasks) {
+	const handleOrderTitleLoaded = () => {
+		const observer = new MutationObserver(() => {
+			const orderTitle = document.querySelector(
+				'.page-header h1, .task-object a[href*="/sales/control/deal/update/id/"], .kanban-card-deal__title, gc-user-link a[href*="/sales/control/deal/update/id/"]'
+			);
+			if (!orderTitle) {
+				return;
+			}
+
+			observer.disconnect();
+			handleRightActiveBlockLoaded(orderTitle);
+		});
+
+		observer.observe(document.body, { childList: true, subtree: true });
+	};
+
+	if (!isPageWithDeals) {
 		return;
 	}
 
-	const orderTitle =
-		document.querySelector('.page-header h1') ||
-		document.querySelector('.task-object a[href*="/sales/control/deal/update/id/"]') ||
-		document.querySelector('.kanban-card-deal__title');
-	if (!orderTitle) {
-		return;
-	}
-
-	handleRightActiveBlockLoaded(orderTitle);
+	handleOrderTitleLoaded();
 };
 
 export default showCurrentOrder;

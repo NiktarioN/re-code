@@ -1,0 +1,51 @@
+.recode-task__text-description {
+	display: block;
+	margin-top: 3px;
+	color: #c70808;
+}
+
+.recode-task-highlight {
+	border: 2px solid #2d73e7 !important;
+}
+
+.recode-deal-panel-highlight {
+	border-radius: 14px !important;
+	border: 2px solid #2d73e7 !important;
+	overflow: hidden !important;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05) !important;
+	opacity: 1 !important;
+}
+
+.recode-task-hide-trash div:has(> .btn-take-task-link),
+.recode-task-hide-trash .btn-take-task-link,
+.recode-task-hide-trash .make-delay-btn {
+	display: none !important;
+}
+
+.task-form.recode-task-big-buttons .task-jobs .abstract-job-widget .results-block {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 15px;
+	width: 100%;
+	padding: 0px !important;
+}
+
+.task-form.recode-task-big-buttons .task-jobs .abstract-job-widget .btn {
+	border-radius: 6px !important;
+}
+
+@media (max-width: 768px) {
+	.task-form.recode-task-big-buttons .task-jobs .abstract-job-widget .results-block {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 576px) {
+	.task-form.recode-task-big-buttons .task-jobs .abstract-job-widget .results-block {
+		grid-template-columns: repeat(1, 1fr);
+	}
+}
+
+.task-form.recode-task-big-buttons .task-jobs .abstract-job-widget [data-field='comment'] {
+	margin-bottom: 15px;
+}

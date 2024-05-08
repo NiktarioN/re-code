@@ -1,10 +1,15 @@
+import settings from './settings';
+
 const setConfig = (options) => ({
-	taskOrder: options?.taskOrder || [],
-	dealHasChangedFieldId: options?.dealHasChangedFieldId || undefined,
-	showCurrentOrder: options?.showCurrentOrder || true,
-	hideTrashInTasks: options?.hideTrashInTasks || false,
-	bigButtonsInTasks: options?.bigButtonsInTasks || false,
-	hideSmsSenderType: options?.hideSmsSenderType || false,
+	taskOrder: options?.taskOrder || settings.taskOrder,
+	hideTasksInOrder: options?.hideTasksInOrder || settings.hideTasksInOrder,
+	hideManagerOperationList: options?.hideManagerOperationList || settings.hideManagerOperationList,
+	dealHasChangedFieldId: options?.dealHasChangedFieldId || settings.dealHasChangedFieldId,
+	showCurrentOrder: options?.showCurrentOrder || settings.showCurrentOrder,
+	hideTrashInTasks: options?.hideTrashInTasks || settings.hideTrashInTasks,
+	bigButtonsInTasks: options?.bigButtonsInTasks || settings.bigButtonsInTasks,
+	hideSmsSenderType: options?.hideSmsSenderType || settings.hideSmsSenderType,
+	changeManagerInOrder: options?.changeManagerInOrder || settings.changeManagerInOrder,
 });
 
 export default setConfig;

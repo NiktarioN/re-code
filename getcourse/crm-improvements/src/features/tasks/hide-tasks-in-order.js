@@ -1,18 +1,16 @@
-import { isDealPage, isUserProfilePage } from '../config/constants';
-import { isNotEmptyArray } from '../../../../utils/checks';
+import { isDealPage } from '../../../../../utils/page-checker';
+import { isUserProfilePage } from '../../config/constants';
+import { isNotEmptyArray } from '../../../../../utils/checks';
+import { isTargetUserId } from '../../../../utils/checks';
 
-const hideTasksInOrder = (config) => {
+const hideTasksInOrder = ({ usersList: { idList = [], notMode = false } = {}, searchWords = [] }) => {
 	if (!isDealPage && !isUserProfilePage) {
 		return;
 	}
 
-	const { usersList: { idList = [], notMode = false } = {}, searchWords = [] } = config;
-
 	if (!isNotEmptyArray(idList) || !isNotEmptyArray(searchWords) || typeof notMode !== 'boolean') {
 		return;
 	}
-
-	const isTargetUserId = (ids) => ids.some((id) => id.toString() === window.accountUserId.toString());
 
 	const hideTasks = (words) => {
 		const taskNodes = document.querySelectorAll('.task-form .task-title > a[href*="/pl/tasks/task/view"]');

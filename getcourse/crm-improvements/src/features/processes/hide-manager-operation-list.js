@@ -1,11 +1,9 @@
-import { isCrmPage, isProcessPage } from '../config/constants';
-import { isNotEmptyArray } from '../../../../utils/checks';
+import { isCrmPage, isProcessPage } from '../../config/constants';
+import { isNotEmptyArray } from '../../../../../utils/checks';
 
-const hideManagerOperationList = (config) => {
+const hideManagerOperationList = ({ idList = [], notMode = false }) => {
 	const managerOperationListSelector = '[name="AutoAssignManagerOperation[managerUserId]"]';
 	const taskFormSelector = '.task-form';
-
-	const { idList = [], notMode = false } = config;
 
 	const isTargetUserId = (ids, value) => ids.some((id) => id.toString() === value.toString());
 

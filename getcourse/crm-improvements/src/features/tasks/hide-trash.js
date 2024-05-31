@@ -1,4 +1,4 @@
-import { isPageWithTasks } from '../config/constants';
+import { isPageWithTasks } from '../../config/constants';
 
 const hideTrashInTasks = () => {
 	if (!isPageWithTasks) {

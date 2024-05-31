@@ -1,4 +1,5 @@
-import { isDealPage, isUserProfilePage } from '../config/constants';
+import { isUserProfilePage } from '../../config/constants';
+import { isDealPage } from '../../../../../utils/page-checker';
 
 const moveTasksToTheTop = () => {
 	if (!isDealPage && !isUserProfilePage) {

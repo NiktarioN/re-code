@@ -1,10 +1,12 @@
-import { isDealPage } from '../config/constants';
-import { getDealId, getDealStatus } from '../helpers/helpers';
-import { isNumber } from '../../../../utils/checks';
+import { isDealPage } from '../../../../../utils/page-checker';
+import { getDealId, getDealStatus } from '../../../../utils/gets';
+import { isNumber } from '../../../../../utils/checks';
 
-const createOrderTask = (config) => {
-	const { id: taskId = undefined, title: taskTitle = undefined, proccessTitle: taskProccessTitle = undefined } = config;
-
+const createOrderTask = ({
+	id: taskId = undefined,
+	title: taskTitle = undefined,
+	proccessTitle: taskProccessTitle = undefined,
+}) => {
 	const hasTask = (title) =>
 		[...document.querySelectorAll('.task-form .task-title > a[href*="/pl/tasks/task/view"]')].some(({ textContent }) =>
 			textContent.trim().includes(title.trim())

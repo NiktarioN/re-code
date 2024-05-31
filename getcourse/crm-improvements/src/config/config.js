@@ -7,9 +7,12 @@ const setConfig = (options) => ({
 	dealHasChangedFieldId: options?.dealHasChangedFieldId || settings.dealHasChangedFieldId,
 	showCurrentOrder: options?.showCurrentOrder || settings.showCurrentOrder,
 	hideTrashInTasks: options?.hideTrashInTasks || settings.hideTrashInTasks,
+	hideTaskDelayBtn: options?.hideTaskDelayBtn || settings.hideTaskDelayBtn,
 	bigButtonsInTasks: options?.bigButtonsInTasks || settings.bigButtonsInTasks,
 	hideSmsSenderType: options?.hideSmsSenderType || settings.hideSmsSenderType,
-	changeManagerInOrder: options?.changeManagerInOrder || settings.changeManagerInOrder,
+	changeManager: options?.changeManager || settings.changeManager,
+	hideSystemOrders: options?.hideSystemOrders || settings.hideSystemOrders,
+	canEditProcesses: options?.canEditProcesses || settings.canEditProcesses,
 });
 
 export default setConfig;

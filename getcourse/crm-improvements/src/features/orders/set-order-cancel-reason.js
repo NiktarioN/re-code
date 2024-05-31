@@ -1,5 +1,5 @@
-import { isDealPage } from '../../../../utils/page-checker';
-import { getDealStatus } from '../helpers/helpers';
+import { isDealPage } from '../../../../../utils/page-checker';
+import { getDealStatus } from '../../../../utils/gets';
 
 const setOrderCancelReason = () => {
 	if (!isDealPage) {

@@ -1,4 +1,4 @@
-import { isCmsPage } from '../config/constants';
+import { isCmsPage } from '../../config/constants';
 
 const validateTgLogin = () => {
 	if (!isCmsPage) {

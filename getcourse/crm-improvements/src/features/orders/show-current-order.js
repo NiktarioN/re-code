@@ -1,4 +1,5 @@
-import { isPageWithDeals } from '../config/constants';
+import { isPageWithDeals } from '../../config/constants';
+import { isDeviceWidthLessThan1200 } from '../../../../../utils/checks';
 
 const showCurrentOrder = () => {
 	const userPanelHistorySelector = '#user-panel-history';
@@ -12,10 +13,12 @@ const showCurrentOrder = () => {
 
 		orderInfoBlock.classList.add('recode-deal-panel-highlight');
 		orderInfoBlock.classList.remove('collapsed');
-		orderInfoBlock.parentNode.parentNode.scrollIntoView({
-			behavior: 'smooth',
-			block: 'start',
-		});
+		if (!isDeviceWidthLessThan1200) {
+			orderInfoBlock.parentNode.parentNode.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start',
+			});
+		}
 	};
 
 	const getOrderPanel = (orderTitle, nodes) =>

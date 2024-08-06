@@ -1,0 +1,43 @@
+.metrika-funnel-part-content {
+	.text-block-wrapper {
+		flex-direction: column;
+		justify-content: center;
+
+		p:not(.recode-dashboard-title):not(:last-child) {
+			margin: 0 !important;
+			margin-bottom: 3px !important;
+		}
+
+		.metrika-data-number {
+			text-align: left;
+			padding: 20px 10px !important;
+		}
+
+		.metrika-data-number-content {
+			.metrika-data-title {
+				display: block;
+				margin-bottom: 8px;
+				font-weight: 700;
+			}
+
+			.number-value {
+				font-weight: 400;
+			}
+		}
+
+		.metrika-data-table {
+			.table-title {
+				font-weight: 700;
+			}
+			td {
+				white-space: normal !important;
+			}
+		}
+	}
+}
+
+.metrika-data-table {
+	td {
+		white-space: normal;
+	}
+}

@@ -38,6 +38,7 @@ const improveTasksForms = () => {
 
 		if (taskTitleLowerCase.includes('[оп]')) {
 			taskForm.classList.add('recode-task-highlight');
+			taskForm.classList.remove('task-form-closed');
 			addTaskAttentionBlock(node, 'Это важная задача для отдела продаж');
 		}
 	});

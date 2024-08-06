@@ -52,7 +52,8 @@ const addAnalyticFields = (fields) => {
 			if (
 				form.querySelector(offerSelector) ||
 				form.closest('.need-create-deal') ||
-				form.closest(formCreateDealSelector)
+				form.closest(formCreateDealSelector) ||
+				form.querySelector(formCreateDealSelector)
 			) {
 				addFields(form, '.builder', fields);
 			} else {

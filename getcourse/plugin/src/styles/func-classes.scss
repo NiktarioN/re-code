@@ -1,0 +1,16 @@
+// Скрыть чек-бокс для подтверждения согласия с рассылками в форме
+.recode-hide-mailing-checkbox {
+	.confirm-mailing-checkbox {
+		display: none !important;
+	}
+}
+
+// Скрыть заголовок в полях формы
+.recode-hide-label .field-label {
+	display: none !important;
+}
+
+// Скрыть стоимость предложения в форме
+.recode-hide-price .form-position-price span {
+	display: none !important;
+}

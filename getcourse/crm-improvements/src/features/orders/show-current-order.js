@@ -13,6 +13,10 @@ const showCurrentOrder = () => {
 
 		orderInfoBlock.classList.add('recode-deal-panel-highlight');
 		orderInfoBlock.classList.remove('collapsed');
+		orderInfoBlock.addEventListener('click', () => {
+			orderInfoBlock.classList.add('recode-deal-panel-highlight');
+		});
+
 		if (!isDeviceWidthLessThan1200) {
 			orderInfoBlock.parentNode.parentNode.scrollIntoView({
 				behavior: 'smooth',

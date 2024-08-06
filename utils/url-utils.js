@@ -51,6 +51,9 @@ const removeSearchParams = (inputUrl, searchParams = []) => {
   return url;
 };
 
+const updateUrl = ({ href, origin, pathname, search, hash }) =>
+  window.location.origin === origin ? `${pathname}${search}${hash}` : href;
+
 export {
   currentUrl,
   isUrl,
@@ -62,4 +65,5 @@ export {
   getFilteredSearchParams,
   addSearchParams,
   removeSearchParams,
+  updateUrl,
 };

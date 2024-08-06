@@ -55,9 +55,12 @@ const getTypeValue = (type, trigger) => {
 const setValuesInFields = (fields) => {
 	const setValue = () => {
 		fields.forEach(({ fieldSelector, valueType, trigger }) => {
-			document.querySelectorAll(`${fieldSelector}:not([${valueSetAttribute}])`).forEach(($field) => {
-				const field = $field;
-				field.value = getTypeValue(valueType, trigger) ?? '';
+			document.querySelectorAll(`${fieldSelector}:not([${valueSetAttribute}])`).forEach((field) => {
+				if (!field.value) {
+					// eslint-disable-next-line no-param-reassign
+					field.value = getTypeValue(valueType, trigger) ?? '';
+				}
+
 				field.setAttribute(valueSetAttribute, '');
 			});
 		});

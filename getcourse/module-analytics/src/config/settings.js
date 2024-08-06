@@ -17,6 +17,8 @@ const settings = {
 			'Авторизация',
 			'systemic_',
 			'[systemic]',
+			'[тех]',
+			'збо',
 		],
 		hideFromEmpoyees: true,
 	},

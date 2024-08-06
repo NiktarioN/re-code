@@ -1,0 +1,11 @@
+// Убираем для объекта "Задачи" настройку "Вызов URL"
+#contextOperationstask label:has([value='common_get_url']) {
+	display: none !important;
+}
+
+// Добавляем возможность изменять размер как нам захочется
+#flowchart .block-modal-window textarea.form-control,
+#flowchart .block-modal-window .description-block textarea,
+#flowchart .block-modal-window .operation textarea {
+	resize: auto !important;
+}

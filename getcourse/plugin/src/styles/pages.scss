@@ -1,0 +1,73 @@
+.isWidgetPage {
+	.container {
+		width: auto;
+		max-width: 1200px;
+	}
+
+	.widget-index > .row {
+		> .col-md-6 {
+			width: 100% !important;
+		}
+
+		> .col-md-6:nth-child(2) {
+			display: none;
+		}
+	}
+}
+
+.isTasksPage {
+	.container {
+		width: auto;
+	}
+}
+
+.isGroupsPage {
+	.container {
+		width: auto;
+		max-width: none;
+	}
+
+	.col-md-8 .dd {
+		max-width: none;
+	}
+}
+
+.isTrainingsPageTree {
+	.container {
+		width: auto;
+		max-width: 1200px;
+	}
+
+	.row {
+		display: flex;
+		flex-direction: column-reverse;
+	}
+
+	.col-md-6 {
+		width: 100%;
+
+		.dd {
+			max-width: none;
+		}
+	}
+
+	.sticky-wrapper {
+		height: auto !important;
+		margin-bottom: 15px;
+	}
+
+	.save-action {
+		position: static !important;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+
+		button {
+			margin-bottom: 5px;
+		}
+
+		br {
+			display: none;
+		}
+	}
+}

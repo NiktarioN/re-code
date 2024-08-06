@@ -66,7 +66,7 @@ const createOrderTask = ({
 			description: '',
 			startSince: '',
 			taskNotifyDelay: '',
-			managerUserId: window?.accountUserId || '',
+			managerUserId: '',
 		});
 	});
 

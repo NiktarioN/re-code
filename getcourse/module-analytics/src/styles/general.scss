@@ -1,0 +1,11 @@
+#fusion-settings-modal {
+	[data-id='utm'] {
+		display: none !important;
+	}
+}
+
+.fz-ext {
+	.form-control ~ label:not(#recode-transfer-params) {
+		display: none !important;
+	}
+}

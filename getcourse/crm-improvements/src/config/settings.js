@@ -17,9 +17,8 @@ const settings = {
 	},
 	dealHasChangedFieldId: undefined,
 	showCurrentOrder: true,
-	hideTrashInTasks: true,
 	hideTaskDelayBtn: false,
-	bigButtonsInTasks: false,
+	improveTaskButtons: false,
 	hideSmsSenderType: false,
 	hideSystemOrders: {
 		searchWords: [
@@ -42,7 +41,13 @@ const settings = {
 		],
 		hideFromEmpoyees: true,
 	},
+	reloadOrderPage: false,
 	canEditProcesses: {
+		idList: [],
+		notMode: false,
+		notAccessRedirectUrl: '/teach/control/stream',
+	},
+	websRights: {
 		idList: [],
 		notMode: false,
 		notAccessRedirectUrl: '/teach/control/stream',

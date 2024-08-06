@@ -1,4 +1,4 @@
-import { isFramed, dontResetSearchParams } from '../config/constants';
+import { isFramed, dontResetSearchParams, valueManuallyClasses } from '../config/constants';
 import { normalizeUrl, hasSearchParamValue } from '../../../../utils/url-utils';
 
 const redirectModesOptions = {
@@ -42,4 +42,13 @@ const hasDontResetSearchParamValue = (inputUrl, searchParam) => {
 	return hasSearchParamValue(inputUrl, searchParam);
 };
 
-export { redirectModesOptions, redirectToUrl, createNode, hasDontResetSearchParamValue };
+const hasManuallyValue = (element) => {
+	const builderItem = element.closest('.builder-item');
+	if (!builderItem) {
+		return null;
+	}
+
+	return builderItem.classList.value.match(new RegExp(`(${valueManuallyClasses.join('|')})`)) ? true : null;
+};
+
+export { redirectModesOptions, redirectToUrl, createNode, hasDontResetSearchParamValue, hasManuallyValue };

@@ -7,14 +7,6 @@ import {
 	getFilteredSearchParams,
 } from '../../../../utils/url-utils';
 
-const referrerUrl = document.referrer || 'none';
-
-const urlPageFromFrame = hasSearchParam(currentUrl.href, 'loc')
-	? new URL(getSearchParamValue(currentUrl.href, 'loc')).href
-	: currentUrl.href;
-
-const dealCreatedType = 'user';
-
 const getCleanUrl = (inputUrl) => {
 	const url = normalizeUrl(inputUrl);
 	const filteredSearchParams = getFilteredSearchParams(url.href, ['id']);
@@ -24,7 +16,19 @@ const getCleanUrl = (inputUrl) => {
 		: `${url.origin}${url.pathname}`;
 };
 
-const widgetUrl = isFramed ? getCleanUrl(currentUrl.href) : 'none';
+const getReffererUrl = () => {
+	if (!document.referrer) {
+		return 'none';
+	}
+	if (document.referrer.length > 255) {
+		return getCleanUrl(document.referrer);
+	}
+	return document.referrer;
+};
+
+const urlPageFromFrame = hasSearchParam(currentUrl.href, 'loc')
+	? new URL(getSearchParamValue(currentUrl.href, 'loc')).href
+	: currentUrl.href;
 
 const getCurrentDate = () => {
 	const options = { timeZone: 'Europe/Moscow', day: 'numeric', month: 'numeric', year: 'numeric' };
@@ -73,7 +77,15 @@ const getCurrentPageUrl = (urlMode) => {
 	const url = new URL(isFramed ? urlPageFromFrame : currentUrl.href);
 	const cleanUrl = getCleanUrl(url.href);
 
+	if (url.href.length > 255) {
+		return cleanUrl || 'none';
+	}
+
 	return urlModeOptions[urlMode] ? url.href : cleanUrl || 'none';
 };
+
+const dealCreatedType = 'user';
+const referrerUrl = getReffererUrl();
+const widgetUrl = isFramed ? getCleanUrl(currentUrl.href) : 'none';
 
 export { referrerUrl, dealCreatedType, widgetUrl, getCurrentDate, getCurrentPageUrl, getPartOfDay, getDeviceType };

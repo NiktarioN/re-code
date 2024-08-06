@@ -38,11 +38,15 @@ const setValueManually = (type) => {
 			targetValue = targetValue.replace(/[-_]/g, ' ');
 		}
 
-		const targetElement = element.querySelector('.form-control');
-		if (!targetElement || !(targetElement.tagName === 'INPUT' || targetElement.tagName === 'TEXTAREA')) {
-			return;
-		}
-		targetElement.value = targetValue;
+		const targetElements = element.querySelectorAll('.custom-field-value, .form-control');
+		targetElements.forEach((targetElement) => {
+			if (!targetElement.tagName === 'INPUT' || !targetElement.tagName === 'TEXTAREA') {
+				return;
+			}
+
+			// eslint-disable-next-line no-param-reassign
+			targetElement.value = targetValue;
+		});
 	});
 };
 

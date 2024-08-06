@@ -23,6 +23,8 @@ const isEditorPage =
 const isFramed = window.self !== window.top;
 const isGetcourseWorkPage = getcourseWorkSections.some((section) => window?.controllerId === section);
 
+const valueManuallyClasses = ['recode-value-', 'recode-text-', 'recode-param-', 'recode-cookie-'];
+
 const valueSetAttribute = 'data-recode-value-set';
 const urlModeOptions = {
 	full: true,
@@ -51,4 +53,5 @@ export {
 	offerSelector,
 	formCreateDealSelector,
 	isEmployee,
+	valueManuallyClasses,
 };

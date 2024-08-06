@@ -1,7 +1,7 @@
-import { isPageWithTasks } from '../../config/constants';
+import { isPageWithTasks, isProcessEditorPage } from '../../../../../utils/page-checker';
 
 const improveTaskButtons = () => {
-	if (!isPageWithTasks) {
+	if (!isPageWithTasks || isProcessEditorPage) {
 		return;
 	}
 

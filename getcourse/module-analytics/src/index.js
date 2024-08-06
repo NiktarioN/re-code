@@ -7,27 +7,21 @@
 /**
  * Plugin Name: gcModuleAnalytics
  * Description: Модуль аналитики на GetCourse
- * Version: 2.3
  */
 
-import {
-	isEditorPage,
-	isOfferSettingsPage,
-	isGetcourseWorkPage,
-	isUserDealsPage,
-	ignoreSearchParams,
-} from './config/constants';
+import setConfig from './config/config';
+import { isEditorPage, isGetcourseWorkPage, ignoreSearchParams } from './config/constants';
 import { currentUrl, getAllSearchParams } from '../../../utils/url-utils';
 import addAnalyticFields from './features/add-fields';
 import { getReformedFields, getParamFields, getCookieFields, getOtherFields } from './helpers/get-fields-data';
 import setValueManually from './features/values-manually';
 import setValuesInFields from './features/values-in-fields';
 import setSearchParamsInElements from './features/set-search-params';
-import redirectWithSearchParams from './features/redirect-using-code';
+import transferParams from './features/redirect-using-code';
 import redirectUsingClass from './features/redirect-using-class';
-import validateOfferSettings from './features/validate-offer-settings';
-import hideSystemOrders from './features/hide-system-orders';
-import setConfig from './config/config';
+import validateOfferSettings from '../../plugin/src/features/offer-settings/validate-settings';
+import hideSystemOrders from '../../plugin/src/features/general/hide-system-orders';
+import settingsBlockController from './features/controlles/cms-settings';
 
 window.recode = {
 	...(window.recode || {}),
@@ -38,8 +32,8 @@ window.recode = {
 			}
 
 			this.config = setConfig(options);
-
-			const fields = getReformedFields(this.config.fields);
+			const { fields: fieldsConfig, hideSystemOrders: hideSystemOrdersConfig } = this.config || {};
+			const fields = getReformedFields(fieldsConfig);
 			const fieldsParam = getParamFields(fields);
 			const fieldsCookie = getCookieFields(fields);
 			const fieldsOther = getOtherFields(fields);
@@ -49,6 +43,7 @@ window.recode = {
 			setValueManually('value');
 			setValueManually('text');
 			redirectUsingClass();
+			settingsBlockController();
 
 			if (document.cookie) {
 				setValueManually('cookie');
@@ -70,16 +65,48 @@ window.recode = {
 				setSearchParamsInElements(filteredWindowSearchParams);
 			}
 
-			if (isOfferSettingsPage) {
+			if (!window?.recode?.gcPlugin) {
 				validateOfferSettings();
+				hideSystemOrders(hideSystemOrdersConfig);
 			}
+		},
 
-			if (isUserDealsPage) {
-				hideSystemOrders(this.config.hideSystemOrders.searchWords, this.config.hideSystemOrders.hideFromEmpoyees);
-			}
-		},
 		redirectWithSearchParams(inputUrl, redirectMode = this.config.redirectMode) {
-			redirectWithSearchParams(inputUrl, redirectMode);
+			transferParams(inputUrl, redirectMode);
 		},
+
+		functions() {
+			// eslint-disable-next-line no-console
+			console.log(
+				`
+        Плагин gcModuleAnalytics. Памятка по функционалу
+
+        Функциональные классы для разных блоков:
+        recode-form-create-deal — класс для форм, если нужно показать создание заказа,
+        recode-transfer-params — класс для кнопок, если нужно сделать передачу параметров на другие страницы,
+        recode-value-ЗНАЧЕНИЕ — класс для блока с доп. полем, если мы хотим прописать значение ВРУЧНУЮ,
+        recode-param-ЗНАЧЕНИЕ — класс для блока с доп. полем, если мы хотим прописать значение конкретного параметра из URL,
+        recode-cookie-ЗНАЧЕНИЕ — класс для блока с доп. полем, если мы хотим прописать значение конкретного параметра из COOKIE,
+
+        Дополнительные параметры для записи параметров в доп. поля. Указывать отдельно в настройках:
+        referrer — Откуда пришел пользователь (с какой страницы),
+        url_full — Страница создания заказа (полный вариант с параметрами),
+        url_clean — Страница создания заказа (только сама страница без параметров),
+        created_date — Дата создания заказа,
+        part_of_day — Время создания заказа (утро, день, вечерь ночь),
+        created_type — Кем был создан заказ (пользователь, менеджер),
+        widget_url — Страница виджета,
+        device_type — С какого типа девайса был создан заказ
+        script_completed — Проверка на корректность срабатывания скрипта
+
+        Функциональные команды:
+        recode.transferParams('URL'); — Перенос всех параметров из URL через форму
+        `
+			);
+		},
+	},
+
+	transferParams(inputUrl, redirectMode = 'current-window') {
+		transferParams(inputUrl, redirectMode);
 	},
 };

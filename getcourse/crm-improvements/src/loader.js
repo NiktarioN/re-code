@@ -3,14 +3,13 @@ const addStyles = () => {
 	link.dataset.scriptName = 'Улучшение CRM GetCourse';
 	link.dataset.author = 're-code studio (tg: @recode_solutions)';
 	link.rel = 'stylesheet';
-	link.href = `https://tech-borodach.pro/packages/getcourse/crm-improvements/style.css?v=${new Date()
+	link.href = `https://tech-borodach.pro/packages/getcourse/crm-improvements/index.css?v=${new Date()
 		.getTime()
 		.toString()
 		.slice(0, 10)}`;
 
 	document.body.appendChild(link);
 };
-addStyles();
 
 const addScript = () => {
 	const script = document.createElement('script');
@@ -23,4 +22,8 @@ const addScript = () => {
 
 	document.body.appendChild(script);
 };
-addScript();
+
+document.addEventListener('DOMContentLoaded', () => {
+	addStyles();
+	addScript();
+});

@@ -1,6 +1,3 @@
-// TODO
-// Сделать так, чтобы если заходя в предложение не указан уникальный код, то он указывается и предложение само сохраняется
-
 import { currentUrl, getSearchParamValue } from '../../../../utils/url-utils';
 
 const validateOfferSettings = () => {

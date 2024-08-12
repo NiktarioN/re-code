@@ -66,6 +66,8 @@ const isCmsSettingsPage = checkPage({
   pages: ['/pl/cms/', '/cms/control/page/settings', '/cms/control/page/payment'],
 });
 
+const isProductSettingsPage = checkPage({ pages: ['/pl/sales/product/update'] });
+
 const isOneOfferSettingsPage = checkPage({ pages: ['/pl/sales/offer/update', '/pl/sales/offer/create'] });
 const isMailingSettingsPage = checkPage({ pages: ['/notifications/control/mailings/update'] });
 const isOneTaskControlPage = checkPage({ pages: ['/pl/tasks/task/view'] });
@@ -115,4 +117,5 @@ export {
   isHideTopNotificationPage,
   isProcessesCreatePage,
   isPayPage,
+  isProductSettingsPage,
 };

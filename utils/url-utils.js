@@ -2,7 +2,7 @@ const currentUrl = new URL(window.location.href);
 
 const isUrl = (value) => {
   try {
-    const url = new URL(value);
+    const url = new URL(value, currentUrl.origin);
     return Boolean(url);
   } catch (error) {
     return false;
@@ -26,6 +26,7 @@ const getAllSearchParams = (inputUrl) => {
 const getFilteredSearchParams = (inputUrl, searchParams = []) => {
   const url = normalizeUrl(inputUrl);
   const search = new URLSearchParams(url.search);
+
   const filteredSearchParams = [...search].filter(([param]) =>
     searchParams.some((searchParam) => param === searchParam)
   );
@@ -35,6 +36,7 @@ const getFilteredSearchParams = (inputUrl, searchParams = []) => {
 
 const addSearchParams = (inputUrl, searchParams = []) => {
   const url = normalizeUrl(inputUrl);
+
   searchParams.forEach(([param, value]) => {
     url.searchParams.set(param, value);
   });
@@ -44,6 +46,7 @@ const addSearchParams = (inputUrl, searchParams = []) => {
 
 const removeSearchParams = (inputUrl, searchParams = []) => {
   const url = normalizeUrl(inputUrl);
+
   [...(typeof searchParams === 'string' ? [searchParams] : searchParams)].forEach((param) => {
     url.searchParams.delete(param);
   });

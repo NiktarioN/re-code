@@ -9,3 +9,8 @@
 #flowchart .block-modal-window .operation textarea {
 	resize: auto !important;
 }
+
+// Меняем блок "Задать вопрос"
+[name='SimpleOperation[description]'] {
+	min-height: 250px;
+}

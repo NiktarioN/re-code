@@ -1,5 +1,29 @@
+import { isProductSettingsPage } from '../../../../../utils/page-checker';
+
+const handleCopyClick = (productName) => {
+	const requestData = new URLSearchParams();
+	requestData.append('Product[title]', `${productName} (Копия)`.replace(/^"+|"+$/g, ''));
+	requestData.append('Product[createOffer]', 0);
+
+	fetch('/pl/sales/product/create', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+		body: requestData.toString(),
+	})
+		.then(() => fetch('/pl/sales/product'))
+		.then((response) => response.text())
+		.then((data) => {
+			const parser = new DOMParser();
+			const doc = parser.parseFromString(data, 'text/html');
+			const newProduct = doc.querySelector('.kv-table-wrap tbody tr:first-child td:first-child a').href;
+			window.location.replace(newProduct);
+		});
+};
+
 const addCopyProductButton = () => {
-	if (!window.location.href.includes('/pl/sales/product/update')) {
+	if (!isProductSettingsPage) {
 		return;
 	}
 
@@ -12,29 +36,15 @@ const addCopyProductButton = () => {
 	copyButton.textContent = 'Копировать продукт';
 	buttonContainer.appendChild(copyButton);
 
-	const handleCopyClick = () => {
-		const requestData = new URLSearchParams();
-		requestData.append('Product[title]', JSON.stringify(`${productName} (Копия)`).replace(/['"«»]/g, ''));
-		requestData.append('Product[createOffer]', 0);
+	document.querySelectorAll('.buttons-row .btn-copy').forEach((button) => {
+		if (!button.classList.contains('recode-button')) {
+			button.classList.add('hide');
+		}
+	});
 
-		fetch('/pl/sales/product/create', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded',
-			},
-			body: requestData.toString(),
-		})
-			.then(() => fetch('/pl/sales/product'))
-			.then((response) => response.text())
-			.then((data) => {
-				const parser = new DOMParser();
-				const doc = parser.parseFromString(data, 'text/html');
-				const newProduct = doc.querySelector('.kv-table-wrap tbody tr:first-child td:first-child a').href;
-				window.location.replace(newProduct);
-			});
-	};
-
-	copyButton.addEventListener('click', handleCopyClick);
+	copyButton.addEventListener('click', () => {
+		handleCopyClick(productName);
+	});
 };
 
 export default addCopyProductButton;

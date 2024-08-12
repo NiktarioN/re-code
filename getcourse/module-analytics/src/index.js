@@ -1,6 +1,5 @@
 // TODO:
 // Добавить дополнительную проверку на игнорируемые параметры в тренингах и уроках, чтобы они не ломали функционал
-// Добавить для создания полей возможность указать тип поля (input или textarea), чтобы можно было записывать все параметры
 // Переработать запись параметров через изменение DOM, а не через атрибут
 // Стоит ли давать пользователям добавлять свои параметры для не обнуления
 
@@ -17,10 +16,11 @@ import { getReformedFields, getParamFields, getCookieFields, getOtherFields } fr
 import setValueManually from './features/values-manually';
 import setValuesInFields from './features/values-in-fields';
 import setSearchParamsInElements from './features/set-search-params';
-import transferParams from './features/redirect-using-code';
+import { transferParams, transferSearchAndFormParams } from './features/redirect-using-code';
 import redirectUsingClass from './features/redirect-using-class';
 import validateOfferSettings from '../../plugin/src/features/offer-settings/validate-settings';
 import hideSystemOrders from '../../plugin/src/features/general/hide-system-orders';
+import getUserData from './features/forms/get-user-data';
 import settingsBlockController from './features/controlles/cms-settings';
 
 window.recode = {
@@ -43,6 +43,7 @@ window.recode = {
 			setValueManually('value');
 			setValueManually('text');
 			redirectUsingClass();
+			getUserData();
 			settingsBlockController();
 
 			if (document.cookie) {
@@ -100,13 +101,25 @@ window.recode = {
         script_completed — Проверка на корректность срабатывания скрипта
 
         Функциональные команды:
-        recode.transferParams('URL'); — Перенос всех параметров из URL через форму
+        recode.transferParams('URL'); — Перенос всех параметров из URL через форму или кнопку
+        recode.transferSearchAndFormParams('URL'); — Перенос всех параметров из URL и данных из формы
         `
+			);
+		},
+
+		testLink() {
+			// eslint-disable-next-line no-console
+			console.log(
+				`${window.location.origin}${window.location.pathname}?utm_source=test_source&utm_medium=test_medium&utm_campaign=test_campaign&utm_content=test_content&utm_term=test_term&gcpc=test_gcpc&contractor=test_contractor`
 			);
 		},
 	},
 
 	transferParams(inputUrl, redirectMode = 'current-window') {
 		transferParams(inputUrl, redirectMode);
+	},
+
+	transferSearchAndFormParams(inputUrl, redirectMode = 'current-window') {
+		transferSearchAndFormParams(inputUrl, redirectMode);
 	},
 };

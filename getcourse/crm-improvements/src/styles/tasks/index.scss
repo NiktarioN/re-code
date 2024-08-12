@@ -88,6 +88,11 @@
 	}
 }
 
+// Убираем возможность создавать новые группы
+.task-form .group-tree-select {
+	display: none !important;
+}
+
 // Скрываем мусор в задачах
 .task-form.recode-task-hide-trash {
 	div:has(> .btn-take-task-link),

@@ -20,6 +20,7 @@ const redirectModes = {
 const redirectToUrl = (inputUrl, redirectMode) => {
 	const url = normalizeUrl(inputUrl);
 	const redirectAction = redirectModes[redirectMode];
+
 	redirectAction(url);
 };
 

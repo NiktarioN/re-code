@@ -1,0 +1,65 @@
+.recode-not-access {
+  opacity: 0 !important;
+}
+
+.recode-crm__attention {
+  margin-top: 3px;
+}
+
+.recode-crm__attention-text {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background-color: #f6cd94;
+  line-height: 1.2;
+  color: #333333;
+}
+
+.recode-crm__attention-text > i {
+  color: #333333 !important;
+}
+
+.recode-deal-panel-highlight {
+  border-radius: 14px !important;
+  border: 2px solid #2d73e7 !important;
+  overflow: hidden !important;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05) !important;
+  opacity: 1 !important;
+}
+
+.recode-manager-link {
+  display: block;
+}
+
+.recode-manager-link--note {
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.not-own-process-message .btn:not(.recode-not-own-process-message__button) {
+  display: none !important;
+}
+
+.v-main__wrap .bottom-panel {
+  display: none !important;
+}
+
+.custom-field.type-numeric .form-control {
+  text-align: left !important;
+  width: 100% !important;
+}
+
+.custom-field .field-description-block {
+  margin-top: 5px;
+  font-style: normal !important;
+}
+
+.v-application .menuable__content__active {
+  min-width: 140px !important;
+  max-width: none !important;
+}
+
+.v-application .scrollable-content {
+  max-height: none !important;
+}

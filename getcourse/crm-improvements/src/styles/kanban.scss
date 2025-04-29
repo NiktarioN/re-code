@@ -1,0 +1,64 @@
+// Убираем нижнюю панель для переноса карточек
+.v-main__wrap .bottom-panel {
+	display: none !important;
+}
+
+// Изменяем выпадающее меню с фильтрами на доске задач
+.v-application .menuable__content__active {
+	min-width: 140px !important;
+	max-width: none !important;
+}
+
+// .v-application .scrollable-content {
+// 	max-height: none !important;
+// }
+
+// Стили для модального окна на доске заказов
+[aria-modal='true'] > .v-dialog:has(> .task-form) {
+	width: 100% !important;
+	max-width: 960px !important;
+}
+
+// Улучшение комментариев в карточке объекта
+.gc-right-active-block .info-panel-group .body .group-item .bg-commented {
+	display: inline-block;
+	padding: 5px 10px;
+}
+
+// Стили для карточки объекта
+.kabnan-card-custom-fields__item,
+.kanban-card-custom-fields__item,
+.deal-card .deal-custom-fields__item {
+	&:not(:last-child) {
+		margin-bottom: 3px;
+	}
+}
+
+// Меняем цвет текста в карточке
+.v-application .orange--text {
+	color: #2e8b57 !important;
+}
+
+// Модальное окно с тегами
+.v-dialog {
+	.mt-4:has(> [href*='/pl/tag/index']) {
+		display: none;
+	}
+}
+
+.v-list {
+	.v-list-item:has(> .v-ship),
+	.v-list-item:has(> .v-chip) {
+		display: none;
+	}
+}
+
+// Модальное окно с выбором времени
+.v-dialog {
+	ul.ui-list li[data-v-66d77556] {
+		&:nth-child(n + 6),
+		&:nth-child(4) {
+			display: none;
+		}
+	}
+}

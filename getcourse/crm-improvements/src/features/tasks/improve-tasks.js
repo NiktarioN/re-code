@@ -1,5 +1,5 @@
 import { isUserProfilePage } from '../../config/constants';
-import { isDealPage } from '../../../../../utils/page-checker';
+import { isDealPage } from '../../../../utils/page-checker';
 
 const addTaskAttentionBlock = (targetNode, text) => {
 	const div = document.createElement('div');

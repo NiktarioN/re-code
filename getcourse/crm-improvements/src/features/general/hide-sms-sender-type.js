@@ -1,4 +1,4 @@
-import { isPageWithRightUserCard } from '../../../../../utils/page-checker';
+import { isPageWithRightUserCard } from '../../../../utils/page-checker';
 
 const hideSmsSenderType = () => {
 	if (!isPageWithRightUserCard) {

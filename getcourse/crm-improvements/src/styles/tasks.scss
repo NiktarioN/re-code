@@ -8,7 +8,8 @@
 	grid-template-columns: repeat(3, 1fr);
 	gap: 15px;
 	width: 100%;
-	padding: 0px !important;
+	padding-top: 20px !important;
+	border-top: 1px solid #777;
 
 	@media (max-width: 992px) {
 		grid-template-columns: repeat(2, 1fr);
@@ -19,6 +20,11 @@
 	}
 }
 
+.task-form div[style='padding-top: 10px;']:has(> .results-block) {
+	padding: 0 !important;
+	margin-top: 25px;
+}
+
 .task-form .results-block .btn,
 .task-form .results-block .make-delay-btn {
 	text-transform: uppercase;
@@ -26,6 +32,7 @@
 
 .task-form .results-block .btn {
 	border-radius: 6px !important;
+	white-space: normal;
 }
 
 .task-form.recode-task-improve-buttons .results-block .make-delay-btn {
@@ -72,8 +79,14 @@
 	order: 4;
 }
 
-// Поле "Комментарий менеджера" на 100%
+// Убираем в самой задаче разделитель
+.task-form .abstract-job-widget > hr {
+	display: none;
+}
+
+// Поле "Комментарий менеджера"
 .task-form [data-field='comment'] {
+	display: none !important;
 	width: 100%;
 }
 
@@ -93,7 +106,7 @@
 	display: none !important;
 }
 
-// Скрываем мусор в задачах
+// Скрыть мусор в задачах
 .task-form.recode-task-hide-trash {
 	div:has(> .btn-take-task-link),
 	.btn-take-task-link,
@@ -102,7 +115,40 @@
 	}
 }
 
-// Скрываем кнопку "Отложить в задачах"
+// Скрыть кнопку "Отложить в задачах"
 .task-form.recode-task-hide-delay-btn .results-block .make-delay-btn {
 	display: none !important;
+}
+
+// Скрыть теги в задаче
+.task-form .custom-form-tags {
+	display: none !important;
+}
+
+// Скрыть кнопку "Добавить чек-лист"
+.task-form [class*='checklistForTask'] {
+	display: none !important;
+}
+
+// Скрыть ссылку "История изменений"
+.task-form a[href*='/pl/logs/event-log?EventLogSearchForm'] {
+	display: none !important;
+}
+
+// Убрать возможность переходить в настройки предложения из задачи
+.task-form .name > b {
+	cursor: text;
+}
+
+.task-form .name a[href^='/pl/sales/offer/update?id'] {
+	color: #333333;
+	text-decoration: none;
+	pointer-events: none;
+
+	&:hover,
+	&:active,
+	&:focus {
+		color: #333333;
+		text-decoration: none;
+	}
 }

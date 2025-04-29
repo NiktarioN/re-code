@@ -1,6 +1,6 @@
 import { isNumber } from '../../../../../utils/checks';
 import { dealFieldsNodeSelector } from '../../config/constants';
-import { isDealPage } from '../../../../../utils/page-checker';
+import { isDealPage } from '../../../../utils/page-checker';
 
 const setDealHasChanged = (fieldId) => {
 	const clickOnCheckBox = () => {

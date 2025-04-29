@@ -1,0 +1,775 @@
+[
+	{
+		"id": null,
+		"label": "Комментарии_к_заказу",
+		"type": "text",
+		"required": false,
+		"settings": {
+			"placeholder": "Напиши комментарии по заказу, чтобы вспомнить ключевые моменты обработки заказа",
+			"rows": "8"
+		},
+		"description": "[ CRM ] Комментарии менеджера по заказу при обработке лида",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "0",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Ключевое_по_задаче",
+		"type": "string",
+		"required": false,
+		"settings": {
+			"size": 50,
+			"table_title": "",
+			"is_important": false,
+			"placeholder": "Напиши самое ключевое что нужно сделать по задаче с лидом"
+		},
+		"description": "[ CRM ] Ключевое что нужно сделать по задаче с лидом. Заполняется вручную менеджером",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "0",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Дата_ожидаемой_оплаты",
+		"type": "date",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": "Укажи примерную или обговоренную дату оплаты заказа"
+		},
+		"description": "[ CRM ] Примерная дата оплаты заказа или следующего платежа. Используется для аналитики, условий в процессах и доп. информации в карточках задач. Заполняется менеджером",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "0",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Дата_выставления_счета",
+		"type": "date",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": "Укажи дату выставления счета на оплату"
+		},
+		"description": "[ CRM ] Дата выставления счета на оплату. Используется для аналитики. Заполняется через процесс или менеджером",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "0",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Сумма_частичной_оплаты",
+		"type": "numeric",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": "Укажи цифрами сумму ежемесячного/текущего платежа",
+			"units": ""
+		},
+		"description": "[ CRM ] Сумма частичной оплаты заказа. Используется для дожимных писем. Заполняется менеджером",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "0",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Способ_оплаты_заказа",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Картой\nВ рассрочку от банка\nВнутренняя рассрочка\nДолями/Сплит/Подели",
+			"showAllValues": false,
+			"emptyValueText": "Не установлено"
+		},
+		"description": "[ CRM ] Каким способом клиент планирует оплатить заказ. Используется для аналитики и доп. информации в карточках задач. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "0",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Горячесть_лида",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Не определена\nГорячий\nТеплый\nХолодный",
+			"showAllValues": false,
+			"emptyValueText": "Определите горячесть лида"
+		},
+		"description": "[ CRM ] Поле для определения горячести лида и готовности к покупке. Используется для фильтрации карточек задач. Заполняется  менеджером",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "0",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Количество_касаний",
+		"type": "numeric",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": "",
+			"units": ""
+		},
+		"description": "[ CRM ] Сколько было касаний с клиентом за все время обработки заказа. Используется для аналитики и условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Количество_касаний_этап",
+		"type": "numeric",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": "",
+			"units": ""
+		},
+		"description": "[ CRM ] Сколько было касаний с клиентом на последнем этапе обработки. Используется для аналитики и условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Количество_ндз_и_игнора",
+		"type": "numeric",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": "",
+			"units": ""
+		},
+		"description": "[ CRM ] Сколько ндз или игнора было от клиента при обработке менеджером. Используется для аналитики и условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Стоимость_заказа",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Платный заказ\nБесплатная заявка",
+			"showAllValues": false,
+			"emptyValueText": "Не установлено"
+		},
+		"description": "[ CRM ] Поле для определения стоимости заказа. Используется для фильтрации карточек задач. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Тип_заявки",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Не определено\nПлатный заказ\nБыл весь вебинар\nКлик по продающей кнопке\nБыл на продающей части\nПисал комментарий\nПолучил подарок\nУчастник вебинара\nРегистрация",
+			"showAllValues": false,
+			"emptyValueText": "Не установлено"
+		},
+		"description": "[ CRM ] Поле для определения типа заявки. Используется для фильтрации карточек задач и распределения. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Действие_по_задаче",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Не установлено\nНачать работу\nСвязаться с клиентом\nДожать на оплату\nДожать на платный заказ\nКонтроль оплаты\nОтработать отказ по рассрочке\nОтработать забытый заказ\nУказать причину отказа\nВыбрать следующий этап в задаче",
+			"showAllValues": false,
+			"emptyValueText": "Не установлено"
+		},
+		"description": "[ CRM ] Универсальное поле для определения текущего действия менеджера в задаче. Используется для фильтрации карточек задач. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Этап_доски_продаж",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Не определен\nНовые заказы\nДолго не в работе\nВ работе\nНедозвоны/Игнор\nПереговоры\nДожать на оплату\nОжидаем оплату\nПредоплаты\nВнутренние рассрочки\nОтказы рассрочка\nЗабытые\nВозвраты\nЗавершены\nОтменены",
+			"showAllValues": false,
+			"emptyValueText": "Не установлено"
+		},
+		"description": "[ CRM ] Универсальный список этапов досок продаж. Используется для перемещения карточки заказа внутри досок продаж. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Итог_обработки_задачи",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Не установлен\nМенеджер не работал с задачей\nМенеджер завершил задачу\nОбработка успешно завершена\nАвтоматическое закрытие задачи\nЗавершение задачи с ошибкой",
+			"showAllValues": false,
+			"emptyValueText": "Не установлено"
+		},
+		"description": "[ CRM ] Какой итог обработки задачи после обработки лида. Используется для аналитики. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Причина_завершения",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Не определена\nСоздан платный заказ\nСоздан более приоритетный заказ\nПовторное прохождение воронки\nЦель задачи выполнена\nЗадачу не взяли в работу\nВышел срок обработки заказа\nМаленький приоритет для ОП",
+			"showAllValues": false,
+			"emptyValueText": "Не установлено"
+		},
+		"description": "[ CRM ] Причина завершения бесплатного заказа. Используется для аналитики. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Сегментация_и_распределение_завершено",
+		"type": "checkbox",
+		"required": false,
+		"settings": {
+			"cols": 49,
+			"rows": 3,
+			"table_title": "",
+			"is_important": false
+		},
+		"description": "[ CRM ] Прошел ли заказ сегментацию и распределение для дальнейшей обработки менеджером. Используется условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Дата_распределения",
+		"type": "date",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": ""
+		},
+		"description": "[ CRM ] Дата распределения лида. Используется условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Итог_распределения",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Не установлен\nВ процессе распределения\nРаспределение успешно\nРаспределит РОП\nРаспределен на ПМ\nРаспределен на менеджера предыдущего заказа\nМенеджер задан вручную\nНе распределен (достигнуто максимальное количество лидов за день)\nНе распределен (есть более приоритетный)\nНе распределен (маленький приоритет для ОП)\nНе распределен (не нужно)\nНе распределен (дубль)\nНе распределен (свободная отработка)\nНе распределен (не для обработки ОП)\nНе распределен (ошибка)",
+			"showAllValues": false,
+			"emptyValueText": "Не установлено"
+		},
+		"description": "[ CRM ] Какой итог распределения лида. Используется для условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Процесс_обработки_запущен",
+		"type": "checkbox",
+		"required": false,
+		"settings": {
+			"cols": 49,
+			"rows": 3,
+			"table_title": "",
+			"is_important": false
+		},
+		"description": "[ CRM ] Запущен ли уже процесс по обработке заказа. Используется для условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Сбор_аналитики_события_завершен",
+		"type": "checkbox",
+		"required": false,
+		"settings": {
+			"cols": 49,
+			"rows": 3,
+			"table_title": "",
+			"is_important": false
+		},
+		"description": "[ CRM ] Завершен ли сбор аналитики события. Используется для условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Сколько_дней_не_в_работе",
+		"type": "numeric",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": "",
+			"units": ""
+		},
+		"description": "[ CRM ] Сколько дней не берут заказ в работу. Используется для аналитики, условий в процессах и доп. информации в карточках задач. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Работал_ли_менеджер_с_заказом",
+		"type": "checkbox",
+		"required": false,
+		"settings": {
+			"cols": 49,
+			"rows": 3,
+			"table_title": "",
+			"is_important": false
+		},
+		"description": "[ CRM ] Работал ли менеджер с заказом. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Был_контакт_с_клиентом",
+		"type": "checkbox",
+		"required": false,
+		"settings": {
+			"cols": 49,
+			"rows": 3,
+			"table_title": "",
+			"is_important": false
+		},
+		"description": "[ CRM ] Был ли контакт клиента с менеджером при обработке. Используется для аналитики, условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Дата_начала_работы",
+		"type": "date",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": ""
+		},
+		"description": "[ CRM ] Дата начала работы менеджера с заказом. Используется для аналитики и доп. информации в карточках задач. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Дата_последнего_касания",
+		"type": "date",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": ""
+		},
+		"description": "[ CRM ] Дата последнего касания менеджера с заказом. Используется для аналитики и доп. информации в карточках задач. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Дата_выхода_из_отложенного",
+		"type": "date",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": ""
+		},
+		"description": "[ CRM ] Используется как контроль работы менеджера при обработке лида. Используется условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Дата_отмены_заказа",
+		"type": "date",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": ""
+		},
+		"description": "[ CRM ] Дата отмены заказа. Используется для аналитики и условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Создан_из_другого_заказа",
+		"type": "checkbox",
+		"required": false,
+		"settings": {
+			"cols": 49,
+			"rows": 3,
+			"table_title": "",
+			"is_important": false
+		},
+		"description": "[ CRM ] Подсчет конверсий при создании заказа из другого заказа. Используется для аналитики и условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Заказ_изменен",
+		"type": "checkbox",
+		"required": false,
+		"settings": {
+			"cols": 49,
+			"rows": 3,
+			"table_title": "",
+			"is_important": false
+		},
+		"description": "[ CRM ] Был ли изменен заказ. Используется для автоматизации досок продаж. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Частичная_оплата_заказа",
+		"type": "checkbox",
+		"required": false,
+		"settings": {
+			"cols": 49,
+			"rows": 3,
+			"table_title": "",
+			"is_important": false
+		},
+		"description": "[ CRM ] Был ли частично оплачен заказ. Используется для фильтрации карточек задач. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Как_заказ_оплачен",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Оплата клиентом\nРабота менеджера",
+			"showAllValues": false,
+			"emptyValueText": "Не установлено"
+		},
+		"description": "[ CRM ] Как заказ был оплачен. Используется для правильной аналитики продаж и подсчета зп менеджерам. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Кем_создан_заказ",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Создан сотрудником не менеджером\nСоздан менеджером\nСоздан самим клиентом\nСоздан системой",
+			"showAllValues": false,
+			"emptyValueText": "Не определено"
+		},
+		"description": "[ CRM ] Кем был создан заказ. Используется для аналитики и условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Номер_менеджера_после_распределения",
+		"type": "string",
+		"required": false,
+		"settings": {
+			"size": 50,
+			"table_title": "",
+			"is_important": false,
+			"placeholder": ""
+		},
+		"description": "[ CRM ] Номер менеджера после автоматического распределения лидов. Используется условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Название_продукта",
+		"type": "string",
+		"required": false,
+		"settings": {
+			"size": 50,
+			"table_title": "",
+			"is_important": false,
+			"placeholder": ""
+		},
+		"description": "[ ТЕХ ] Название продукта в предложении. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "deal_response",
+		"type": "text",
+		"required": false,
+		"settings": {
+			"placeholder": "",
+			"rows": "3"
+		},
+		"description": "[ ТЕХ ] Ответ от сервера при вызове URL",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Часовой_пояс",
+		"type": "string",
+		"required": false,
+		"settings": {
+			"size": 50,
+			"table_title": "",
+			"is_important": false,
+			"placeholder": ""
+		},
+		"description": "[ CRM ] Часовой пояс пользователя. Используется для доп. информации в карточках задач. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "user"
+	},
+	{
+		"id": null,
+		"label": "Дата_последней_оплаты",
+		"type": "date",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": ""
+		},
+		"description": "[ CRM ] Поле для определения когда последний раз была оплата у пользователя. Используется для доп. информации в карточках задач. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "user"
+	},
+	{
+		"id": null,
+		"label": "user_deal_forward_params",
+		"type": "text",
+		"required": false,
+		"settings": {
+			"placeholder": "",
+			"rows": "3"
+		},
+		"description": "[ ТЕХ ] Параметры заказа для переноса аналитики в другой заказ. Руками трогать не нужно",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "user"
+	},
+	{
+		"id": null,
+		"label": "user_response",
+		"type": "text",
+		"required": false,
+		"settings": {
+			"placeholder": "",
+			"rows": "3"
+		},
+		"description": "[ ТЕХ ] Ответ от сервера при вызове URL",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "user"
+	}
+]

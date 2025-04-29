@@ -1,0 +1,233 @@
+@charset "UTF-8";
+.recode-not-access {
+  opacity: 0 !important;
+}
+
+.recode-crm__attention {
+  margin-top: 3px;
+}
+
+.recode-crm__attention-text {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background-color: #f6cd94;
+  line-height: 1.2;
+  color: #333333;
+}
+
+.recode-crm__attention-text > i {
+  color: #333333 !important;
+}
+
+.recode-deal-panel-highlight {
+  border-radius: 14px !important;
+  border: 2px solid #2d73e7 !important;
+  overflow: hidden !important;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05) !important;
+  opacity: 1 !important;
+}
+
+.recode-manager-link {
+  display: block;
+}
+
+.recode-manager-link--note {
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.not-own-process-message .btn:not(.recode-not-own-process-message__button) {
+  display: none !important;
+}
+
+.v-main__wrap .bottom-panel {
+  display: none !important;
+}
+
+.custom-field.type-numeric .form-control {
+  text-align: left !important;
+  width: 100% !important;
+}
+
+.custom-field .field-description-block {
+  margin-top: 5px;
+  font-style: normal !important;
+}
+
+.v-application .menuable__content__active {
+  min-width: 140px !important;
+  max-width: none !important;
+}
+
+.v-application .scrollable-content {
+  max-height: none !important;
+}
+
+.recode-task-highlight {
+  border: 2px solid #2d73e7 !important;
+}
+
+.task-form.recode-task-improve-buttons .results-block {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  width: 100%;
+  padding: 0px !important;
+}
+@media (max-width: 992px) {
+  .task-form.recode-task-improve-buttons .results-block {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 576px) {
+  .task-form.recode-task-improve-buttons .results-block {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.task-form .results-block .btn,
+.task-form .results-block .make-delay-btn {
+  text-transform: uppercase;
+}
+
+.task-form .results-block .btn {
+  border-radius: 6px !important;
+  white-space: normal;
+}
+
+.task-form.recode-task-improve-buttons .results-block .make-delay-btn {
+  display: inline-block !important;
+  padding: 6px 12px !important;
+  margin: 0 !important;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  background-image: none;
+  background-color: #337ab7;
+  color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 6px;
+}
+.task-form.recode-task-improve-buttons .results-block .make-delay-btn:hover {
+  background-color: #336188;
+}
+
+.task-form.recode-task-improve-buttons [data-field=comment] {
+  margin-bottom: 15px;
+}
+
+.task-form.recode-task-improve-buttons .results-block .btn-success {
+  order: 1;
+}
+
+.task-form.recode-task-improve-buttons .results-block .btn-danger {
+  order: 2;
+}
+
+.task-form.recode-task-improve-buttons .results-block .btn-warning {
+  order: 3;
+}
+
+.task-form.recode-task-improve-buttons .results-block .make-delay-btn {
+  order: 4;
+}
+
+.task-form [data-field=comment] {
+  width: 100%;
+}
+
+.task-form .cancel-reason {
+  max-width: none !important;
+  border: 1px solid #ffc5da;
+  border-radius: 10px;
+}
+.task-form .cancel-reason [name="ChangeStatusOperation[cancel_reason_id]"] {
+  width: 100%;
+}
+
+.task-form .group-tree-select {
+  display: none !important;
+}
+
+.task-form.recode-task-hide-trash div:has(> .btn-take-task-link),
+.task-form.recode-task-hide-trash .btn-take-task-link,
+.task-form.recode-task-hide-trash .field-description-block {
+  display: none !important;
+}
+
+.task-form.recode-task-hide-delay-btn .results-block .make-delay-btn {
+  display: none !important;
+}
+
+.task-form .custom-form-tags {
+  display: none !important;
+}
+
+.task-form [class*=checklistForTask] {
+  display: none !important;
+}
+
+[name="Deal[add_comment]"] {
+  min-height: 100px;
+  padding: 10px;
+  border: 2px solid #5cb85c !important;
+  resize: vertical;
+  outline: none !important;
+  transition: 0.3s ease-in-out border-color;
+}
+[name="Deal[add_comment]"]:focus {
+  border-color: #4c914c !important;
+}
+
+.add-comment-textarea .hint {
+  font-size: 1em;
+  color: #333;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 0.5em;
+  border: 1px solid #307f98;
+  border-radius: 0.5em;
+  padding: 0.5em 0.75em;
+}
+.add-comment-textarea .hint .fa {
+  color: #307f98;
+  font-size: 1.8em;
+}
+
+.transitions-block .btn-change-status {
+  display: none;
+}
+
+.recode-webs-rights .table.with-actions [data-confirm="Вы уверены что хотите удалить вебинар?"],
+.recode-webs-rights .table.with-actions .actions {
+  display: none !important;
+}
+
+.recode-modal-container .modal-content {
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+.recode-modal-container .modal-title {
+  font-family: "proxima-nova", sans-serif;
+}
+.recode-modal-container .modal-footer {
+  margin: 0;
+}
+.recode-modal-container .modal-footer .btn {
+  border-radius: 6px;
+}
+
+#recode-task-creation-modal .modal-body p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 16px;
+}

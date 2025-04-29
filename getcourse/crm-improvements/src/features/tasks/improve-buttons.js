@@ -1,4 +1,4 @@
-import { isPageWithTasks, isProcessEditorPage } from '../../../../../utils/page-checker';
+import { isPageWithTasks, isProcessEditorPage } from '../../../../utils/page-checker';
 
 const improveTaskButtons = () => {
 	if (!isPageWithTasks || isProcessEditorPage) {

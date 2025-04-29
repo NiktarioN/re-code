@@ -13,10 +13,64 @@
 	background-color: #f6cd94;
 	line-height: 1.2;
 	color: #333333;
+
+	> i {
+		color: #333333 !important;
+	}
 }
 
-.recode-crm__attention-text > i {
-	color: #333333 !important;
+.recode-hint {
+	display: flex;
+	align-items: center;
+	padding: 0.5em 0.75em;
+	border: 1px solid;
+	border-radius: 0.5em;
+	color: #333;
+	font-size: 1em;
+	gap: 0.5em;
+
+	> i {
+		color: inherit !important;
+	}
+
+	&--warning {
+		color: #8a6d3b;
+		background-color: #fcf8e3;
+		border-color: #faebcc;
+		border-radius: 0;
+	}
+
+	&--free-offer {
+		margin-bottom: 20px;
+	}
+}
+
+.recode-cancel-reason-hint__text {
+	display: inline-block;
+	padding: 8px 10px;
+	background-color: #f5f5f5;
+	line-height: 1.2;
+	color: #333333;
+
+	> i {
+		color: #333333 !important;
+	}
+}
+
+.recode-cancel-reason-hint {
+	margin-bottom: 5px;
+}
+
+.recode-cancel-reason-hint__text {
+	display: inline-block;
+	padding: 8px 10px;
+	background-color: #f5f5f5;
+	line-height: 1.2;
+	color: #333333;
+
+	> i {
+		color: #333333 !important;
+	}
 }
 
 .recode-deal-panel-highlight {
@@ -41,12 +95,120 @@
 	display: none !important;
 }
 
-.v-main__wrap .bottom-panel {
-	display: none !important;
-}
-
 // Исправляем поле с типом "Число"
 .custom-field.type-numeric .form-control {
 	text-align: left !important;
 	width: 100% !important;
+}
+
+// Изменяем описание у доп. полей
+.custom-field .field-description-block {
+	margin-top: 5px;
+	font-style: normal !important;
+}
+
+.recode-disabled-styles {
+	pointer-events: none;
+}
+
+// Стили для недоступных элементов
+.recode-disabled {
+	outline: none !important;
+	box-shadow: none;
+	opacity: 0.6;
+	cursor: not-allowed;
+	filter: grayscale(0.4);
+
+	&:focus {
+		outline: none !important;
+	}
+}
+
+.recode-setting-wrapper {
+	display: flex;
+	gap: 5px;
+}
+
+.recode-settings-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	padding: 20px 15px 15px 10px;
+	margin: 25px 0 15px 0;
+	border: 1px solid #ddd;
+
+	label {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		margin: 0;
+	}
+
+	input[type='checkbox'] {
+		margin: 0;
+	}
+
+	> *:not(:last-child) {
+		margin-bottom: 10px;
+	}
+
+	&-title {
+		position: absolute;
+		top: -11px;
+		left: 5px;
+		padding: 0 5px;
+		background-color: #ffffff;
+	}
+
+	.recode-tooltip {
+		position: relative;
+		display: inline-block;
+		cursor: pointer;
+		color: #337ab7;
+	}
+
+	.recode-tooltip-text {
+		visibility: hidden;
+		opacity: 0;
+		transition: opacity ease-in-out 0.2s, visibility ease-in-out 0.2s;
+		position: absolute;
+		bottom: 15px;
+		left: 20px;
+		max-width: 300px;
+		width: max-content;
+		padding: 8px 12px;
+		background: #ffffff;
+		color: #333333;
+		border-radius: 4px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+		border: 1px solid #dddddd;
+		font-size: 12px;
+		z-index: 10;
+		white-space: normal;
+		cursor: text;
+	}
+
+	.recode-tooltip:hover .recode-tooltip-text {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.recode-tooltip::after {
+		content: '?';
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 18px;
+		height: 18px;
+		border: 1px solid currentColor;
+		border-radius: 50%;
+		font-size: 12px;
+		font-weight: bold;
+	}
+}
+
+.recode-setting-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 5px;
 }

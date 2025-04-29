@@ -1,4 +1,10 @@
 @import 'general';
-@import 'tasks/index';
-@import 'orders/index';
+@import 'tasks';
+@import 'improve-tasks';
+@import 'kanban';
+@import 'orders';
 @import 'webs-rights';
+@import 'modal';
+@import 'right-active-block';
+@import 'deal-comments';
+@import 'hide-faggots-functions';

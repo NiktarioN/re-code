@@ -1,5 +1,5 @@
 import { currentUrl, getSearchParamValue } from '../../../../../utils/url-utils';
-import { isOneOfferSettingsPage } from '../../../../../utils/page-checker';
+import { isOneOfferSettingsPage } from '../../../../utils/page-checker';
 
 const doValidation = (field) => {
 	// eslint-disable-next-line no-param-reassign

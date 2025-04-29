@@ -1,0 +1,8 @@
+#fusion-settings-modal [data-id=utm],
+#fusion-settings-modal [data-id=c_orders] {
+  display: none !important;
+}
+
+.fz-ext .form-control ~ label:not(#recode-transfer-params) {
+  display: none !important;
+}

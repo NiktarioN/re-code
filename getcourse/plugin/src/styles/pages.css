@@ -1,0 +1,53 @@
+.isWidgetPage .container {
+  width: auto;
+  max-width: 1200px;
+}
+.isWidgetPage .widget-index > .row > .col-md-6 {
+  width: 100% !important;
+}
+.isWidgetPage .widget-index > .row > .col-md-6:nth-child(2) {
+  display: none;
+}
+
+.isTasksPage .container {
+  width: auto;
+}
+
+.isGroupsPage .container {
+  width: auto;
+  max-width: none;
+}
+.isGroupsPage .col-md-8 .dd {
+  max-width: none;
+}
+
+.isTrainingsPageTree .container {
+  width: auto;
+  max-width: 1200px;
+}
+.isTrainingsPageTree .row {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.isTrainingsPageTree .col-md-6 {
+  width: 100%;
+}
+.isTrainingsPageTree .col-md-6 .dd {
+  max-width: none;
+}
+.isTrainingsPageTree .sticky-wrapper {
+  height: auto !important;
+  margin-bottom: 15px;
+}
+.isTrainingsPageTree .save-action {
+  position: static !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.isTrainingsPageTree .save-action button {
+  margin-bottom: 5px;
+}
+.isTrainingsPageTree .save-action br {
+  display: none;
+}

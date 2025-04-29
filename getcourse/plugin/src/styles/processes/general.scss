@@ -11,6 +11,24 @@
 }
 
 // Меняем блок "Задать вопрос"
-[name='SimpleOperation[description]'] {
+[name='SimpleOperation[description]'],
+// Меняем блок "Что сказать клиенту"
+[name='MakeCallOperation[description]'] {
 	min-height: 250px;
+}
+
+// Счетчики
+#flowchart .counters-modal-window .counter-wrapper {
+	display: flex;
+	align-items: center;
+}
+
+#flowchart .counters-modal-window .counter-wrapper [type='text'] {
+	flex-grow: 1;
+}
+
+// Меняем select в блоках настроек
+#flowchart .block-modal-window [name='UpdateFieldOperation[updateValue][]'] {
+	width: 100%;
+	min-height: 125px;
 }

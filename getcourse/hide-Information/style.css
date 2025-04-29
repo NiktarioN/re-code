@@ -57,13 +57,14 @@ td:not(.user-name) a[href*='/user/control/user/update/id/'] {
 /* КАРТОЧКА ПОЛЬЗОВАТЕЛЯ СПРАВА */
 .user-profile-link,
 .user-profile-image,
+.user-name[data-reactid],
 .user-avatar[data-reactid],
 .user-email[data-reactid],
 .user-phone[data-reactid],
 .user-manager[data-reactid],
 .user-payed-money[data-reactid],
 .editable-link-wrapper[data-reactid] {
-  filter: blur(6px);
+  filter: blur(6px) !important;
 }
 
 /* ДАННЫЕ НА СТРАНИЦЕ ПОЛЬЗОВАТЕЛЯ */
@@ -109,6 +110,10 @@ form[action*='/notifications/control/mailings/update/id/'] .col-md-8 > .row > .c
   filter: blur(6px);
 }
 
+.kanban-column__header .header-right {
+  filter: blur(6px);
+}
+
 .deal-kanban-header__brief {
   filter: blur(6px);
 }
@@ -117,6 +122,7 @@ form[action*='/notifications/control/mailings/update/id/'] .col-md-8 > .row > .c
   filter: blur(6px);
 }
 
+.kabnan-card-custom-fields,
 .kanban-card-custom-fields,
 .kanban-card-client,
 .kanban-card-manager {
@@ -127,10 +133,22 @@ form[action*='/notifications/control/mailings/update/id/'] .col-md-8 > .row > .c
 @media print {
   .page-header,
   .gc-account-logo,
-  .talks-widget-button,
-  .gc-account-leftbar,
+  .talks-widget-butto .gc-account-leftbar,
   .questionaryMenu,
   .questionaryDetails > table > tbody > tr:nth-child(2) {
     display: none;
   }
+}
+
+/* ПРОЦЕССЫ */
+/* Скрыть исполнителей и супервайзеров */
+#s2id_responsible-manager_user_ids,
+#s2id_responsible-supervisor_user_ids {
+  filter: blur(6px);
+}
+
+/* ОБЩЕЕ */
+/* Скрываем логотип проекта */
+.standard-logo {
+  display: none !important;
 }

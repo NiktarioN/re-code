@@ -1,11 +1,11 @@
-import { isHideTalksWidgetPage, isDealPage, isEditMode } from '../../../../../utils/page-checker';
+import { isHideTalksWidgetPage, isEditMode } from '../../../../utils/page-checker';
 
 const hideTalksWidgetButton = () => {
-	if (!isHideTalksWidgetPage && !isDealPage && !isEditMode) {
-		return;
-	}
+  if (!isHideTalksWidgetPage && !isEditMode) {
+    return;
+  }
 
-	document.querySelector('.talks-widget-button')?.classList.add('hide');
+  document.querySelector('.talks-widget-button')?.classList.add('hide');
 };
 
 export default hideTalksWidgetButton;

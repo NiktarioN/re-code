@@ -1,0 +1,4 @@
+#fusion-settings-modal [data-id=c_orders],
+#fusion-settings-modal [data-id=orderPage] {
+  display: none !important;
+}

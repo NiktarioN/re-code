@@ -1,5 +1,5 @@
 import { isAdmin } from '../../../../utils/checks';
-import { isLessonPage } from '../../../../../utils/page-checker';
+import { isLessonPage } from '../../../../utils/page-checker';
 import { currentUrl } from '../../../../../utils/url-utils';
 
 const addRecoveryLinkForLessonBlocks = () => {

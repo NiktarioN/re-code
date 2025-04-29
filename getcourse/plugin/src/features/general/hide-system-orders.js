@@ -1,5 +1,5 @@
 import { isEmployee } from '../../../../utils/checks';
-import { isUserOrdersPage } from '../../../../../utils/page-checker';
+import { isUserOrdersPage } from '../../../../utils/page-checker';
 
 const hideSystemOrders = ({ searchWords = [], hideFromEmpoyees = true }) => {
 	if (!isUserOrdersPage) {

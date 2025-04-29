@@ -1,0 +1,15 @@
+@charset "UTF-8";
+/* Скрываем кнопку "Изменить шаблон" при редактировании процесса */
+.not-own-process-message .btn:not(.recode-not-own-process-message__button) {
+  display: none !important;
+}
+
+.recode-not-own-process-message {
+  position: relative;
+}
+.recode-not-own-process-message__author {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  font-size: 10px;
+}

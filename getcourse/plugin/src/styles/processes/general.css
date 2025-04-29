@@ -1,0 +1,23 @@
+#contextOperationstask label:has([value=common_get_url]) {
+  display: none !important;
+}
+
+#flowchart .block-modal-window textarea.form-control,
+#flowchart .block-modal-window .description-block textarea,
+#flowchart .block-modal-window .operation textarea {
+  resize: auto !important;
+}
+
+[name="SimpleOperation[description]"],
+[name="MakeCallOperation[description]"] {
+  min-height: 250px;
+}
+
+#flowchart .counters-modal-window .counter-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+#flowchart .counters-modal-window .counter-wrapper [type=text] {
+  flex-grow: 1;
+}

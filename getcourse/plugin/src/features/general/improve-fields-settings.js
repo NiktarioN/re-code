@@ -1,4 +1,4 @@
-import { isPageWithFieldsSettings } from '../../../../../utils/page-checker';
+import { isPageWithFieldsSettings } from '../../../../utils/page-checker';
 
 const improvePageWithFieldsSettings = () => {
 	if (!isPageWithFieldsSettings) {

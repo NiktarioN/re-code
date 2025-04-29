@@ -1,0 +1,32 @@
+// Скрытие баннера от GetCourse
+.common-banner-wrapper:has(.banner-frame) {
+	display: none !important;
+}
+
+// Доп. настройки от GetFushion
+#fusion-settings-modal {
+	[data-id='c_orders'],
+	[data-id='orderPage'] {
+		display: none !important;
+	}
+}
+
+// Баннер от GetFushion
+.fz-banner {
+	display: none !important;
+}
+
+// Чат в боковой панели от Getloo
+.gl-chat-getcoursepro {
+	display: none !important;
+}
+
+// Баннер от Getloo
+.gl-ad-banner {
+	display: none !important;
+}
+
+// Баннер от Getloo на странице поддержки
+.contact-footer-row:has(> img[src*='getloo.ru']) {
+	display: none !important;
+}

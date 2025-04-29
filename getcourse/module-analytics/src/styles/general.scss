@@ -1,5 +1,6 @@
 #fusion-settings-modal {
-	[data-id='utm'] {
+	[data-id='utm'],
+	[data-id='c_orders'] {
 		display: none !important;
 	}
 }

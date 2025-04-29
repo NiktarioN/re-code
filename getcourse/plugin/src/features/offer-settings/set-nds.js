@@ -1,4 +1,4 @@
-import { isOneOfferSettingsPage } from '../../../../../utils/page-checker';
+import { isOneOfferSettingsPage } from '../../../../utils/page-checker';
 
 const setOfferNds = () => {
 	if (!isOneOfferSettingsPage) {

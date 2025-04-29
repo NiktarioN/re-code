@@ -1,5 +1,5 @@
 import { isEmployee } from '../../../utils/checks';
-import { isPageWithRightUserCard } from '../../../../utils/page-checker';
+import { isPageWithRightUserCard } from '../../../utils/page-checker';
 
 const rightUserCardController = () => {
 	if (!isEmployee || !isPageWithRightUserCard) {

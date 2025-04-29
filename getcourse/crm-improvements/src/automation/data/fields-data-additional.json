@@ -1,0 +1,99 @@
+[
+	{
+		"id": null,
+		"label": "Сегментация_карточки",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Не определено\nДорогой платный заказ\nПлатный заказ\nПредоплата\nПродление\nКонсультация\nОбратный звонок\nПредзапись\nБыл весь вебинар\nКлик по продающей кнопке\nБыл на продающей части\nПисал комментарий\nПолучил подарок\nУчастник вебинара\nРегистрация\nГорячая нулевая заявка\nХолодная нулевая заявка",
+			"showAllValues": false,
+			"emptyValueText": "Не установлено"
+		},
+		"description": "[ CRM ] Поле для фильтрации карточки задачи. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Слово_фильтр_для_карточки",
+		"type": "string",
+		"required": false,
+		"settings": {
+			"size": 50,
+			"table_title": "",
+			"is_important": false,
+			"placeholder": "Пропиши слово-фильтр для быстрого поиска карточки задачи"
+		},
+		"description": "[ CRM ] Слово-фильтр для фильтрации карточек объектов. Заполняется менеджером",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "0",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Суть_задачи",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Не определена\nПригласить на мероприятие\nСоздание платного заказа\nОтработка сегмента\nНапомнить о мероприятии\nПроконсультировать",
+			"showAllValues": false,
+			"emptyValueText": "Не установлено"
+		},
+		"description": "[ CRM ] Поле для определения что самое ключевое должен сделать менеджер в задаче. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Приоритетный_заказ",
+		"type": "checkbox",
+		"required": false,
+		"settings": {
+			"cols": 49,
+			"rows": 3,
+			"table_title": "",
+			"is_important": false
+		},
+		"description": "[ CRM ] Приоритетный ли заказ среди созданных за короткое время. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Дата_касания_п",
+		"type": "date",
+		"required": false,
+		"settings": {
+			"table_title": "",
+			"is_important": false,
+			"placeholder": ""
+		},
+		"description": "[ CRM ] Дата последнего касания менеджера с пользователем. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "user"
+	}
+]

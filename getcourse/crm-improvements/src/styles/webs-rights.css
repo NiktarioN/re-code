@@ -1,0 +1,5 @@
+@charset "UTF-8";
+.recode-webs-rights .table.with-actions [data-confirm="Вы уверены что хотите удалить вебинар?"],
+.recode-webs-rights .table.with-actions .actions {
+  display: none !important;
+}

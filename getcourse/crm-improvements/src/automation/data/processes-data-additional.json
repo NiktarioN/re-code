@@ -1,0 +1,263 @@
+[
+	{
+		"Mission[title]": "[ CRM ] Удалить заказы. Дубли [TECH]",
+		"Mission[description]": "Процесс, который отлавливает неправильно отмененные дубли заказов и удаляет их до конца\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,действие_ОТМЕНИТЬ-ЗАКАЗ,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "cancel_reason",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"selected_id": ["60837"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_status",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"selected_id": ["cancelled"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "user_typerule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::CustomFieldRule",
+								"params": {
+									"value": {
+										"selected_id": ["user"]
+									},
+									"valueMode": null
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Стать ПМом [ОП]",
+		"Mission[description]": "Процесс, позволяющий стать ПМом через ручной запуск\n\nГде запускается или используется\nТолько вручную\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "41",
+		"tags": "CRM,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Убрать технические и «мусорные» заказы с досок продаж [TECH]",
+		"Mission[description]": "Процесс, который убирает все технические и «мусорные» заказы с досок продаж, где должны быть только определенные заказы. Так же отправляет уведомление тех. спецам, чтобы они посмотрели настройки и исправили отправку предложений на доски\n\n!!! Что нужно контролировать в процессе\n— Общие настройки. Список досок продаж\n— Общие настройки. Условия для определения заказов, которые не должны на досках продаж\n— Внутри процесса. В блоках с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать тех. спецов, которые отвечают за настройки CRM\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,crm_ДОСКИ-ПРОДАЖ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"params": {
+				"mode": "and",
+				"children": [
+					{
+						"type": "crm_dealfunnelandstage",
+						"inverted": 0,
+						"params": {
+							"value": {
+								"selected_id": "19632"
+							},
+							"stageId": {
+								"selected_id": null
+							}
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"params": {
+							"mode": "or",
+							"children": [
+								{
+									"type": "deal_offer_id",
+									"inverted": 0,
+									"params": {
+										"value": {
+											"selected_id": [],
+											"selected_tags": ["событие_РЕГИСТРАЦИЯ"],
+											"all_object_with_tags": true
+										},
+										"valueMode": null
+									}
+								},
+								{
+									"type": "deal_offer_id",
+									"inverted": 0,
+									"params": {
+										"value": {
+											"selected_id": [],
+											"selected_tags": ["тех_БЕЗ-ОБРАБОТКИ"],
+											"all_object_with_tags": true
+										},
+										"valueMode": null
+									}
+								},
+								{
+									"type": "deal_offer_id",
+									"inverted": 0,
+									"params": {
+										"value": {
+											"selected_id": [],
+											"selected_tags": ["тех_ТЕСТЫ-НАСТРОЕК"],
+											"all_object_with_tags": true
+										},
+										"valueMode": null
+									}
+								},
+								{
+									"type": "deal_tag",
+									"inverted": 0,
+									"params": {
+										"value": {
+											"selected_id": ["1677735"]
+										},
+										"valueMode": null
+									}
+								}
+							]
+						}
+					}
+				]
+			},
+			"maxSize": ""
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Поставить часовой пояс [ПОДПРОЦЕСС]",
+		"Mission[description]": "Подпроцесс, который проставляет часовой пояс пользователю в доп. поле, чтобы это значение можно было вывести в карточках задач\n\nГде запускается или используется\nПроцесс: [ CRM ] Сегментация и распределение лидов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "41",
+		"tags": "CRM,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Убрать лишние теги в заказе после запуска процесса обработки [TECH]",
+		"Mission[description]": "Процесс, который убирает теги у заказа, если они не были убраны автоматически после запуска процесса обработки\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "DealContext_formfieldvalue",
+						"inverted": 0,
+						"className": "app::components::logic::rule::FormFieldValueRule",
+						"params": { "valueMode": 2, "fieldId": 10512893, "fieldValue": { "checked": 1 }, "caseSensitive": false }
+					},
+					{
+						"type": "deal_tag",
+						"inverted": 0,
+						"className": "app::components::logic::rule::sales::TaggedDealContextRule",
+						"params": { "value": { "selected_id": ["1677735", "1700714"] }, "valueMode": null }
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Убрать тег «crm_БЕЗ-ПМ» у лида с персональным менеджером [TECH]",
+		"Mission[description]": "Процесс, который убирает тег у заказа, если у клиента появился персональный менеджер\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "deal_is_finished",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"checked": 0
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_status",
+						"inverted": 1,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"selected_id": ["payed", "cancelled"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_tag",
+						"inverted": 0,
+						"className": "app::components::logic::rule::sales::TaggedDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": ["1730858"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "personal_manager_user_id",
+								"inverted": 0,
+								"className": "app::components::logic::rule::CustomFieldRule",
+								"params": {
+									"value": {
+										"selected_id": null
+									},
+									"valueMode": 1
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Пригласить на мероприятие [ПОДПРОЦЕСС]",
+		"Mission[description]": "Подпроцесс, который используется для приглашения пользователя на мероприятия в панели быстрых действий по задаче\n\n!!! Что нужно контролировать в процессе\nВнутри процесса. Время от времени добавлять/убирать кнопки для мероприятий\n\nГде запускается или используется\nПанель для быстрых действий по заказу\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ",
+		"Mission[type]": "manual"
+	}
+]

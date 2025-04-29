@@ -1,0 +1,110 @@
+[
+	{
+		"CancelReason[title]": "Дубль заказа",
+		"CancelReason[order_pos]": 0
+	},
+	{
+		"CancelReason[title]": "Дубль пользователя",
+		"CancelReason[order_pos]": 1
+	},
+	{
+		"CancelReason[title]": "Игнор / Не отвечает",
+		"CancelReason[order_pos]": 2
+	},
+	{
+		"CancelReason[title]": "Перестал выходить на связь",
+		"CancelReason[order_pos]": 3
+	},
+	{
+		"CancelReason[title]": "Передумал / Нет желания",
+		"CancelReason[order_pos]": 4
+	},
+	{
+		"CancelReason[title]": "Возврат средств",
+		"CancelReason[order_pos]": 5
+	},
+	{
+		"CancelReason[title]": "Не устроила цена",
+		"CancelReason[order_pos]": 6
+	},
+	{
+		"CancelReason[title]": "Нет денег",
+		"CancelReason[order_pos]": 7
+	},
+	{
+		"CancelReason[title]": "Не целевой",
+		"CancelReason[order_pos]": 8
+	},
+	{
+		"CancelReason[title]": "Отпала потребность",
+		"CancelReason[order_pos]": 9
+	},
+	{
+		"CancelReason[title]": "Выбрал другой продукт проекта",
+		"CancelReason[order_pos]": 10
+	},
+	{
+		"CancelReason[title]": "Уже проходил обучение",
+		"CancelReason[order_pos]": 11
+	},
+	{
+		"CancelReason[title]": "Пойдет на следующий поток",
+		"CancelReason[order_pos]": 12
+	},
+	{
+		"CancelReason[title]": "Отказ по банковской рассрочке",
+		"CancelReason[order_pos]": 13
+	},
+	{
+		"CancelReason[title]": "Не выплачена внутр. рассрочка",
+		"CancelReason[order_pos]": 14
+	},
+	{
+		"CancelReason[title]": "Создал заказ случайно",
+		"CancelReason[order_pos]": 15
+	},
+	{
+		"CancelReason[title]": "Вышел срок оплаты заказа",
+		"CancelReason[order_pos]": 16
+	},
+	{
+		"CancelReason[title]": "Вышел срок обработки заказа",
+		"CancelReason[order_pos]": 17
+	},
+	{
+		"CancelReason[title]": "Работа в другом заказе",
+		"CancelReason[order_pos]": 18
+	},
+	{
+		"CancelReason[title]": "Пользователь удален",
+		"CancelReason[order_pos]": 19
+	},
+	{
+		"CancelReason[title]": "Тестирование",
+		"CancelReason[order_pos]": 20
+	},
+	{
+		"CancelReason[title]": "[тех] Перенос на следующий поток",
+		"CancelReason[order_pos]": 21
+	},
+	{
+		"CancelReason[title]": "[тех] Перенос в другую карточку",
+		"CancelReason[order_pos]": 22
+	},
+	{
+		"CancelReason[title]": "Заказ от сотрудника",
+		"CancelReason[order_pos]": 96
+	},
+	{
+		"CancelReason[title]": "Ошибка",
+		"CancelReason[order_pos]": 97
+	},
+	{
+		"CancelReason[title]": "Битая заявка",
+		"CancelReason[order_pos]": 98
+	},
+	{
+		"CancelReason[title]": "Другое (обязательно напиши комментарий)",
+		"CancelReason[order_pos]": 99
+	}
+]

@@ -1,0 +1,4232 @@
+[
+	{
+		"Mission[title]": "[ ШАБЛОН ] Обработка лидов",
+		"Mission[description]": "Основной процесс, в котором происходит обработка лидов менеджерами. Данный процесс является шаблоном для всех остальных процессов обработки лидов. Редактируем только его, чтобы все изменения применились на все процессы, где данный процесс является шаблоном\n\n!!! Что нужно контролировать в процессе\n— Общие настройки. Список исполнителей/супервайзеров. Должны быть указаны тех. спецы, которые работают с CRM. Сотрудники, которые контролируют работу по задачам. Менеджеры, которые именно сейчас работают в проекте\n— Внутри процесса. Все блоки с припиской [КОНТРОЛЬ] в названии\n— Внутри процесса. Актуальные списки менеджеров заказов (также в блоках [КОНТРОЛЬ])\n— Внутри процесса. В блоках с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать тех. спецов, которые отвечают за настройки CRM\n— Внутри процесса. В блоках с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать сотрудников, которые контролируют работу менеджеров\n\nГде запускается или используется\n— Запускается из кнопки «Действия» в заказе\n— При перемещении в техническую в доску в этап «Обработка лидов»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ,контроль_МЕНЕДЖЕРЫ,ШАБЛОНЫ,оп_ОБРАБОТКА-ЛИДА",
+		"key": "crm",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ ШАБЛОН ] Отменить дубли заказов оплаченного продукта",
+		"Mission[description]": "Процесс, который отменяет дубли оплаченного заказа по продукту. Использовать как шаблон для других процессов\n\nГде запускается или используется\nИспользуется только как основа (шаблон) для других процессов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "ШАБЛОНЫ,действие_ОТМЕНИТЬ-ЗАКАЗ",
+		"key": "crm",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"params": {
+				"mode": "and",
+				"children": [
+					{
+						"type": "deal_created_by_client",
+						"inverted": 0,
+						"params": {
+							"value": {
+								"checked": 1
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_haspayment",
+						"inverted": 1,
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"params": {
+									"mode": "and",
+									"children": [
+										{
+											"type": "status",
+											"inverted": 0,
+											"params": {
+												"value": {
+													"selected_id": ["accepted"]
+												},
+												"valueMode": null
+											}
+										},
+										{
+											"type": "type",
+											"inverted": 1,
+											"params": {
+												"value": {
+													"selected_id": ["VIRTUAL"]
+												},
+												"valueMode": null
+											}
+										}
+									]
+								}
+							},
+							"countCondition": {
+								"checker": "nlt",
+								"numval": ""
+							}
+						}
+					},
+					{
+						"type": "deal_is_finished",
+						"inverted": 0,
+						"params": {
+							"value": {
+								"checked": 0
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_is_partially_payed",
+						"inverted": 0,
+						"params": {
+							"value": {
+								"checked": 0
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 0,
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["событие_ПОКУПКА-ПРОДУКТА"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_status",
+						"inverted": 1,
+						"params": {
+							"value": {
+								"selected_id": ["payed", "cancelled"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"params": {
+							"linkedRule": {
+								"type": "user_hasdealrule",
+								"inverted": 0,
+								"params": {
+									"linkedRule": {
+										"type": "andrule",
+										"inverted": 0,
+										"params": {
+											"mode": "and",
+											"children": [
+												{
+													"type": "andrule",
+													"inverted": 0,
+													"params": {
+														"mode": "or",
+														"children": [
+															{
+																"type": "deal_is_finished",
+																"inverted": 0,
+																"params": {
+																	"value": {
+																		"checked": 1
+																	},
+																	"valueMode": null
+																}
+															},
+															{
+																"type": "deal_status",
+																"inverted": 0,
+																"params": {
+																	"value": {
+																		"selected_id": ["payed"]
+																	},
+																	"valueMode": null
+																}
+															}
+														]
+													}
+												},
+												{
+													"type": "deal_offer_id",
+													"inverted": 0,
+													"params": {
+														"value": {
+															"selected_id": [],
+															"selected_tags": ["событие_ПОКУПКА-ПРОДУКТА"],
+															"all_object_with_tags": true
+														},
+														"valueMode": null
+													}
+												}
+											]
+										}
+									},
+									"countCondition": {
+										"checker": "nlt",
+										"numval": ""
+									}
+								}
+							},
+							"countCondition": {
+								"checker": "nlt",
+								"numval": ""
+							}
+						}
+					}
+				]
+			},
+			"maxSize": ""
+		}
+	},
+	{
+		"Mission[title]": "[ ШАБЛОН ] Собрать аналитику после события",
+		"Mission[description]": "Процесс, который собирает аналитику после события (вебинар, воронка и т.д.) в доп. поля заказа и определяет степень горячести лида для последующей обработки отделом продаж. После завершения процесса заказ отправляется в процесс распределения лидов\n\nГде запускается или используется\nИспользуется только как основа (шаблон) для других процессов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"Mission[type]": "auto",
+		"tags": "ШАБЛОНЫ,действие_СОБРАТЬ-АНАЛИТИКУ",
+		"key": "crm",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": -1,
+										"fieldId": 10167925,
+										"fieldValue": { "checked": 1 },
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10167925,
+										"fieldValue": { "checked": 0 },
+										"caseSensitive": false
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_is_finished",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": { "value": { "checked": 0 }, "valueMode": null }
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 0,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": { "selected_id": [], "selected_tags": [], "all_object_with_tags": false },
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_status",
+						"inverted": 1,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": { "value": { "selected_id": ["payed", "cancelled"] }, "valueMode": null }
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": { "value": { "selected_id": ["2660400"] } }
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": { "value": { "selected_id": ["user"] }, "valueMode": null }
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ ШАБЛОН ] Завершить заказы для обработки по причине выполнения их ключевой цели",
+		"Mission[description]": "Процесс, который завершает заказы после выполнения цели в каком-то из процессов обработки лидов. Использовать как шаблон для других процессов\n\nГде запускается или используется\nИспользуется только как основа (шаблон) для других процессов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "ШАБЛОНЫ,действие_ЗАВЕРШИТЬ-ЗАКАЗ",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ ОБЩЕЕ ] Создать заказ по сегменту [TECH]",
+		"Mission[description]": "Процесс, который создает заказы по определенной выборке\n\nЧто нужно делать\n1. Указать сегмент, по которому будет создан заказ\n2. Удалить старые задачи\n3. В самом процессе указать нужное предложение\n4. При желании создать группу сегмента и добавить в нее\n\nГде запускается или используется\nТолько вручную\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "41",
+		"Mission[type]": "manual",
+		"tags": "ОБЩЕЕ,назначение_ТЕХ-НАСТРОЙКИ,действие_СОЗДАТЬ-ЗАКАЗ",
+		"key": "general"
+	},
+	{
+		"Mission[title]": "[ ОБЩЕЕ ] Процесс для массовых действий с заказами [TECH]",
+		"Mission[description]": "Процесс, который нужен для любых массовых действий, которые нормально не сделать через кнопку «Действия» в выборке по заказам\n\nГде запускается или используется\nТолько вручную\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"Mission[type]": "manual",
+		"tags": "ОБЩЕЕ,назначение_ТЕХ-НАСТРОЙКИ",
+		"key": "general"
+	},
+	{
+		"Mission[title]": "[ CRM ] Добавить в группу тестовых пользователей [TECH]",
+		"Mission[description]": "Процесс, который собирает тестовых пользователей в отдельную группу, чтобы их исключать из рассылок и быстрее находить, чем через сегмент\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "41",
+		"tags": "CRM,действие_ДОБ-В-ГРУППУ,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "user_email_like",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": "@test.ru",
+										"valueMode": null
+									}
+								},
+								{
+									"type": "user_email_like",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": "test@gmail.com",
+										"valueMode": null
+									}
+								},
+								{
+									"type": "user_email_like",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": "test@gmail.ru",
+										"valueMode": null
+									}
+								},
+								{
+									"type": "user_email_like",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": "test@mail.ru",
+										"valueMode": null
+									}
+								},
+								{
+									"type": "user_email_like",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": "test@ya.ru",
+										"valueMode": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "user_ingrouprule",
+						"inverted": 1,
+						"className": "app::modules::user::models::rule::InGroupRule",
+						"params": {
+							"value": {
+								"selected_id": ["3772495"]
+							}
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Добавить менеджеров в обязательные группы [TECH]",
+		"Mission[description]": "Процесс, который добавляет менеджеров в обязательные группы, которые участвуют в аналитике, скриптах и т.д.\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "41",
+		"tags": "CRM,действие_ДОБ-В-ГРУППУ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "user_ingrouprule",
+						"inverted": 0,
+						"className": "app::modules::user::models::rule::InGroupRule",
+						"params": { "value": { "selected_id": ["4119813", "4119828"] } }
+					},
+					{
+						"type": "user_ingrouprule",
+						"inverted": 1,
+						"className": "app::modules::user::models::rule::InGroupRule",
+						"params": { "value": { "selected_id": ["4119824"] } }
+					},
+					{
+						"type": "user_typerule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": { "value": { "selected_id": ["teacher", "admin"] }, "valueMode": null }
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Поставить в доп. поле заказа что он частично оплачен [TECH]",
+		"Mission[description]": "Процесс, который проставляет галочку в платном заказе, если он частично оплачен. Процесс нужен для фильтрации карточек в разделе с задачами\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": -1,
+										"fieldId": 10524347,
+										"fieldValue": {
+											"checked": 1
+										},
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10524347,
+										"fieldValue": {
+											"checked": 0
+										},
+										"caseSensitive": false
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_haspayment",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "status",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["accepted"]
+												},
+												"valueMode": null
+											}
+										},
+										{
+											"type": "type",
+											"inverted": 1,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["VIRTUAL"]
+												},
+												"valueMode": null
+											}
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					},
+					{
+						"type": "deal_is_finished",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"checked": 0
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_is_partially_payed",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"checked": 1
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_status",
+						"inverted": 1,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"selected_id": ["payed", "cancelled"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": {
+												"value": {
+													"selected_id": ["3861429"]
+												}
+											}
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["user"]
+												},
+												"valueMode": null
+											}
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Поставить как заказ оплачен [TECH]",
+		"Mission[description]": "Процесс, который автоматически определяет как заказ оплачен после внесенного платежа. Если менеджер дальше будет работать, то значение доп. поля изменится в процессе обработки лидов\n\n!!! Что нужно контролировать в процессе\nВнутри процесса. Все блоки с припиской [КОНТРОЛЬ] в названии. Чаще всего нужно будет следить за тем, что мы считаем ключевым действием менеджера при обработке лидов\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "DealContext_formfieldvalue",
+						"inverted": 0,
+						"className": "app::components::logic::rule::FormFieldValueRule",
+						"params": {
+							"valueMode": -1,
+							"fieldId": 10732322,
+							"fieldValue": { "selected_id": null },
+							"caseSensitive": false
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "deal_haspayment",
+									"inverted": 0,
+									"className": "app::components::logic::rule::LinkedContextRule",
+									"params": {
+										"linkedRule": {
+											"type": "andrule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::AndRule",
+											"params": {
+												"children": [
+													{
+														"type": "andrule",
+														"inverted": 0,
+														"className": "app::components::logic::rule::AndRule",
+														"params": {
+															"children": [
+																{
+																	"type": "created_at",
+																	"inverted": 0,
+																	"className": "app::components::logic::rule::CustomFieldRule",
+																	"params": {
+																		"value": {
+																			"from": null,
+																			"to": null,
+																			"toNDays": "24",
+																			"fromNDays": null,
+																			"dateType": "last_n_hours",
+																			"withTime": false
+																		},
+																		"valueMode": null
+																	}
+																},
+																{
+																	"type": "status_changed_at",
+																	"inverted": 0,
+																	"className": "app::components::logic::rule::CustomFieldRule",
+																	"params": {
+																		"value": {
+																			"from": null,
+																			"to": null,
+																			"toNDays": "24",
+																			"fromNDays": null,
+																			"dateType": "last_n_hours",
+																			"withTime": false
+																		},
+																		"valueMode": null
+																	}
+																}
+															],
+															"mode": "or"
+														}
+													},
+													{
+														"type": "status",
+														"inverted": 0,
+														"className": "app::components::logic::rule::CustomFieldRule",
+														"params": { "value": { "selected_id": ["accepted"] }, "valueMode": null }
+													},
+													{
+														"type": "type",
+														"inverted": 1,
+														"className": "app::components::logic::rule::CustomFieldRule",
+														"params": { "value": { "selected_id": ["VIRTUAL"] }, "valueMode": null }
+													}
+												],
+												"mode": "and"
+											}
+										},
+										"countCondition": null
+									}
+								},
+								{
+									"type": "deal_payed_at",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": {
+											"from": null,
+											"to": null,
+											"toNDays": "24",
+											"fromNDays": null,
+											"dateType": "last_n_hours",
+											"withTime": false
+										},
+										"valueMode": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "user_ingrouprule",
+								"inverted": 1,
+								"className": "app::modules::user::models::rule::InGroupRule",
+								"params": { "value": { "selected_id": ["4081203", "4090246"] } }
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Поставить заказу что он создан из другого заказа [TECH]",
+		"Mission[description]": "Процесс, который проставляет галочку в платном заказе, если он создан из бесплатного после обработки менеджером. Процесс нужен для аналитики и подсчета конверсий\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": -1,
+										"fieldId": 10416992,
+										"fieldValue": {
+											"checked": 1
+										},
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10416992,
+										"fieldValue": {
+											"checked": 0
+										},
+										"caseSensitive": false
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "deal_prevdeal_context",
+									"inverted": 0,
+									"className": "app::components::logic::rule::sales::PrevDealContextRule",
+									"params": {
+										"linkedRule": {
+											"type": "andrule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::AndRule",
+											"params": {
+												"children": [
+													{
+														"type": "DealContext_formfieldvalue",
+														"inverted": 0,
+														"className": "app::components::logic::rule::FormFieldValueRule",
+														"params": {
+															"valueMode": 2,
+															"fieldId": 10416841,
+															"fieldValue": {
+																"selected_id": ["Будет+создан+платный+заказ", "Цель+задачи+выполнена"]
+															},
+															"caseSensitive": false
+														}
+													},
+													{
+														"type": "deal_finished_at",
+														"inverted": 0,
+														"className": "app::components::logic::rule::CustomFieldRule",
+														"params": {
+															"value": {
+																"from": null,
+																"to": null,
+																"toNDays": "1",
+																"fromNDays": null,
+																"dateType": "last_n_hours",
+																"withTime": false
+															},
+															"valueMode": null
+														}
+													}
+												],
+												"mode": "and"
+											}
+										},
+										"countCondition": null
+									}
+								},
+								{
+									"type": "deal_tag",
+									"inverted": 0,
+									"className": "app::components::logic::rule::sales::TaggedDealContextRule",
+									"params": {
+										"value": {
+											"selected_id": ["1625798"]
+										},
+										"valueMode": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_created_at",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"from": null,
+								"to": null,
+								"toNDays": "1",
+								"fromNDays": null,
+								"dateType": "last_n_hours",
+								"withTime": false
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_created_by_client",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"checked": 0
+							},
+							"valueMode": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Поставить дату последней оплаты в карточке клиента [TECH]",
+		"Mission[description]": "Процесс, который прописывает дату последней оплаты в карточку клиента. Это полезная дополнительная информация для менеджера при обработке лидов\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "deal_prevdeal_context",
+									"inverted": 0,
+									"className": "app::components::logic::rule::sales::PrevDealContextRule",
+									"params": {
+										"linkedRule": {
+											"type": "emptyrule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::EmptyRule",
+											"params": []
+										},
+										"countCondition": null
+									}
+								},
+								{
+									"type": "deal_usercontext",
+									"inverted": 0,
+									"className": "app::components::logic::rule::LinkedContextRule",
+									"params": {
+										"linkedRule": {
+											"type": "user_hasdealrule",
+											"inverted": 0,
+											"className": "app::modules::user::models::rule::HasDealRule",
+											"params": {
+												"linkedRule": {
+													"type": "andrule",
+													"inverted": 0,
+													"className": "app::components::logic::rule::AndRule",
+													"params": {
+														"children": [
+															{
+																"type": "deal_haspayment",
+																"inverted": 0,
+																"className": "app::components::logic::rule::LinkedContextRule",
+																"params": {
+																	"linkedRule": {
+																		"type": "andrule",
+																		"inverted": 0,
+																		"className": "app::components::logic::rule::AndRule",
+																		"params": {
+																			"children": [
+																				{
+																					"type": "status",
+																					"inverted": 0,
+																					"className": "app::components::logic::rule::CustomFieldRule",
+																					"params": {
+																						"value": {
+																							"selected_id": ["accepted"]
+																						},
+																						"valueMode": null
+																					}
+																				},
+																				{
+																					"type": "type",
+																					"inverted": 1,
+																					"className": "app::components::logic::rule::CustomFieldRule",
+																					"params": {
+																						"value": {
+																							"selected_id": ["VIRTUAL"]
+																						},
+																						"valueMode": null
+																					}
+																				}
+																			],
+																			"mode": "and"
+																		}
+																	},
+																	"countCondition": null
+																}
+															},
+															{
+																"type": "deal_is_payed",
+																"inverted": 0,
+																"className": "app::components::logic::rule::CustomFieldRule",
+																"params": {
+																	"value": {
+																		"checked": 1
+																	},
+																	"valueMode": null
+																}
+															}
+														],
+														"mode": "and"
+													}
+												},
+												"countCondition": {
+													"checker": "equal",
+													"numval": "1"
+												}
+											}
+										},
+										"countCondition": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_haspayment",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "status",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["accepted"]
+												},
+												"valueMode": null
+											}
+										},
+										{
+											"type": "type",
+											"inverted": 1,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["VIRTUAL"]
+												},
+												"valueMode": null
+											}
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					},
+					{
+						"type": "deal_is_payed",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"checked": 1
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "UserContext_formfieldvalue",
+											"inverted": 0,
+											"className": "app::components::logic::rule::FormFieldValueRule",
+											"params": {
+												"valueMode": -1,
+												"fieldId": 10617360,
+												"fieldValue": {
+													"from": null,
+													"to": null,
+													"toNDays": null,
+													"fromNDays": null,
+													"dateType": null,
+													"withTime": false
+												},
+												"caseSensitive": false
+											}
+										},
+										{
+											"type": "UserContext_formfieldvalue",
+											"inverted": 0,
+											"className": "app::components::logic::rule::FormFieldValueRule",
+											"params": {
+												"valueMode": 2,
+												"fieldId": 10617360,
+												"fieldValue": {
+													"from": "01.01.1970",
+													"to": "01.01.1970",
+													"toNDays": null,
+													"fromNDays": null,
+													"dateType": null,
+													"withTime": false
+												},
+												"caseSensitive": false
+											}
+										}
+									],
+									"mode": "or"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Прописать данные в заказ при выставлении счёта от менеджера [TECH]",
+		"Mission[description]": "Процесс, который проставляет необходимые данные в платный заказ, когда менеджер создает этот заказ из процесса\n\nГде запускается или используется\nТолько на технической доске для заказов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Завершить все задачи [TECH]",
+		"Mission[description]": "Процесс, который завершает все задачи, проставляет значения в доп. полях и убирает из доски продаж\n\nГде запускается или используется\nТолько на технической доске для заказов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Удаление заказов. Пустые заявки [TECH]",
+		"Mission[description]": "Процесс, который отлавливает неправильно созданные заказы, удаляет до конца и отправляет уведомление об ошибке тех. спецам\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"ParamsObject[use_personal_manager]": 2,
+		"tags": "CRM,действие_ОТМЕНИТЬ-ЗАКАЗ,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "deal_created_at",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": {
+											"from": null,
+											"to": null,
+											"toNDays": null,
+											"fromNDays": "1",
+											"dateType": "last_n_hours",
+											"withTime": false
+										},
+										"valueMode": null
+									}
+								},
+								{
+									"type": "deal_created_by_client_new",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": { "value": { "checked": 1 }, "valueMode": null }
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_haspayment",
+						"inverted": 1,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "status",
+								"inverted": 0,
+								"className": "app::components::logic::rule::CustomFieldRule",
+								"params": { "value": { "selected_id": ["accepted"] }, "valueMode": null }
+							},
+							"countCondition": null
+						}
+					},
+					{
+						"type": "deal_offerparamsrule",
+						"inverted": 1,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "emptyrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::EmptyRule",
+								"params": []
+							},
+							"countCondition": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": { "value": { "selected_id": null } }
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": { "value": { "selected_id": ["user"] }, "valueMode": null }
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Отмена заказов. После полного возврата [TECH]",
+		"Mission[description]": "Процесс, который отменяет заказ с причиной «Возврат средств» после полного возврата\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,действие_ОТМЕНИТЬ-ЗАКАЗ,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "andrule",
+									"inverted": 0,
+									"className": "app::components::logic::rule::AndRule",
+									"params": {
+										"children": [
+											{
+												"type": "cancel_reason",
+												"inverted": 0,
+												"className": "app::components::logic::rule::CustomFieldRule",
+												"params": {
+													"value": {
+														"selected_id": null
+													},
+													"valueMode": -1
+												}
+											},
+											{
+												"type": "deal_status",
+												"inverted": 0,
+												"className": "app::components::logic::rule::CustomFieldRule",
+												"params": {
+													"value": {
+														"selected_id": ["cancelled"]
+													},
+													"valueMode": null
+												}
+											}
+										],
+										"mode": "and"
+									}
+								},
+								{
+									"type": "deal_status",
+									"inverted": 1,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": {
+											"selected_id": ["cancelled"]
+										},
+										"valueMode": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_haspayment",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "status",
+								"inverted": 0,
+								"className": "app::components::logic::rule::CustomFieldRule",
+								"params": {
+									"value": {
+										"selected_id": ["returned"]
+									},
+									"valueMode": null
+								}
+							},
+							"countCondition": null
+						}
+					},
+					{
+						"type": "deal_haspayment",
+						"inverted": 1,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "status",
+								"inverted": 0,
+								"className": "app::components::logic::rule::CustomFieldRule",
+								"params": {
+									"value": {
+										"selected_id": ["accepted", "frombalance"]
+									},
+									"valueMode": null
+								}
+							},
+							"countCondition": null
+						}
+					},
+					{
+						"type": "deal_is_finished",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"checked": 0
+							},
+							"valueMode": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Отмена заказов. Созданы более 30 дней назад [TECH]",
+		"Mission[description]": "Процесс, отменяющий заказы, которые не оплаченные и были созданы больше 30 дней назад. Нужен, чтобы держать порядок и в проекте всегда был список только актуальных заказов\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,действие_ОТМЕНИТЬ-ЗАКАЗ,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": -1,
+										"fieldId": 10757194,
+										"fieldValue": { "checked": 1 },
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10757194,
+										"fieldValue": { "checked": 0 },
+										"caseSensitive": false
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_created_at",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"from": null,
+								"to": null,
+								"toNDays": null,
+								"fromNDays": "30",
+								"dateType": "last_n_days",
+								"withTime": false
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_haspayment",
+						"inverted": 1,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "status",
+								"inverted": 0,
+								"className": "app::components::logic::rule::CustomFieldRule",
+								"params": { "value": { "selected_id": ["accepted", "returned", "frombalance"] }, "valueMode": null }
+							},
+							"countCondition": null
+						}
+					},
+					{
+						"type": "deal_is_finished",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": { "value": { "checked": 0 }, "valueMode": null }
+					},
+					{
+						"type": "deal_is_free",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": { "value": { "checked": 0 }, "valueMode": null }
+					},
+					{
+						"type": "deal_is_partially_payed",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": { "value": { "checked": 0 }, "valueMode": null }
+					},
+					{
+						"type": "deal_manager_id",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": { "value": { "selected_id": null }, "valueMode": -1 }
+					},
+					{
+						"type": "deal_status",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": { "selected_id": ["new", "in_work", "not_confirmed", "payment_waiting"] },
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": { "value": { "selected_id": ["4119846"] } }
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": { "value": { "selected_id": ["user"] }, "valueMode": null }
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Удаление заказов. От сотрудников или тестовых пользователей [TECH]",
+		"Mission[description]": "Процесс, который удаляет заказы от сотрудников проекта или тестовых пользователей\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,действие_ОТМЕНИТЬ-ЗАКАЗ,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"params": {
+				"mode": "or",
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"params": {
+							"mode": "and",
+							"children": [
+								{
+									"type": "andrule",
+									"inverted": 0,
+									"params": {
+										"mode": "or",
+										"children": [
+											{
+												"type": "andrule",
+												"inverted": 0,
+												"params": {
+													"mode": "and",
+													"children": [
+														{
+															"type": "andrule",
+															"inverted": 0,
+															"params": {
+																"mode": "or",
+																"children": [
+																	{
+																		"type": "andrule",
+																		"inverted": 0,
+																		"params": {
+																			"mode": "and",
+																			"children": [
+																				{
+																					"type": "deal_created_at",
+																					"inverted": 0,
+																					"params": {
+																						"value": {
+																							"from": null,
+																							"to": null,
+																							"toNDays": null,
+																							"fromNDays": "1",
+																							"dateType": "last_n_hours",
+																							"withTime": false
+																						},
+																						"valueMode": null
+																					}
+																				},
+																				{
+																					"type": "deal_status",
+																					"inverted": 1,
+																					"params": { "value": { "selected_id": ["payed"] }, "valueMode": null }
+																				}
+																			]
+																		}
+																	},
+																	{
+																		"type": "andrule",
+																		"inverted": 0,
+																		"params": {
+																			"mode": "and",
+																			"children": [
+																				{
+																					"type": "deal_created_at",
+																					"inverted": 0,
+																					"params": {
+																						"value": {
+																							"from": null,
+																							"to": null,
+																							"toNDays": null,
+																							"fromNDays": "14",
+																							"dateType": "last_n_days",
+																							"withTime": false
+																						},
+																						"valueMode": null
+																					}
+																				},
+																				{
+																					"type": "deal_offer_id",
+																					"inverted": 0,
+																					"params": {
+																						"value": {
+																							"selected_id": [],
+																							"selected_tags": [],
+																							"all_object_with_tags": false
+																						},
+																						"valueMode": null
+																					}
+																				}
+																			]
+																		}
+																	}
+																]
+															}
+														},
+														{
+															"type": "deal_is_free",
+															"inverted": 0,
+															"params": { "value": { "checked": 1 }, "valueMode": null }
+														}
+													]
+												}
+											},
+											{
+												"type": "andrule",
+												"inverted": 0,
+												"params": {
+													"mode": "and",
+													"children": [
+														{
+															"type": "deal_created_at",
+															"inverted": 0,
+															"params": {
+																"value": {
+																	"from": null,
+																	"to": null,
+																	"toNDays": null,
+																	"fromNDays": "1",
+																	"dateType": "last_n_hours",
+																	"withTime": false
+																},
+																"valueMode": null
+															}
+														},
+														{
+															"type": "deal_haspayment",
+															"inverted": 1,
+															"params": {
+																"linkedRule": {
+																	"type": "status",
+																	"inverted": 0,
+																	"params": {
+																		"value": { "selected_id": ["accepted", "frombalance"] },
+																		"valueMode": null
+																	}
+																},
+																"countCondition": { "checker": "nlt", "numval": "" }
+															}
+														},
+														{
+															"type": "deal_is_finished",
+															"inverted": 0,
+															"params": { "value": { "checked": 0 }, "valueMode": null }
+														},
+														{
+															"type": "deal_is_free",
+															"inverted": 0,
+															"params": { "value": { "checked": 0 }, "valueMode": null }
+														}
+													]
+												}
+											}
+										]
+									}
+								},
+								{
+									"type": "deal_usercontext",
+									"inverted": 0,
+									"params": {
+										"linkedRule": {
+											"type": "user_typerule",
+											"inverted": 0,
+											"params": { "value": { "selected_id": ["teacher", "admin"] }, "valueMode": null }
+										},
+										"countCondition": { "checker": "nlt", "numval": "" }
+									}
+								}
+							]
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"params": {
+									"mode": "and",
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 0,
+											"params": { "value": { "selected_id": ["4081203", "4090246"] }, "valueMode": null }
+										},
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"params": { "value": { "selected_id": ["4090256"] }, "valueMode": null }
+										}
+									]
+								}
+							},
+							"countCondition": { "checker": "nlt", "numval": "" }
+						}
+					}
+				]
+			},
+			"maxSize": ""
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Уведомление сотрудникам. Новый заказ [TECH]",
+		"Mission[description]": "Процесс, который отправляет уведомление сотрудникам после создания заказа\n\nВАЖНО! Самих сотрудников отдела продаж в процессе указывать не нужно, им приходят уведомления по их лидам в процессе «Обработка лидов»\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,crm_УВЕДОМЛЕНИЯ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "deal_created_at",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"from": null,
+								"to": null,
+								"toNDays": "24",
+								"fromNDays": null,
+								"dateType": "last_n_hours",
+								"withTime": false
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_is_finished",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"checked": 0
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_is_partially_payed",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"checked": 0
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_БЕЗ-УВЕДОМЛЕНИЙ"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_СИСТЕМНЫЕ"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_ТЕСТЫ-НАСТРОЕК"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_status",
+						"inverted": 1,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"selected_id": ["cancelled"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": {
+												"value": {
+													"selected_id": ["3861429"]
+												}
+											}
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["user"]
+												},
+												"valueMode": null
+											}
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Уведомление сотрудникам. Полная оплата заказа [TECH]",
+		"Mission[description]": "Процесс, который отправляет уведомление сотрудникам после полной оплаты заказа\n\nВАЖНО! Самих сотрудников отдела продаж в процессе указывать не нужно, им приходят уведомления по их лидам в процессе «Обработка лидов»\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,назначение_СОТРУДНИКИ,действие_УВЕДОМЛЕНИЕ",
+		"ParamsObject[use_personal_manager]": 2,
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_БЕЗ-УВЕДОМЛЕНИЙ"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_СИСТЕМНЫЕ"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_ТЕСТЫ-НАСТРОЕК"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_payed_at",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"from": null,
+								"to": null,
+								"toNDays": "24",
+								"fromNDays": null,
+								"dateType": "last_n_hours",
+								"withTime": false
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_status",
+						"inverted": 1,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"selected_id": ["cancelled"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": {
+												"value": {
+													"selected_id": ["3861429"]
+												}
+											}
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["user"]
+												},
+												"valueMode": null
+											}
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Уведомление сотрудникам. Частичная оплата заказа [TECH]",
+		"Mission[description]": "Процесс, который отправляет уведомление сотрудникам после частичной оплаты заказа\n\nВАЖНО! Самих сотрудников отдела продаж в процессе указывать не нужно, им приходят уведомления по их лидам в процессе «Обработка лидов»\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,назначение_СОТРУДНИКИ,действие_УВЕДОМЛЕНИЕ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "deal_haspayment",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "status",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["accepted"]
+												},
+												"valueMode": null
+											}
+										},
+										{
+											"type": "status_changed_at",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"from": null,
+													"to": null,
+													"toNDays": "24",
+													"fromNDays": null,
+													"dateType": "last_n_hours",
+													"withTime": false
+												},
+												"valueMode": null
+											}
+										},
+										{
+											"type": "type",
+											"inverted": 1,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["VIRTUAL"]
+												},
+												"valueMode": null
+											}
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					},
+					{
+						"type": "deal_is_partially_payed",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"checked": 1
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_БЕЗ-УВЕДОМЛЕНИЙ"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_СИСТЕМНЫЕ"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_ТЕСТЫ-НАСТРОЕК"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_status",
+						"inverted": 1,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"selected_id": ["cancelled"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": {
+												"value": {
+													"selected_id": ["3861429"]
+												}
+											}
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["user"]
+												},
+												"valueMode": null
+											}
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Подключение и настройка Telegram для менеджеров [TECH]",
+		"Mission[description]": "Процесс, который отправляет инструкцию сотрудникам для подключения бота Telegram, чтобы получать удобные уведомления\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "41",
+		"tags": "CRM,назначение_СОТРУДНИКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "user_ingrouprule",
+						"inverted": 0,
+						"className": "app::modules::user::models::rule::InGroupRule",
+						"params": { "value": { "selected_id": ["4119813"] } }
+					},
+					{
+						"type": "user_telegram_connected",
+						"inverted": 0,
+						"className": "app::modules::user::models::rule::UserHasConnectedAnyTelegramBotRule",
+						"params": { "value": { "checked": 0 }, "valueMode": null }
+					},
+					{
+						"type": "user_typerule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": { "value": { "selected_id": ["teacher", "admin"] }, "valueMode": null }
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Сброс неактуального персонального менеджера у клиента [TECH]",
+		"Mission[description]": "Процесс, который сбрасывает неактуального персонального менеджера у пользователя, если менеджер уже не работает в проекте\n\n!!! Что нужно контролировать в процессе\nОбщие настройки. Список актуальных персональных менеджеров во входящих условиях\n\nГде запускается или используется\n— Работает всегда и запускается через раздел «Процессы»\n— Процесс: [ CRM ] Сегментация и распределение лидов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "41",
+		"tags": "CRM,КОНТРОЛЬ,контроль_МЕНЕДЖЕРЫ,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "personal_manager_user_id",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"selected_id": null
+							},
+							"valueMode": 1
+						}
+					},
+					{
+						"type": "personal_manager_user_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"selected_id": null
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "user_typerule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"selected_id": ["user"]
+							},
+							"valueMode": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Назначить в рабочем заказе персонального менеджера клиента [TECH]",
+		"Mission[description]": "Процесс, который назначает в заказе персонального менеджера клиента, если менеджер начал работать с заказом\n\n!!! Что нужно контролировать в процессе\n— Общие настройки. Список актуальных персональных менеджеров во входящих условиях\n— Внутри процесса. В блоке с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать тех. спецов, которые отвечают за настройки CRM\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ,контроль_МЕНЕДЖЕРЫ,назначение_ТЕХ-НАСТРОЙКИ",
+		"ParamsObject[use_personal_manager]": 1,
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "DealContext_formfieldvalue",
+						"inverted": 0,
+						"className": "app::components::logic::rule::FormFieldValueRule",
+						"params": { "valueMode": 2, "fieldId": 10421291, "fieldValue": { "checked": 1 }, "caseSensitive": false }
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10085595,
+										"fieldValue": { "checked": 1 },
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "deal_tag",
+									"inverted": 0,
+									"className": "app::components::logic::rule::sales::TaggedDealContextRule",
+									"params": { "value": { "selected_id": ["1730833"] }, "valueMode": null }
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10085596,
+										"fieldValue": {
+											"from": null,
+											"to": null,
+											"toNDays": "30",
+											"fromNDays": null,
+											"dateType": "last_n_days",
+											"withTime": false
+										},
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10085597,
+										"fieldValue": {
+											"from": null,
+											"to": null,
+											"toNDays": "30",
+											"fromNDays": null,
+											"dateType": "last_n_days",
+											"withTime": false
+										},
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "deal_created_at",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": {
+											"from": null,
+											"to": null,
+											"toNDays": "30",
+											"fromNDays": null,
+											"dateType": "last_n_days",
+											"withTime": false
+										},
+										"valueMode": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_manager_id",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": { "value": { "selected_id": null }, "valueMode": -1 }
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "personal_manager_user_id",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": { "value": { "selected_id": null }, "valueMode": 1 }
+										},
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": { "value": { "selected_id": ["2660400"] } }
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": { "value": { "selected_id": ["user"] }, "valueMode": null }
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Назначить персонального менеджера клиенту из заказа [TECH]",
+		"Mission[description]": "Процесс, который закрепляет персонального менеджера клиенту из заказа, с которым начал работать менеджер\n\nКак работает\nСрабатывает, если менеджер работал с заказом и у клиента нет персонального менеджера. Все дальнейшие заказы клиента будут закрепляться за этим персональным менеджером\n\n!!! Что нужно контролировать в процессе\n— Общие настройки. Список актуальных персональных менеджеров во входящих условиях\n— Внутри процесса. В блоке с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать тех. спецов, которые отвечают за настройки CRM\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ,контроль_МЕНЕДЖЕРЫ,назначение_ТЕХ-НАСТРОЙКИ",
+		"ParamsObject[use_personal_manager]": 2,
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10714693,
+										"fieldValue": { "checked": 1 },
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "deal_tag",
+									"inverted": 0,
+									"className": "app::components::logic::rule::sales::TaggedDealContextRule",
+									"params": { "value": { "selected_id": ["1770944"] }, "valueMode": null }
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10714695,
+										"fieldValue": {
+											"from": null,
+											"to": null,
+											"toNDays": null,
+											"fromNDays": null,
+											"dateType": "last_n_days",
+											"withTime": false
+										},
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10714696,
+										"fieldValue": {
+											"from": null,
+											"to": null,
+											"toNDays": "30",
+											"fromNDays": null,
+											"dateType": "last_n_days",
+											"withTime": false
+										},
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "deal_created_at",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": {
+											"from": null,
+											"to": null,
+											"toNDays": "30",
+											"fromNDays": null,
+											"dateType": "last_n_days",
+											"withTime": false
+										},
+										"valueMode": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_manager_id",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": { "value": { "selected_id": null }, "valueMode": 1 }
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "personal_manager_user_id",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": { "value": { "selected_id": ["265353811", "265709567", "415447939"] }, "valueMode": -1 }
+										},
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": { "value": { "selected_id": ["4071546"] } }
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": { "value": { "selected_id": ["user"] }, "valueMode": null }
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Назначить в новом оплаченном заказе от клиента персонального менеджера клиента [TECH]",
+		"Mission[description]": "Процесс, который назначает в заказе персонального менеджера клиента, если заказ был оплачен и менеджер работал до этого с этим клиентом\n\n!!! Что нужно контролировать в процессе\n— Общие настройки. Список актуальных персональных менеджеров во входящих условиях процесса\n— Общие настройки. Список исполнителей/супервайзеров. Должны быть указаны тех. спецы, которые работают с CRM. Сотрудники, которые контролируют работу по задачам. Обычных менеджеров указывать не нужно\n— Внутри процесса. Все блоки с припиской [КОНТРОЛЬ] в названии\n— Внутри процесса. В блоке с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать тех. спецов, которые отвечают за настройки CRM\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ,контроль_МЕНЕДЖЕРЫ,назначение_ТЕХ-НАСТРОЙКИ",
+		"showOnKanban": 1,
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "DealContext_formfieldvalue",
+						"inverted": 0,
+						"className": "app::components::logic::rule::FormFieldValueRule",
+						"params": {
+							"valueMode": 2,
+							"fieldId": 10668876,
+							"fieldValue": {
+								"checked": 1
+							},
+							"caseSensitive": false
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "deal_haspayment",
+									"inverted": 0,
+									"className": "app::components::logic::rule::LinkedContextRule",
+									"params": {
+										"linkedRule": {
+											"type": "andrule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::AndRule",
+											"params": {
+												"children": [
+													{
+														"type": "created_at",
+														"inverted": 0,
+														"className": "app::components::logic::rule::CustomFieldRule",
+														"params": {
+															"value": {
+																"from": null,
+																"to": null,
+																"toNDays": "24",
+																"fromNDays": null,
+																"dateType": "last_n_hours",
+																"withTime": false
+															},
+															"valueMode": null
+														}
+													},
+													{
+														"type": "status",
+														"inverted": 0,
+														"className": "app::components::logic::rule::CustomFieldRule",
+														"params": {
+															"value": {
+																"selected_id": ["accepted"]
+															},
+															"valueMode": null
+														}
+													},
+													{
+														"type": "type",
+														"inverted": 1,
+														"className": "app::components::logic::rule::CustomFieldRule",
+														"params": {
+															"value": {
+																"selected_id": ["VIRTUAL"]
+															},
+															"valueMode": null
+														}
+													}
+												],
+												"mode": "and"
+											}
+										},
+										"countCondition": null
+									}
+								},
+								{
+									"type": "deal_payed_at",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": {
+											"from": null,
+											"to": null,
+											"toNDays": "24",
+											"fromNDays": null,
+											"dateType": "last_n_hours",
+											"withTime": false
+										},
+										"valueMode": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": -1,
+										"fieldId": 5000945,
+										"fieldValue": {
+											"checked": 1
+										},
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 5000945,
+										"fieldValue": {
+											"checked": 0
+										},
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "deal_tag",
+									"inverted": 1,
+									"className": "app::components::logic::rule::sales::TaggedDealContextRule",
+									"params": {
+										"value": {
+											"selected_id": ["1749742"]
+										},
+										"valueMode": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_is_free",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"checked": 0
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "personal_manager_user_id",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": null
+												},
+												"valueMode": 1
+											}
+										},
+										{
+											"type": "user_hasdealrule",
+											"inverted": 0,
+											"className": "app::modules::user::models::rule::HasDealRule",
+											"params": {
+												"linkedRule": {
+													"type": "andrule",
+													"inverted": 0,
+													"className": "app::components::logic::rule::AndRule",
+													"params": {
+														"children": [
+															{
+																"type": "DealContext_formfieldvalue",
+																"inverted": 0,
+																"className": "app::components::logic::rule::FormFieldValueRule",
+																"params": {
+																	"valueMode": 2,
+																	"fieldId": 5005965,
+																	"fieldValue": {
+																		"from": null,
+																		"to": null,
+																		"toNDays": "7",
+																		"fromNDays": null,
+																		"dateType": "last_n_days",
+																		"withTime": false
+																	},
+																	"caseSensitive": false
+																}
+															},
+															{
+																"type": "andrule",
+																"inverted": 0,
+																"className": "app::components::logic::rule::AndRule",
+																"params": {
+																	"children": [
+																		{
+																			"type": "DealContext_formfieldvalue",
+																			"inverted": 0,
+																			"className": "app::components::logic::rule::FormFieldValueRule",
+																			"params": {
+																				"valueMode": 2,
+																				"fieldId": 5000945,
+																				"fieldValue": {
+																					"checked": 1
+																				},
+																				"caseSensitive": false
+																			}
+																		},
+																		{
+																			"type": "deal_tag",
+																			"inverted": 0,
+																			"className": "app::components::logic::rule::sales::TaggedDealContextRule",
+																			"params": {
+																				"value": {
+																					"selected_id": ["1749742"]
+																				},
+																				"valueMode": null
+																			}
+																		}
+																	],
+																	"mode": "or"
+																}
+															}
+														],
+														"mode": "and"
+													}
+												},
+												"countCondition": null
+											}
+										},
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": {
+												"value": {
+													"selected_id": ["2716567"]
+												}
+											}
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["user"]
+												},
+												"valueMode": null
+											}
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Передать работу по заказу менеджеру [TECH]",
+		"Mission[description]": "Процесс, позволяющий передать работу по заказу конкретному менеджеру и проставляющий необходимые данные для аналитики\n\nГде запускается или используется\nТолько вручную\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Убрать работу менеджера по заказу [TECH]",
+		"Mission[description]": "Процесс, позволяющий убрать работу по заказу у менеджера и поставить автооплату\n\nГде запускается или используется\nТолько вручную\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Отметить работу менеджера с заказом [ПОДПРОЦЕСС]",
+		"Mission[description]": "Подпроцесс, который запускается, если менеджер работал с заказом по задаче и заполняет необходимые данные\n\nГде запускается или используется\nПроцесс: [ CRM ] Обработка лидов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Поставить теги заказу [ПОДПРОЦЕСС]",
+		"Mission[description]": "Подпроцесс, в котором происходит проверка на принадлежность заказа к определенному продукту/воронке и дальше проставление в заказе соответствующих тегов\n\n!!! Что нужно контролировать в процессе\nВнутри процесса. Добавлять при необходимости новые продукты/воронки и теги к ним, чтобы менеджеры могли фильтровать задачи через теги\n— Внутри процесса. В блоке с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать тех. спецов, которые отвечают за настройки CRM\n\nГде запускается или используется\nПроцесс: [ CRM ] Сегментация и распределение лидов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Заполнить доп. поля для писем по заказам [ПОДПРОЦЕСС]",
+		"Mission[description]": "Процесс, который заполняет доп.поля для вставки их значений в письмах по заказам\n\n!!! Что нужно контролировать в процессе\nВнутри процесса. Добавлять при необходимости новые продукты\n— Внутри процесса. В блоке с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать тех. спецов, которые отвечают за настройки CRM\n\nГде запускается или используется\nПроцесс: [ CRM ] Сегментация и распределение лидов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ,назначение_ТЕХ-НАСТРОЙКИ",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Указать данные по лиду и заказу [ПОДПРОЦЕСС]",
+		"Mission[description]": "Подпроцесс, который используется в основном процессе обработки лидов и не только для того, чтобы менеджер указал дополнительные данные по объектам после касания с лидом\n\nГде запускается или используется\nПроцесс: [ CRM ] Обработка лидов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Закрыть задачу [ПОДПРОЦЕСС]",
+		"Mission[description]": "Подпроцесс, который используется в основном процессе обработки лидов для того, чтобы можно было закрыть задачу из любого этапа задачи\n\n!!! Что нужно контролировать в процессе\nОбщие настройки. Список исполнителей/супервайзеров. Должны быть указаны тех. спецы, которые работают с CRM. Сотрудники, которые контролируют работу по задачам. Обычных менеджеров указывать не нужно\n\nГде запускается или используется\nПроцесс: [ CRM ] Обработка лидов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Набор шаблонов сообщений для обработки [ПОДПРОЦЕСС]",
+		"Mission[description]": "Подпроцесс, в котором добавлены шаблоны сообщений, которые используют менеджеры при обработке лидов\n\n!!! Что нужно контролировать в процессе\n— Общие настройки. Список исполнителей/супервайзеров. Должны быть указаны тех. спецы, которые работают с CRM. Сотрудники, которые контролируют работу по задачам. Обычных менеджеров указывать не нужно\n— Внутри процесса. Добавлять/убирать шаблоны писем для отдела продаж\n\nГде запускается или используется\nПроцесс: [ CRM ] Обработка лидов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Панель для быстрых действий по заказу [ПОДПРОЦЕСС]",
+		"Mission[description]": "Подпроцесс, в котором добавлены быстрые действия для обработки лидов\n\n!!! Что нужно контролировать в процессе\nОбщие настройки. Список исполнителей/супервайзеров. Должны быть указаны тех. спецы, которые работают с CRM. Сотрудники, которые контролируют работу по задачам. Обычных менеджеров указывать не нужно\n\nГде запускается или используется\nПроцесс: [ CRM ] Обработка лидов\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ",
+		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Убрать заказы из этапов «Завершен» и «Отменен» [TECH]",
+		"Mission[description]": "Процесс, который убирает завершенные и отменные заказы с досок продаж. Это нужно, чтобы доски продаж быстрее грузились. Этапы завершенные и отменные не нужны для анализа, поэтому раз в неделю/месяц желательно заказы оттуда убирать\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,crm_ДОСКИ-ПРОДАЖ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "andrule",
+									"inverted": 0,
+									"className": "app::components::logic::rule::AndRule",
+									"params": {
+										"children": [
+											{
+												"type": "DealContext_formfieldvalue",
+												"inverted": 0,
+												"className": "app::components::logic::rule::FormFieldValueRule",
+												"params": {
+													"valueMode": 2,
+													"fieldId": 10757202,
+													"fieldValue": {
+														"from": null,
+														"to": null,
+														"toNDays": null,
+														"fromNDays": "30",
+														"dateType": "last_n_days",
+														"withTime": false
+													},
+													"caseSensitive": false
+												}
+											},
+											{
+												"type": "deal_status",
+												"inverted": 0,
+												"className": "app::components::logic::rule::CustomFieldRule",
+												"params": { "value": { "selected_id": ["cancelled"] }, "valueMode": null }
+											}
+										],
+										"mode": "and"
+									}
+								},
+								{
+									"type": "andrule",
+									"inverted": 0,
+									"className": "app::components::logic::rule::AndRule",
+									"params": {
+										"children": [
+											{
+												"type": "deal_finished_at",
+												"inverted": 0,
+												"className": "app::components::logic::rule::CustomFieldRule",
+												"params": {
+													"value": {
+														"from": null,
+														"to": null,
+														"toNDays": null,
+														"fromNDays": "30",
+														"dateType": "last_n_days",
+														"withTime": false
+													},
+													"valueMode": null
+												}
+											},
+											{
+												"type": "deal_status",
+												"inverted": 0,
+												"className": "app::components::logic::rule::CustomFieldRule",
+												"params": { "value": { "selected_id": ["payed"] }, "valueMode": null }
+											}
+										],
+										"mode": "and"
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "crm_dealfunnelandstage",
+						"inverted": 1,
+						"className": "app::modules::crm::models::rule::DealFunnelAndStageRule",
+						"params": { "value": { "selected_id": "0" }, "stageId": { "selected_id": null } }
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Распределитель заказов по доскам продаж [TECH]",
+		"Mission[description]": "Процесс, который распределяет заказы на доски продаж, исходя из их параметров\n\n!!! Что нужно контролировать в процессе\nВнутри процесса. Добавлять новые доски продаж в блоке с припиской [КОНТРОЛЬ]\n— Внутри процесса. В блоках с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать тех. спецов, которые отвечают за настройки CRM\n\nГде запускается или используется\n1. Работает всегда фоново\n2. На доске заказов «ТЕХНИЧЕСКАЯ ДОСКА» на этапе «РАСПР. ПО ДОСКАМ»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ,crm_ДОСКИ-ПРОДАЖ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "andrule",
+									"inverted": 0,
+									"className": "app::components::logic::rule::AndRule",
+									"params": {
+										"children": [
+											{
+												"type": "crm_dealfunnelandstage",
+												"inverted": 0,
+												"className": "app::modules::crm::models::rule::DealFunnelAndStageRule",
+												"params": {
+													"value": {
+														"selected_id": "0"
+													},
+													"stageId": {
+														"selected_id": null
+													}
+												}
+											},
+											{
+												"type": "deal_is_finished",
+												"inverted": 0,
+												"className": "app::components::logic::rule::CustomFieldRule",
+												"params": {
+													"value": {
+														"checked": 0
+													},
+													"valueMode": null
+												}
+											},
+											{
+												"type": "deal_status",
+												"inverted": 1,
+												"className": "app::components::logic::rule::CustomFieldRule",
+												"params": {
+													"value": {
+														"selected_id": ["payed", "cancelled", "pending"]
+													},
+													"valueMode": null
+												}
+											}
+										],
+										"mode": "and"
+									}
+								},
+								{
+									"type": "crm_dealfunnelandstage",
+									"inverted": 0,
+									"className": "app::modules::crm::models::rule::DealFunnelAndStageRule",
+									"params": {
+										"value": {
+											"selected_id": "19634"
+										},
+										"stageId": {
+											"selected_id": ["191274"]
+										}
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_created_at",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"from": null,
+								"to": null,
+								"toNDays": "30",
+								"fromNDays": null,
+								"dateType": "last_n_days",
+								"withTime": false
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_hastask",
+						"inverted": 1,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "task_mission_id",
+								"inverted": 0,
+								"className": "app::components::logic::rule::CustomFieldRule",
+								"params": {
+									"value": {
+										"selected_id": ["1823729"]
+									},
+									"valueMode": null
+								}
+							},
+							"countCondition": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_БЕЗ-ОБРАБОТКИ"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_ТЕСТЫ-НАСТРОЕК"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_tag",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::TaggedDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": ["1677735"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": {
+												"value": {
+													"selected_id": ["3861429"]
+												}
+											}
+										},
+										{
+											"type": "user_statusrule",
+											"inverted": 1,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["banned"]
+												},
+												"valueMode": null
+											}
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["user"]
+												},
+												"valueMode": null
+											}
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Доска продаж «НАЗВАНИЕ ДОСКИ». Связь изменения заказа и этапа [TECH]",
+		"Mission[description]": "Процесс, который отслеживает изменения в заказе и меняет этап в доске заказов\n\nГде запускается или используется\n1. Работает всегда и запускается через раздел «Процессы»\n2. На досках продаж на этапах «Новые заказы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,crm_ДОСКИ-ПРОДАЖ",
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "crm_dealfunnelandstage",
+						"inverted": 0,
+						"className": "app::modules::crm::models::rule::DealFunnelAndStageRule",
+						"params": {
+							"value": {
+								"selected_id": "19632"
+							},
+							"stageId": {
+								"selected_id": null
+							}
+						}
+					},
+					{
+						"type": "deal_hastask",
+						"inverted": 1,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "task_mission_id",
+								"inverted": 0,
+								"className": "app::components::logic::rule::CustomFieldRule",
+								"params": {
+									"value": {
+										"selected_id": ["1823731"]
+									},
+									"valueMode": null
+								}
+							},
+							"countCondition": null
+						}
+					},
+					{
+						"type": "deal_is_finished",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"checked": 0
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_БЕЗ-ОБРАБОТКИ"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_ТЕСТЫ-НАСТРОЕК"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_status",
+						"inverted": 1,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"selected_id": ["payed", "cancelled"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": {
+												"value": {
+													"selected_id": ["3861429"]
+												}
+											}
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["user"]
+												},
+												"valueMode": null
+											}
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[ CRM ] Сегментация и распределение лидов [TECH]",
+		"Mission[description]": "Процесс, в котором происходит классификация заказов и их распределение на менеджеров для последующей работы. После завершения этого этапа заказы направляются на обработку менеджерами в соответствующие процессы\n\n!!! Что нужно контролировать в процессе\n— Внутри процесса. Все блоки с припиской [КОНТРОЛЬ] в названии\n— Внутри процесса. Актуальные списки менеджеров заказов и персональных менеджеров (также в блоках [КОНТРОЛЬ])\n— Внутри процесса. В блоках с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать тех. спецов, которые отвечают за настройки CRM\n\nГде запускается или используется\n1. Работает всегда и запускается через раздел «Процессы»\n2. На досках продаж на этапах «Новые заказы»\n\nАвторы процесса\n— Никита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)\n— Сергей Щаев (@shchaev — https://t.me/shchaev)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ,контроль_МЕНЕДЖЕРЫ,назначение_ТЕХ-НАСТРОЙКИ",
+		"ParamsObject[use_personal_manager]": 1,
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": -1,
+										"fieldId": 10512892,
+										"fieldValue": {
+											"checked": 1
+										},
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10512892,
+										"fieldValue": {
+											"checked": 0
+										},
+										"caseSensitive": false
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "andrule",
+									"inverted": 0,
+									"className": "app::components::logic::rule::AndRule",
+									"params": {
+										"children": [
+											{
+												"type": "DealContext_formfieldvalue",
+												"inverted": 0,
+												"className": "app::components::logic::rule::FormFieldValueRule",
+												"params": {
+													"valueMode": 2,
+													"fieldId": 10512894,
+													"fieldValue": {
+														"checked": 1
+													},
+													"caseSensitive": false
+												}
+											},
+											{
+												"type": "deal_offer_id",
+												"inverted": 0,
+												"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+												"params": {
+													"value": {
+														"selected_id": [],
+														"selected_tags": ["тех_СОБРАТЬ-АНАЛИТИКУ"],
+														"all_object_with_tags": true
+													},
+													"valueMode": null
+												}
+											}
+										],
+										"mode": "and"
+									}
+								},
+								{
+									"type": "deal_offer_id",
+									"inverted": 1,
+									"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+									"params": {
+										"value": {
+											"selected_id": [],
+											"selected_tags": ["тех_СОБРАТЬ-АНАЛИТИКУ"],
+											"all_object_with_tags": true
+										},
+										"valueMode": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "andrule",
+									"inverted": 0,
+									"className": "app::components::logic::rule::AndRule",
+									"params": {
+										"children": [
+											{
+												"type": "deal_is_finished",
+												"inverted": 0,
+												"className": "app::components::logic::rule::CustomFieldRule",
+												"params": {
+													"value": {
+														"checked": 0
+													},
+													"valueMode": null
+												}
+											},
+											{
+												"type": "deal_is_free",
+												"inverted": 0,
+												"className": "app::components::logic::rule::CustomFieldRule",
+												"params": {
+													"value": {
+														"checked": 1
+													},
+													"valueMode": null
+												}
+											}
+										],
+										"mode": "and"
+									}
+								},
+								{
+									"type": "deal_is_free",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": {
+											"checked": 0
+										},
+										"valueMode": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "deal_created_at",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": {
+											"from": null,
+											"to": null,
+											"toNDays": "24",
+											"fromNDays": null,
+											"dateType": "last_n_hours",
+											"withTime": false
+										},
+										"valueMode": null
+									}
+								},
+								{
+									"type": "deal_haspayment",
+									"inverted": 0,
+									"className": "app::components::logic::rule::LinkedContextRule",
+									"params": {
+										"linkedRule": {
+											"type": "andrule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::AndRule",
+											"params": {
+												"children": [
+													{
+														"type": "created_at",
+														"inverted": 0,
+														"className": "app::components::logic::rule::CustomFieldRule",
+														"params": {
+															"value": {
+																"from": null,
+																"to": null,
+																"toNDays": "24",
+																"fromNDays": null,
+																"dateType": "last_n_hours",
+																"withTime": false
+															},
+															"valueMode": null
+														}
+													},
+													{
+														"type": "status",
+														"inverted": 0,
+														"className": "app::components::logic::rule::CustomFieldRule",
+														"params": {
+															"value": {
+																"selected_id": ["accepted"]
+															},
+															"valueMode": null
+														}
+													},
+													{
+														"type": "type",
+														"inverted": 1,
+														"className": "app::components::logic::rule::CustomFieldRule",
+														"params": {
+															"value": {
+																"selected_id": ["VIRTUAL"]
+															},
+															"valueMode": null
+														}
+													}
+												],
+												"mode": "and"
+											}
+										},
+										"countCondition": null
+									}
+								},
+								{
+									"type": "deal_tag",
+									"inverted": 0,
+									"className": "app::components::logic::rule::sales::TaggedDealContextRule",
+									"params": {
+										"value": {
+											"selected_id": ["1700714"]
+										},
+										"valueMode": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_hastask",
+						"inverted": 1,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "task_mission_id",
+								"inverted": 0,
+								"className": "app::components::logic::rule::CustomFieldRule",
+								"params": {
+									"value": {
+										"selected_id": ["1823734"]
+									},
+									"valueMode": null
+								}
+							},
+							"countCondition": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_БЕЗ-ОБРАБОТКИ"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_status",
+						"inverted": 1,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"selected_id": ["cancelled"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_tag",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::TaggedDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": ["1677735"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": {
+												"value": {
+													"selected_id": ["3861429"]
+												}
+											}
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["user"]
+												},
+												"valueMode": null
+											}
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[1] [ CRM ] Обработка лидов [ОП]",
+		"Mission[description]": "Основной процесс, в котором происходит обработка лидов менеджерами\n\n!!! Что нужно контролировать в процессе\n— Общие настройки. Список исполнителей/супервайзеров. Должны быть указаны тех. спецы, которые работают с CRM. Сотрудники, которые контролируют работу по задачам. Менеджеры, которые именно сейчас работают в проекте\n— Общие настройки. Список актуальных менеджеров заказа во входящих условиях\n— Внутри процесса. Все блоки с припиской [КОНТРОЛЬ] в названии\n— Внутри процесса. Актуальные списки менеджеров заказов (также в блоках [КОНТРОЛЬ])\n— Внутри процесса. В блоках с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать тех. спецов, которые отвечают за настройки CRM\n— Внутри процесса. В блоках с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать сотрудников, которые контролируют работу менеджеров\n\nГде запускается или используется\n— Запускается из кнопки «Действия» в заказе\n— При перемещении в техническую в доску в этап «Обработка лидов»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ,контроль_МЕНЕДЖЕРЫ,оп_ОБРАБОТКА-ЛИДА",
+		"ParamsObject[use_personal_manager]": 2,
+		"ParamsObject[only_executor_and_supervisor]": 1,
+		"showOnKanban": 1,
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"params": {
+				"mode": "and",
+				"children": [
+					{
+						"type": "DealContext_formfieldvalue",
+						"inverted": 0,
+						"params": {
+							"fieldId": 10512892,
+							"fieldValue": {
+								"checked": 1
+							},
+							"valueMode": 2
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"params": {
+							"mode": "or",
+							"children": [
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"params": {
+										"fieldId": 10512893,
+										"fieldValue": {
+											"checked": 1
+										},
+										"valueMode": -1
+									}
+								},
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"params": {
+										"fieldId": 10512893,
+										"fieldValue": {
+											"checked": 0
+										},
+										"valueMode": 2
+									}
+								}
+							]
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"params": {
+							"mode": "or",
+							"children": [
+								{
+									"type": "deal_created_at",
+									"inverted": 0,
+									"params": {
+										"value": {
+											"from": "01.08.2024",
+											"to": null,
+											"toNDays": "24",
+											"fromNDays": null,
+											"dateType": "last_n_hours",
+											"withTime": false
+										},
+										"valueMode": null
+									}
+								},
+								{
+									"type": "deal_tag",
+									"inverted": 0,
+									"params": {
+										"value": {
+											"selected_id": ["1700714"]
+										},
+										"valueMode": null
+									}
+								}
+							]
+						}
+					},
+					{
+						"type": "deal_is_finished",
+						"inverted": 0,
+						"params": {
+							"value": {
+								"checked": 0
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_manager_id",
+						"inverted": 0,
+						"params": {
+							"value": {
+								"selected_id": null
+							},
+							"valueMode": 1
+						}
+					},
+					{
+						"type": "deal_status",
+						"inverted": 1,
+						"params": {
+							"value": {
+								"selected_id": ["payed", "cancelled"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_tag",
+						"inverted": 1,
+						"params": {
+							"value": {
+								"selected_id": ["1677735"]
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"params": {
+									"mode": "and",
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"params": {
+												"value": {
+													"selected_id": ["3861429"]
+												},
+												"valueMode": null
+											}
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"params": {
+												"value": {
+													"selected_id": ["user"]
+												},
+												"valueMode": null
+											}
+										}
+									]
+								}
+							},
+							"countCondition": {
+								"checker": "nlt",
+								"numval": ""
+							}
+						}
+					}
+				]
+			},
+			"maxSize": ""
+		}
+	},
+	{
+		"Mission[title]": "[2] [ CRM ] Указать причину отказа у заказов [ОП]",
+		"Mission[description]": "Процесс, который напомнит менеджеру заказа указать причину отказа, т.к. это важно для аналитики и истории взаимодействия с клиентом\n\n!!! Что нужно контролировать в процессе\n— Общие настройки. Список исполнителей/супервайзеров. Должны быть указаны тех. спецы, которые работают с CRM. Сотрудники, которые контролируют работу по задачам. Менеджеры, которые именно сейчас работают в проекте\n— Внутри процесса. Все блоки с припиской [КОНТРОЛЬ] в названии\n— Внутри процесса. Актуальные списки менеджеров заказов (также в блоках [КОНТРОЛЬ])\n— Внутри процесса. В блоках с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать тех. спецов, которые отвечают за настройки CRM\n— Внутри процесса. В блоках с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать сотрудников, которые контролируют работу менеджеров\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ,контроль_МЕНЕДЖЕРЫ,оп_ОБРАБОТКА-ЛИДА",
+		"ParamsObject[use_personal_manager]": 2,
+		"ParamsObject[only_executor_and_supervisor]": 1,
+		"showOnKanban": 1,
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": -1,
+										"fieldId": 10456889,
+										"fieldValue": { "checked": 1 },
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10456889,
+										"fieldValue": { "checked": 0 },
+										"caseSensitive": false
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": { "valueMode": 2, "fieldId": null, "fieldValue": null, "caseSensitive": false }
+								},
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10085596,
+										"fieldValue": {
+											"from": null,
+											"to": null,
+											"toNDays": "30",
+											"fromNDays": null,
+											"dateType": "last_n_days",
+											"withTime": false
+										},
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "DealContext_formfieldvalue",
+									"inverted": 0,
+									"className": "app::components::logic::rule::FormFieldValueRule",
+									"params": {
+										"valueMode": 2,
+										"fieldId": 10085597,
+										"fieldValue": {
+											"from": null,
+											"to": null,
+											"toNDays": "30",
+											"fromNDays": null,
+											"dateType": "last_n_days",
+											"withTime": false
+										},
+										"caseSensitive": false
+									}
+								},
+								{
+									"type": "deal_created_at",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": {
+											"from": "01.02.2025",
+											"to": null,
+											"toNDays": null,
+											"fromNDays": null,
+											"dateType": null,
+											"withTime": false
+										},
+										"valueMode": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "cancel_reason",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": { "value": { "selected_id": null }, "valueMode": -1 }
+					},
+					{
+						"type": "deal_status",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": { "value": { "selected_id": ["cancelled"] }, "valueMode": null }
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": { "value": { "selected_id": ["4081203"] } }
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": { "value": { "selected_id": ["user"] }, "valueMode": null }
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	},
+	{
+		"Mission[title]": "[3] [ CRM ] Поздравить с покупкой [ОП]",
+		"Mission[description]": "Процесс, который запускается после оплаты продукта и нужен для того, чтобы менеджер сделал сервисный звонок и отправил клиенту инструкцию\n\n!!! Что нужно контролировать в процессе\n— Общие настройки. Список исполнителей/супервайзеров. Должны быть указаны тех. спецы, которые работают с CRM. Сотрудники, которые контролируют работу по задачам. Менеджеры, которые именно сейчас работают в проекте\n— Общие настройки. Список актуальных менеджеров заказа во входящих условиях\n— Внутри процесса. Все блоки с припиской [КОНТРОЛЬ] в названии\n— Внутри процесса. В блоках с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать тех. спецов, которые отвечают за настройки CRM\n— Внутри процесса. В блоках с припиской [УВЕДОМЛЕНИЕ] добавлять/убирать сотрудников, которые контролируют работу менеджеров\n\nГде запускается или используется\nРаботает всегда и запускается через раздел «Процессы»\n\nАвтор процесса\nНикита Трофимов (@NiktarioN — https://techeducation.ru/y/c2726b3)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,КОНТРОЛЬ,контроль_МЕНЕДЖЕРЫ,оп_ОБРАБОТКА-ЛИДА",
+		"ParamsObject[use_personal_manager]": 2,
+		"showOnKanban": 1,
+		"Mission[type]": "auto",
+		"Mission[rule_string]": {
+			"type": "andrule",
+			"inverted": 0,
+			"className": "app::components::logic::rule::AndRule",
+			"params": {
+				"children": [
+					{
+						"type": "DealContext_formfieldvalue",
+						"inverted": 0,
+						"className": "app::components::logic::rule::FormFieldValueRule",
+						"params": {
+							"valueMode": 2,
+							"fieldId": 10512892,
+							"fieldValue": {
+								"checked": 1
+							},
+							"caseSensitive": false
+						}
+					},
+					{
+						"type": "andrule",
+						"inverted": 0,
+						"className": "app::components::logic::rule::AndRule",
+						"params": {
+							"children": [
+								{
+									"type": "deal_haspayment",
+									"inverted": 0,
+									"className": "app::components::logic::rule::LinkedContextRule",
+									"params": {
+										"linkedRule": {
+											"type": "andrule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::AndRule",
+											"params": {
+												"children": [
+													{
+														"type": "created_at",
+														"inverted": 0,
+														"className": "app::components::logic::rule::CustomFieldRule",
+														"params": {
+															"value": {
+																"from": null,
+																"to": null,
+																"toNDays": "24",
+																"fromNDays": null,
+																"dateType": "last_n_hours",
+																"withTime": false
+															},
+															"valueMode": null
+														}
+													},
+													{
+														"type": "status",
+														"inverted": 0,
+														"className": "app::components::logic::rule::CustomFieldRule",
+														"params": {
+															"value": {
+																"selected_id": ["accepted"]
+															},
+															"valueMode": null
+														}
+													},
+													{
+														"type": "type",
+														"inverted": 1,
+														"className": "app::components::logic::rule::CustomFieldRule",
+														"params": {
+															"value": {
+																"selected_id": ["VIRTUAL"]
+															},
+															"valueMode": null
+														}
+													}
+												],
+												"mode": "and"
+											}
+										},
+										"countCondition": null
+									}
+								},
+								{
+									"type": "deal_payed_at",
+									"inverted": 0,
+									"className": "app::components::logic::rule::CustomFieldRule",
+									"params": {
+										"value": {
+											"from": null,
+											"to": null,
+											"toNDays": "24",
+											"fromNDays": null,
+											"dateType": "last_n_hours",
+											"withTime": false
+										},
+										"valueMode": null
+									}
+								}
+							],
+							"mode": "or"
+						}
+					},
+					{
+						"type": "deal_manager_id",
+						"inverted": 0,
+						"className": "app::components::logic::rule::CustomFieldRule",
+						"params": {
+							"value": {
+								"selected_id": null
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["событие_БРОНИРОВАНИЕ"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["событие_ПРЕДОПЛАТА"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_БЕЗ-ОБРАБОТКИ"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_offer_id",
+						"inverted": 1,
+						"className": "app::components::logic::rule::sales::OfferIdDealContextRule",
+						"params": {
+							"value": {
+								"selected_id": [],
+								"selected_tags": ["тех_ТЕСТЫ-НАСТРОЕК"],
+								"all_object_with_tags": true
+							},
+							"valueMode": null
+						}
+					},
+					{
+						"type": "deal_usercontext",
+						"inverted": 0,
+						"className": "app::components::logic::rule::LinkedContextRule",
+						"params": {
+							"linkedRule": {
+								"type": "andrule",
+								"inverted": 0,
+								"className": "app::components::logic::rule::AndRule",
+								"params": {
+									"children": [
+										{
+											"type": "user_ingrouprule",
+											"inverted": 1,
+											"className": "app::modules::user::models::rule::InGroupRule",
+											"params": {
+												"value": {
+													"selected_id": ["3861429"]
+												}
+											}
+										},
+										{
+											"type": "user_typerule",
+											"inverted": 0,
+											"className": "app::components::logic::rule::CustomFieldRule",
+											"params": {
+												"value": {
+													"selected_id": ["user"]
+												},
+												"valueMode": null
+											}
+										}
+									],
+									"mode": "and"
+								}
+							},
+							"countCondition": null
+						}
+					}
+				],
+				"mode": "and"
+			}
+		}
+	}
+]

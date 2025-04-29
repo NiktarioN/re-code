@@ -1,0 +1,87 @@
+@use 'mixins';
+@use 'variables' as *;
+
+.#{$cssPrefix} {
+	&-quick-delay-section {
+		position: relative;
+		margin: 25px 0 15px 0;
+		padding: 20px 15px 15px 10px;
+		border: 1px solid #ddd;
+
+		@at-root .#{$cssPrefix}-checkbox-wrapper {
+			display: inline-block;
+			margin: 0 0 10px 3px;
+
+			label {
+				align-items: center;
+				display: flex;
+				gap: 5px;
+				margin: 0;
+				font-size: 13px;
+				color: #666;
+				cursor: pointer;
+				user-select: none;
+				transition: color 0.2s ease;
+
+				&:hover {
+					color: #333;
+				}
+			}
+
+			input[type='checkbox'] {
+				margin: 0;
+				cursor: pointer;
+			}
+		}
+
+		@at-root .#{$cssPrefix}-quick-delay-title {
+			left: 5px;
+			padding: 0 5px;
+			position: absolute;
+			top: -10px;
+			margin: 0;
+			font-size: 14px;
+			font-weight: normal;
+			background: #ffffff;
+			color: #333;
+		}
+
+		@at-root .#{$cssPrefix}-quick-delay-option {
+			padding: 6px 12px;
+			border: 1px solid #ddd;
+			border-radius: 16px;
+			text-align: center;
+			cursor: pointer;
+			font-size: 12px;
+			background-color: #fff;
+			transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+			white-space: nowrap;
+
+			&s {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 6px;
+			}
+
+			&:hover {
+				background-color: #f8f8f8;
+				border-color: #999;
+				transform: translateY(-1px);
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			}
+
+			&:active {
+				transform: translateY(0);
+				box-shadow: none;
+			}
+
+			@media (max-width: 768px) {
+				min-width: calc(33.33% - 5px);
+			}
+
+			@media (max-width: 480px) {
+				min-width: calc(50% - 4px);
+			}
+		}
+	}
+}

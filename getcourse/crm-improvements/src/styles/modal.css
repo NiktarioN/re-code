@@ -1,0 +1,19 @@
+.recode-modal-container .modal-content {
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+.recode-modal-container .modal-title {
+  font-family: "proxima-nova", sans-serif;
+}
+.recode-modal-container .modal-footer {
+  margin: 0;
+}
+.recode-modal-container .modal-footer .btn {
+  border-radius: 6px;
+}
+
+#recode-task-creation-modal .modal-body p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 16px;
+}

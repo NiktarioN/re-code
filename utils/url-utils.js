@@ -57,6 +57,10 @@ const removeSearchParams = (inputUrl, searchParams = []) => {
 const updateUrl = ({ href, origin, pathname, search, hash }) =>
   window.location.origin === origin ? `${pathname}${search}${hash}` : href;
 
+const removeSearchParamFromHistory = (inputUrl, searchParam) => {
+  window.history.pushState({}, '', removeSearchParams(inputUrl, searchParam).href);
+};
+
 export {
   currentUrl,
   isUrl,
@@ -69,4 +73,5 @@ export {
   addSearchParams,
   removeSearchParams,
   updateUrl,
+  removeSearchParamFromHistory,
 };

@@ -1,22 +1,21 @@
 import { customPayFuncSearchParam, deleteTimerSearchParam } from '../config/constants';
-import { currentUrl, addSearchParams } from '../../../../utils/url-utils';
-import removeSearchParamCustomPay from '../helpers/helpers';
-import getCustomPayValue from '../helpers/get-custom-pay-value';
+import { addSearchParams, removeSearchParamFromHistory } from '../../../../utils/url-utils';
+import getCustomPayValue from './get-custom-pay-value';
 
 const manyOffers = (nodeSelector) => {
-	const customPayBlock = document.querySelector(nodeSelector);
-	const form = customPayBlock?.closest('form');
-	const selectedNode = form?.querySelector('.custom-pay label.selected');
-	if (!selectedNode) {
-		return;
-	}
+  const customPayBlock = document.querySelector(nodeSelector);
+  const form = customPayBlock?.closest('form');
+  const selectedNode = form?.querySelector('.custom-pay label.selected, .recode-custom-pay label.selected');
+  if (!selectedNode) {
+    return;
+  }
 
-	const value = getCustomPayValue(selectedNode);
-	window.history.pushState({}, '', addSearchParams(currentUrl, [[customPayFuncSearchParam, value]]).href);
+  const value = getCustomPayValue(selectedNode);
+  window.history.pushState({}, '', addSearchParams(window.location.href, [[customPayFuncSearchParam, value]]).href);
 
-	setTimeout(() => {
-		removeSearchParamCustomPay(currentUrl, customPayFuncSearchParam);
-	}, deleteTimerSearchParam);
+  setTimeout(() => {
+    removeSearchParamFromHistory(window.location.href, customPayFuncSearchParam);
+  }, deleteTimerSearchParam);
 };
 
 export default manyOffers;

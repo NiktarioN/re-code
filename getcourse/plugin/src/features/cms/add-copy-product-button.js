@@ -1,4 +1,4 @@
-import { isProductSettingsPage } from '../../../../../utils/page-checker';
+import { isProductSettingsPage } from '../../../../utils/page-checker';
 
 const handleCopyClick = (productName) => {
 	const requestData = new URLSearchParams();

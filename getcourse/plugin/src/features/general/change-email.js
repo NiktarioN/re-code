@@ -1,4 +1,4 @@
-import { isCmsPage, isOneLessonPage } from '../../../../../utils/page-checker';
+import { isCmsPage, isOneLessonPage } from '../../../../utils/page-checker';
 
 const changeEmail = ({ changeEmailBlockSelector, newEmailFieldSelector }) => {
 	if (!isCmsPage || !isOneLessonPage) {

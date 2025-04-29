@@ -1,4 +1,4 @@
-import { isUserGroupControlPage, isGroupControlPage, isTrainingTreeEditPage } from '../../../../../utils/page-checker';
+import { isUserGroupControlPage, isGroupControlPage, isTrainingTreeEditPage } from '../../../../utils/page-checker';
 
 const getSettingsBlock = () => {
 	const root = document.createElement('div');

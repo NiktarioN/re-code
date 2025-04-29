@@ -1,4 +1,4 @@
-import { isHideTopNotificationPage } from '../../../../../utils/page-checker';
+import { isHideTopNotificationPage } from '../../../../utils/page-checker';
 
 const hideTopNotification = () => {
 	if (!isHideTopNotificationPage) {

@@ -10,7 +10,26 @@
 	display: none !important;
 }
 
+.recode-no-title-field .field-label {
+	display: none !important;
+}
+
 // Скрыть стоимость предложения в форме
 .recode-hide-price .form-position-price span {
 	display: none !important;
+}
+
+// Можно переносить слова
+.recode-can-wrap-words p {
+	overflow-wrap: anywhere;
+}
+
+// Сбросить стили у списка
+.recode-list-reset {
+	ul,
+	ol {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
 }

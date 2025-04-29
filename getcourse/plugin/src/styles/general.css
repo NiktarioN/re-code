@@ -1,0 +1,208 @@
+@charset "UTF-8";
+.recode-sticky-editor {
+  position: sticky;
+  top: 10px;
+}
+
+.recode-dashboard-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 !important;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.gc-tasks-block {
+  display: none !important;
+}
+
+.gl-ad-banner {
+  display: none !important;
+}
+
+.common-banner-wrapper:has(.banner-frame) {
+  display: none !important;
+}
+
+.btn-group > [data-value=text-justify] {
+  display: none;
+}
+
+/* Перенос фильтров в дашбордах */
+.metrika-date-filter-wrapper {
+  max-width: 1200px;
+}
+
+/* Фикс для блока с эмодзи когда текст заходит под блок */
+.emoji-textarea {
+  padding-right: 70px !important;
+}
+
+/* Фикс для поля ввода ссылки для редиректа, если нет доступа к тренингу */
+[name="ParamsObject[not_access_redirect_url]"] {
+  width: 100%;
+}
+
+/* Блок. Якорь на странице */
+.block-set .lt-anchor {
+  height: 0 !important;
+}
+
+/* Фикс когда пропадает папка под количество оставшегося места в видео */
+.gc-file-dialog .file-dialog-layout .file-dialog-size-progress {
+  bottom: 0 !important;
+}
+
+/* Фикс для дроп-меню, когда он не перекрывается кнопками для взаимодействия с блоком */
+.block-set-editor .lite-block .lite-block-actions {
+  z-index: auto;
+}
+
+.dropdown-menu {
+  z-index: 999;
+}
+
+/* Показываем кнопки с настройками блока */
+.lite-block-actions {
+  display: block !important;
+}
+
+/* Окно сохранения настроек всегда при себе в модальных окнах */
+.code-editor-modal .modal-header,
+.gc-modal .modal-header,
+.popover-title {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+/* Меняем цвет для строк в таблицах с данными */
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f5f5f5;
+}
+
+/* Меняем поля для сегментов и т.д. */
+ul.select2-results[role=listbox] {
+  max-height: 400px;
+}
+
+form[action="/pl/sales/deal/index"] div.pull-left[style="min-width: 350px"] {
+  width: 500px;
+}
+
+#flowchart .block-modal-window div[data-operation-type=common_ask_fields] .checkbox-list label {
+  width: 100% !important;
+}
+
+/* Фиксы для приложения */
+.chatium_body {
+  padding: 0 15px !important;
+}
+
+.recode-alert-appeals {
+  position: absolute;
+  display: flex;
+  gap: 8px;
+  z-index: 1000;
+  top: 20px;
+  right: 20px;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  padding: 15px;
+  color: #3c763d;
+}
+
+.recode-alert-appeals button {
+  background: none;
+  border: none;
+}
+
+.recode-close-all-appeal-button {
+  border-radius: 10px !important;
+  font-weight: 700;
+}
+
+#flowchart .block-modal-window div[data-operation-type=common_ask_fields] .checkbox-list label {
+  width: 100% !important;
+}
+
+.custom-field.type-numeric .form-control {
+  text-align: left !important;
+  width: 100% !important;
+}
+
+[name="Mission[description]"] {
+  min-height: 175px;
+}
+
+.field-mission-task_title {
+  display: none;
+}
+
+[name="UpdateFieldOperation[fieldId]"] {
+  width: 100%;
+  margin-bottom: 10px !important;
+}
+
+[name="UpdateFieldOperation[updateType]"] {
+  width: 100%;
+  margin-bottom: 10px !important;
+}
+
+[name="UpdateFieldOperation[updateValue]"] {
+  width: 100%;
+  text-align: left !important;
+}
+
+.flowchart-container .flowchart-block.start-flowchart-block span,
+.flowchart-container .flowchart-block.finish-flowchart-block span {
+  text-transform: uppercase;
+}
+
+#s2id_addmailingmessageoperation-mailing_id {
+  width: 100% !important;
+  margin: 0 0 5px 0 !important;
+}
+
+[name="AddMailingMessageOperation[can_resend]"] + label {
+  display: block !important;
+}
+
+.custom-field .field-description-block {
+  margin-top: 5px;
+  font-style: normal !important;
+}
+
+.custom-field.type-numeric .form-control {
+  text-align: left !important;
+  width: 100% !important;
+}
+
+.__chtm-create-funnel-btn-inserted {
+  display: none !important;
+}
+
+.custom-form-tags {
+  gap: 8px;
+  justify-content: end;
+}
+.custom-form-tags .tag-info {
+  padding: 4px 6px;
+  border-radius: 6px;
+  line-height: 1.3;
+  font-size: 12px;
+}
+
+.getloo-waba-temps {
+  width: 100% !important;
+}
+
+.waba-getloo-input {
+  height: auto !important;
+}

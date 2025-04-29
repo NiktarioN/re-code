@@ -1,7 +1,9 @@
-import { getAllSearchParams } from '../../../../../utils/url-utils';
+/* eslint-disable no-param-reassign */
+
+import { currentUrl, getAllSearchParams } from '../../../../../utils/url-utils';
 
 const fillFormFieldsFromUrl = () => {
-	const urlParams = getAllSearchParams(window.location.href);
+	const urlParams = getAllSearchParams(currentUrl.href);
 	const formFields = {
 		email: '[name="formParams[email]"]',
 		phone: '[name="formParams[phone]"]',
@@ -15,7 +17,6 @@ const fillFormFieldsFromUrl = () => {
 		}
 
 		document.querySelectorAll(value).forEach((field) => {
-			// eslint-disable-next-line no-param-reassign
 			field.value = paramValue;
 		});
 	});

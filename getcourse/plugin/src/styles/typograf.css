@@ -1,0 +1,15 @@
+.recode-typograf--success {
+  border-color: #5cb85c;
+}
+
+.recode-typograf-button {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.recode-typograf-button--success {
+  color: #5cb85c;
+}
+.recode-typograf-button--success:hover {
+  color: #5cb85c;
+}

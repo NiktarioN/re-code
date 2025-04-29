@@ -1,0 +1,44 @@
+// Скрытие блока с задачами наверху страницы
+.gc-tasks-block {
+	display: none !important;
+}
+
+// Убираем возможность сделать выровнять текст по ширине
+.btn-group > [data-value='text-justify'] {
+	display: none;
+}
+
+// Убираем всплывающее уведомление с анализом базы проекта
+#top-notification-revenue-structure {
+	display: none !important;
+}
+
+// Убираем обратную связь от GetCourse в левой менюшке
+.menu-item-delimiter > a[href*='/pl/csi/survey/'] {
+	display: none !important;
+}
+
+// Убираем баннер от GetCourse с рекламой GetCourse Ads на странице заказов
+.col-md-4 .Banner-container-min {
+	display: none !important;
+}
+
+// Убираем ублюдскую иконку копирования email от GetCourse
+.user-email-copy-button {
+	display: none !important;
+}
+
+// Убрать какой-то странный блок от GetCourse в блоках страниц
+.builder-item > .add-redesign-subblock {
+	display: none;
+}
+
+// Убираем кнопку "Создать воронку" в тренинге
+.__chtm-create-funnel-btn-inserted {
+	display: none !important;
+}
+
+// Убираем блок "Суть задачи" в настройках процесса
+.field-mission-task_title {
+	display: none;
+}

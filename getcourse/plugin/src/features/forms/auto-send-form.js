@@ -1,7 +1,7 @@
-import { hasSearchParam } from '../../../../../utils/url-utils';
+import { currentUrl, hasSearchParam } from '../../../../../utils/url-utils';
 
 const autoSendForm = () => {
-	const hasSendFormParam = hasSearchParam(window.location.href, 'autosendform');
+	const hasSendFormParam = hasSearchParam(currentUrl.href, 'autosendform');
 	if (!hasSendFormParam) {
 		return;
 	}

@@ -1,29 +1,33 @@
 import { currentUrl } from '../../../../utils/url-utils';
 
-const payPagePathname = '/sales/shop/dealPay/id/';
-
 const customPayDefaultSearchParam = 'paymentValue';
 const customPayFuncSearchParam = 'recode-custom-pay';
+const partialPayFuncSearchParam = 'recode-partial-pay';
 const hidePartialPayBlockSearchParam = 'recode-hide-partial-block';
 
-const deleteTimerSearchParam = 3000;
+const deleteTimerSearchParam = 10000;
 
 const convertToBooleanOptions = {
-	yes: true,
-	no: false,
+  yes: true,
+  no: false,
 };
 
-const isPayPage = currentUrl.pathname.includes(payPagePathname);
+const isPayPage = currentUrl.pathname.includes('/sales/shop/dealPay/id/');
+const isApp = !!document.querySelector('#app');
+const isOldPayPage = isPayPage && !isApp;
+const isNewPayPage = isPayPage && isApp;
 
 const formsSelector = 'form.lt-form';
 
 export {
-	payPagePathname,
-	customPayDefaultSearchParam,
-	customPayFuncSearchParam,
-	hidePartialPayBlockSearchParam,
-	deleteTimerSearchParam,
-	convertToBooleanOptions,
-	isPayPage,
-	formsSelector,
+  customPayDefaultSearchParam,
+  customPayFuncSearchParam,
+  partialPayFuncSearchParam,
+  hidePartialPayBlockSearchParam,
+  deleteTimerSearchParam,
+  convertToBooleanOptions,
+  isPayPage,
+  isOldPayPage,
+  isNewPayPage,
+  formsSelector,
 };

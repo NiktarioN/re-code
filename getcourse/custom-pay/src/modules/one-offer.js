@@ -1,17 +1,16 @@
 import { customPayFuncSearchParam, deleteTimerSearchParam } from '../config/constants';
-import { currentUrl, addSearchParams } from '../../../../utils/url-utils';
-import removeSearchParamCustomPay from '../helpers/helpers';
+import { addSearchParams, removeSearchParamFromHistory } from '../../../../utils/url-utils';
 
-const oneOffer = (value) => {
-	if (!value) {
-		return;
-	}
+const oneOffer = (paymentCost) => {
+  if (!paymentCost) {
+    return;
+  }
 
-	window.history.pushState({}, '', addSearchParams(currentUrl, [[customPayFuncSearchParam, value]]).href);
+  window.history.pushState({}, '', addSearchParams(window.location.href, [[customPayFuncSearchParam, paymentCost]]).href);
 
-	setTimeout(() => {
-		removeSearchParamCustomPay(currentUrl);
-	}, deleteTimerSearchParam);
+  setTimeout(() => {
+    removeSearchParamFromHistory(window.location.href, customPayFuncSearchParam);
+  }, deleteTimerSearchParam);
 };
 
 export default oneOffer;

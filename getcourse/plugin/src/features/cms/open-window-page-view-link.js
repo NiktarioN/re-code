@@ -1,4 +1,4 @@
-import { isCmsPage } from '../../../../../utils/page-checker';
+import { isCmsPage } from '../../../../utils/page-checker';
 
 const openWindowPageViewLink = () => {
 	if (!isCmsPage) {

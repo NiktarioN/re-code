@@ -1,4 +1,4 @@
-import { isProcessesCreatePage } from '../../../../../utils/page-checker';
+import { isProcessesCreatePage } from '../../../../utils/page-checker';
 
 const resetProcessTemplate = () => {
 	if (!isProcessesCreatePage) {
@@ -13,7 +13,9 @@ const resetProcessTemplate = () => {
 					return;
 				}
 
-				targetNode.value = '';
+				if (targetNode.value === '39') {
+					targetNode.value = '';
+				}
 			});
 		});
 	});

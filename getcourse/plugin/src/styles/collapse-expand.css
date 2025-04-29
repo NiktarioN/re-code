@@ -1,0 +1,15 @@
+.recode-collapse-expand {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 7px;
+       column-gap: 7px;
+  margin-bottom: 15px;
+}
+.recode-collapse-expand__button {
+  padding: 5px 15px;
+  border: none;
+  background: #fafafa;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}

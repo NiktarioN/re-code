@@ -1,4 +1,4 @@
-import { isOneWebRoomPage } from '../../../../../utils/page-checker';
+import { isOneWebRoomPage } from '../../../../utils/page-checker';
 
 // eslint-disable-next-line consistent-return
 const handleClick = (event) => {

@@ -1,0 +1,10 @@
+.recode-email-hint {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.15;
+}
+.recode-email-hint span {
+  color: #477ab5;
+  border-bottom: 1px solid #477ab5;
+  cursor: pointer;
+}

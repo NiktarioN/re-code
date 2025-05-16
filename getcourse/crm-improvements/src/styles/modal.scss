@@ -33,17 +33,17 @@
 	align-items: center;
 	gap: 0.5rem;
 	padding: 0.6rem 1.2rem;
-	background: linear-gradient(180deg, #f8f9fa, #e9ecef);
-	border: 1px solid #dee2e6;
+	background: #f8f9fa;
+	border: 1px solid #d0d5dd;
 	border-radius: 6px;
 	font-size: 14px;
 	color: #212529;
 	cursor: pointer;
-	transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+	transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 	appearance: none;
 
 	&:hover {
-		background: linear-gradient(180deg, #e9ecef, #dde0e4);
+		background: #dde0e4;
 		border-color: #ced4da;
 	}
 
@@ -58,7 +58,6 @@
 }
 
 .#{$cssPrefix}-modal {
-	transition: opacity 0.3s ease, visibility 0.3s ease;
 	display: block !important;
 	opacity: 0;
 	visibility: hidden;
@@ -71,6 +70,7 @@
 	z-index: 1050;
 	overflow-x: hidden;
 	overflow-y: auto;
+	transition: opacity 0.3s ease, visibility 0.3s ease;
 
 	&--open {
 		opacity: 1;
@@ -80,8 +80,8 @@
 	&-dialog {
 		margin: 20vh auto 2rem;
 		width: min(700px, 90%);
-		transition: transform 0.3s ease;
 		transform: translateY(-30px);
+		transition: transform 0.3s ease;
 	}
 
 	&--open &-dialog {
@@ -95,19 +95,19 @@
 		overflow: hidden;
 	}
 
-	&--open &-content {
-		opacity: 1;
-	}
-
 	&-header {
+		display: flex;
+		align-items: center;
+		gap: 6px;
 		padding: 24px;
 		background-color: #f8f9fa;
 		border-bottom: 1px solid #eee;
+		font-size: 2rem;
 
 		h3 {
 			margin: 0;
-			font-size: 2rem;
 			font-weight: 600;
+			font-size: inherit;
 			color: #1a1a1a;
 		}
 	}
@@ -135,6 +135,7 @@
 			border-radius: 8px;
 			resize: vertical;
 			line-height: 1.5;
+			transition: box-shadow 0.3s ease, border-color 0.3s ease;
 
 			&:focus {
 				outline: none;
@@ -147,11 +148,23 @@
 			font-size: 12px;
 			color: #666;
 			text-align: right;
-			margin-top: 8px;
+		}
 
-			&.#{$cssPrefix}-error {
-				color: #dc3545;
+		.#{$cssPrefix}-checkbox-wrapper {
+			margin: 0;
+
+			label {
+				font-size: 14px;
 			}
+		}
+	}
+
+	.#{$cssPrefix}-status-message {
+		color: #666;
+		font-style: italic;
+
+		&:not(:empty) {
+			margin: 10px 0 15px 0;
 		}
 	}
 
@@ -161,9 +174,10 @@
 		display: flex;
 		gap: 12px;
 		justify-content: flex-end;
+		align-items: center;
 		background: #f8f9fa;
 
-		button {
+		&__btn {
 			padding: 10px 24px;
 			font-weight: 500;
 			font-size: 14px;
@@ -175,7 +189,7 @@
 
 		.#{$cssPrefix}-btn {
 			&-cancel {
-				background: #f0f2f5;
+				background: #f8f9fa;
 				border: 1px solid #d0d5dd;
 				color: #344054;
 
@@ -202,6 +216,31 @@
 				}
 			}
 		}
+	}
+}
+
+.#{$cssPrefix}-comment-clear-btn {
+	margin-right: auto;
+	background: #f8f9fa;
+	border: 1px solid #d0d5dd;
+	border-radius: 8px;
+	cursor: pointer;
+	color: #333;
+	font-size: 12px;
+	padding: 4px 8px;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity 0.3s ease, visibility 0.3s ease;
+
+	&--visible {
+		opacity: 0.6;
+		visibility: visible;
+		pointer-events: auto;
+	}
+
+	&:hover {
+		opacity: 1;
 	}
 }
 

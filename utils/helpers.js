@@ -5,6 +5,16 @@ const delay = (ms) =>
 
 const toUrlSearchParams = (obj) => new URLSearchParams(obj).toString();
 
+const normalizeSpaces = (text) =>
+  text
+    .trim()
+    // Заменяем множественные пробелы/табы на один пробел (но сохраняем переносы строк)
+    .replace(/[ \t]{2,}/g, ' ')
+    // Удаляем пробелы перед переносами строк
+    .replace(/[ \t]+\n/g, '\n')
+    // Удаляем пробелы после переносов строк
+    .replace(/\n[ \t]+/g, '\n');
+
 const fetchWithRetry = async (url, delay, maxTries, options = {}) => {
   try {
     const response = await fetch(url, options);
@@ -48,4 +58,4 @@ const sendPostRequest = async (url, requestParams) => {
   }
 };
 
-export { delay, toUrlSearchParams, fetchWithRetry, sendPostRequest };
+export { delay, toUrlSearchParams, fetchWithRetry, sendPostRequest, normalizeSpaces };

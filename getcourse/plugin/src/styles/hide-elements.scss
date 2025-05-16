@@ -23,6 +23,10 @@
 	display: none !important;
 }
 
+.col-md-4 div:has(.Banner-wrapper) {
+	display: none !important;
+}
+
 // Убираем ублюдскую иконку копирования email от GetCourse
 .user-email-copy-button {
 	display: none !important;

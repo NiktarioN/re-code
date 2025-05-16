@@ -1,3 +1,5 @@
+import { SELECTORS } from '../crm-improvements/src/config/constants';
+
 const { isAdmin, isTeacher } = window?.userInfo;
 
 const isEmployee = isAdmin || isTeacher;
@@ -13,4 +15,9 @@ const hasPermission = (idList, notMode) => {
 
 const hasFormTask = !!document.querySelector('.task-form');
 
-export { isAdmin, isEmployee, isChatium, isTargetUserId, hasPermission, hasFormTask };
+const formHasSearchWords = (form, searchWords) => {
+  const formTitleLowerCase = form.querySelector(SELECTORS.TASK.TITLE)?.textContent?.trim().toLowerCase();
+  return searchWords.some((word) => formTitleLowerCase.includes(word.toLowerCase()));
+};
+
+export { isAdmin, isEmployee, isChatium, isTargetUserId, hasPermission, hasFormTask, formHasSearchWords };

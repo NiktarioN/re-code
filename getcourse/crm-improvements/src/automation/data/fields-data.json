@@ -1,14 +1,14 @@
 [
 	{
 		"id": null,
-		"label": "Комментарии_к_заказу",
+		"label": "Инфо_для_менеджера",
 		"type": "text",
 		"required": false,
 		"settings": {
-			"placeholder": "Напиши комментарии по заказу, чтобы вспомнить ключевые моменты обработки заказа",
-			"rows": "8"
+			"placeholder": "",
+			"rows": "3"
 		},
-		"description": "[ CRM ] Комментарии менеджера по заказу при обработке лида",
+		"description": "[ CRM ] Важная информация для обработки лида. Заполняется вручную сотрудниками",
 		"html_block": "",
 		"html_block_position": "",
 		"show_in_table": false,
@@ -218,7 +218,7 @@
 		"type": "select",
 		"required": false,
 		"settings": {
-			"valueList": "Не определено\nПлатный заказ\nБыл весь вебинар\nКлик по продающей кнопке\nБыл на продающей части\nПисал комментарий\nПолучил подарок\nУчастник вебинара\nРегистрация",
+			"valueList": "Не определен\nПлатный заказ\nПлатный заказ\nЗаявка\nКонсультация\nПредзапись\nЧекин\nРегистрация\nОтработка сегмента\nОтработка своего заказа",
 			"showAllValues": false,
 			"emptyValueText": "Не установлено"
 		},
@@ -543,26 +543,6 @@
 	},
 	{
 		"id": null,
-		"label": "Создан_из_другого_заказа",
-		"type": "checkbox",
-		"required": false,
-		"settings": {
-			"cols": 49,
-			"rows": 3,
-			"table_title": "",
-			"is_important": false
-		},
-		"description": "[ CRM ] Подсчет конверсий при создании заказа из другого заказа. Используется для аналитики и условий в процессах. Заполняется через процесс",
-		"html_block": "",
-		"html_block_position": "",
-		"show_in_table": false,
-		"hide_filled": false,
-		"hide": "1",
-		"key": "crm",
-		"object_type": "deal"
-	},
-	{
-		"id": null,
 		"label": "Заказ_изменен",
 		"type": "checkbox",
 		"required": false,
@@ -598,6 +578,46 @@
 		"show_in_table": false,
 		"hide_filled": false,
 		"hide": "2",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Забытый_заказ",
+		"type": "checkbox",
+		"required": false,
+		"settings": {
+			"cols": 49,
+			"rows": 3,
+			"table_title": "",
+			"is_important": false
+		},
+		"description": "[ CRM ] Забыл ли менеджер про рабочий заказ. Используется для условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "Создан_из_другого_заказа",
+		"type": "checkbox",
+		"required": false,
+		"settings": {
+			"cols": 49,
+			"rows": 3,
+			"table_title": "",
+			"is_important": false
+		},
+		"description": "[ CRM ] Подсчет конверсий при создании заказа из другого заказа. Используется для аналитики и условий в процессах. Заполняется через процесс",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
 		"key": "crm",
 		"object_type": "deal"
 	},
@@ -688,7 +708,25 @@
 			"placeholder": "",
 			"rows": "3"
 		},
-		"description": "[ ТЕХ ] Ответ от сервера при вызове URL",
+		"description": "[ ТЕХ ] Ответ/Статус от сервера при вызове URL",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "1",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
+		"label": "deal_response_msg",
+		"type": "text",
+		"required": false,
+		"settings": {
+			"placeholder": "",
+			"rows": "3"
+		},
+		"description": "[ ТЕХ ] Сообщение от сервера при вызове URL",
 		"html_block": "",
 		"html_block_position": "",
 		"show_in_table": false,

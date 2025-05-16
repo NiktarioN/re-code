@@ -4,13 +4,28 @@ const PLUGIN_NAME = '[ RE-CODE AGENCY ] Плагин «Улучшение CRM»'
 const PROJECT_NAME_SHORT = '[RE-CODE]'
 const PROJECT_NAME_SHORT_ALT = 'RE-CODE'
 const CSS_PREFIX = 'recode';
+const PROJECT_NAME = 'RE-CODE AGENCY'
 const PROJECT_LINK = 'https://techeducation.ru/y/8bbf221';
 const LOCAL_STORAGE_KEY = 'recode-settings';
 
 const SELECTORS = {
   TASK: {
     FORM: '.task-form',
+    HEAD: '.task-title',
+    OBJECT: '.task-object',
+    JOBS: '.task-jobs',
+    BODY: '.task-body',
     TITLE: '.task-title > a[href*="/pl/tasks/task/view"]',
+  }
+}
+
+const CLASSES = {
+  HIDE: 'hide',
+  STATUS_SUCCESS: `${CSS_PREFIX}-status-success`,
+  STATUS_ERROR: `${CSS_PREFIX}-status-error`,
+  CHECKBOX_WRAPPER: `${CSS_PREFIX}-checkbox-wrapper`,
+  ANIMATIONS: {
+    PULSE: `${CSS_PREFIX}-pulse`,
   }
 }
 
@@ -32,7 +47,9 @@ const isProcessPage = ['mission'].some((section) => window?.controllerId === sec
 
 export {
   SELECTORS,
+  CLASSES,
   PLUGIN_NAME,
+  PROJECT_NAME,
   PROJECT_NAME_SHORT,
   PROJECT_NAME_SHORT_ALT,
   CSS_PREFIX,

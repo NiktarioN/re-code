@@ -7,6 +7,7 @@ class Modal {
     this.modalDialog = null;
     this.modalContent = null;
     this.isOpen = false;
+    this.onClose = null;
     this.initModal();
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -31,6 +32,53 @@ class Modal {
     }
   }
 
+  open() {
+    if (this.isOpen) {
+      return;
+    }
+
+    document.body.style.overflow = 'hidden';
+    document.body.appendChild(this.modalElement);
+
+    requestAnimationFrame(() => {
+      this.modalElement.classList.add(`${CSS_PREFIX}-modal--open`);
+    });
+
+    this.modalElement.addEventListener('click', this.handleOutsideClick);
+    document.addEventListener('keydown', this.handleKeyDown);
+
+    this.isOpen = true;
+  }
+
+  close() {
+    if (!this.isOpen) {
+      return;
+    }
+
+    if (this.onClose) {
+      this.onClose();
+    }
+
+    document.body.style.overflow = '';
+
+    this.modalElement.classList.remove(`${CSS_PREFIX}-modal--open`);
+
+    this.modalElement.removeEventListener('click', this.handleOutsideClick);
+    document.removeEventListener('keydown', this.handleKeyDown);
+
+    this.isOpen = false;
+
+    setTimeout(() => {
+      if (this.modalElement.parentNode) {
+        this.modalElement.parentNode.removeChild(this.modalElement);
+      }
+    }, 300);
+  }
+
+  setOnClose(callback) {
+    this.onClose = callback;
+  }
+
   handleOutsideClick(event) {
     if (event.target === this.modalElement) {
       this.close();
@@ -41,36 +89,6 @@ class Modal {
     if (event.key === 'Escape') {
       this.close();
     }
-  }
-
-  open() {
-    if (this.isOpen) {
-      return;
-    }
-
-    document.body.appendChild(this.modalElement);
-
-    this.modalElement.classList.add(`${CSS_PREFIX}-modal--open`);
-    this.modalElement.addEventListener('click', this.handleOutsideClick);
-    document.addEventListener('keydown', this.handleKeyDown);
-    this.isOpen = true;
-  }
-
-  close() {
-    if (!this.isOpen) {
-      return;
-    }
-
-    this.modalElement.classList.remove(`${CSS_PREFIX}-modal--open`);
-    this.modalElement.removeEventListener('click', this.handleOutsideClick);
-    document.removeEventListener('keydown', this.handleKeyDown);
-    this.isOpen = false;
-
-    setTimeout(() => {
-      if (this.modalElement.parentNode) {
-        this.modalElement.parentNode.removeChild(this.modalElement);
-      }
-    }, 300);
   }
 }
 

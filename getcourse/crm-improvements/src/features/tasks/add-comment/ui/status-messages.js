@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 
-import { CONFIG } from "./config";
+import { CONFIG } from "../core/config";
 
 const setStatusMessage = (element, text, typeClass = '') => {
   element.textContent = text;

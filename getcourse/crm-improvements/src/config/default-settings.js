@@ -85,7 +85,12 @@ const settings = {
         { label: '72 часа', minutes: 4320 },
       ],
     },
+    comments: {
+      enableCommentLimit: true,
+      enableButtonHighlight: false,
+    },
   },
+  hideRightCardAddComments: false,
 };
 
 export default settings;

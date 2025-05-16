@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 import { PLUGIN_NAME, PROJECT_NAME_SHORT_ALT, PROJECT_LINK, CSS_PREFIX } from "../../config/constants";
 import { isProcessEditorPage } from '../../../../utils/page-checker';
 import { getProcessData } from '../../../../utils/gets';

@@ -1,3 +1,6 @@
+@use 'variables' as *;
+@use 'animations';
+
 .recode-not-access {
 	opacity: 0 !important;
 }
@@ -211,4 +214,24 @@
 	display: flex;
 	align-items: center;
 	gap: 5px;
+}
+
+.#{$cssPrefix}-status-error {
+	color: #dc3545 !important;
+}
+
+.#{$cssPrefix}-status-success {
+	color: #5cb85c !important;
+}
+
+.#{$cssPrefix}-pulse {
+	animation: pulse 1.5s ease-out infinite;
+}
+
+.#{$cssPrefix}-hide-right-card-add-comments {
+	.gc-right-active-block {
+		[data-reactid='.0.1.1.0.1.7.1'] {
+			display: none !important;
+		}
+	}
 }

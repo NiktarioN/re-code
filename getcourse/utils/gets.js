@@ -2,7 +2,9 @@ import { toUrlSearchParams } from '../../utils/helpers';
 
 const getDealId = () => {
   const attribute =
-    document.querySelector('form[action*="/sales/control/deal/update/id/"]')?.getAttribute('action') || document.querySelector('[href*="/sales/control/deal/update/id/"]')?.getAttribute('href') || '';
+    document.querySelector('form[action*="/sales/control/deal/update/id/"]')?.getAttribute('action') ||
+    document.querySelector('[href*="/sales/control/deal/update/id/"]')?.getAttribute('href') ||
+    '';
   const match = attribute.match(/\/id\/(\d+)/);
 
   return match?.[1] || '';
@@ -14,6 +16,16 @@ const getUserId = () => {
   const match = attribute.match(/\/id\/(\d+)/);
 
   return match?.[1] || '';
+};
+
+const getCurrentUserId = () => {
+  const userId = window.accountUserId;
+
+  if (userId === '-1' || !userId) {
+    return null;
+  }
+
+  return userId;
 };
 
 const getDealCost = () => {
@@ -81,4 +93,4 @@ const getObjectList = async (url) =>
       return [];
     });
 
-export { getDealId, getUserId, getDealCost, getDealStatus, getTag, getProcessData, getObjectList };
+export { getDealId, getUserId, getCurrentUserId, getDealCost, getDealStatus, getTag, getProcessData, getObjectList };

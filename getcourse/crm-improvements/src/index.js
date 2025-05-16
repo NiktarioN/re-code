@@ -3,7 +3,7 @@
  * Description: Улучшение CRM GetCourse
  */
 
-import setConfig from './config/config';
+import { setConfig, initConfig } from './config/config';
 import { SELECTORS } from './config/constants';
 import createOrderTask from './features/tasks/create-order-task';
 import improveTaskButtons from './features/tasks/improve-buttons';
@@ -30,7 +30,10 @@ const gcCrmImprovements = {
       throw new Error('RE-CODE STUDIO. Плагин gcCrmImprovements. Повторная инициализация функционала невозможна');
     }
 
+    console.log(options);
     this.config = setConfig(options);
+    initConfig(this.config || {});
+
     const {
       taskOrder: taskOrderConfig,
       dealHasChangedFieldId,
@@ -41,7 +44,6 @@ const gcCrmImprovements = {
       showCurrentOrder: showCurrentOrderValue,
       hideTasksInOrder: hideTasksInOrderConfig,
       hideManagerOperationList: hideManagerOperationListConfig,
-      changeManager: changeManagerConfig,
       hideSystemOrders: hideSystemOrdersConfig,
       canSeeOrdersPage: canSeeOrdersPageConfig,
       canEditProcesses: canEditProcessesConfig,
@@ -63,7 +65,7 @@ const gcCrmImprovements = {
     improveTasksForms();
     moveTasksToTheTop();
 
-    rights.changeManager(changeManagerConfig);
+    rights.changeManager();
     rights.canSeeOrdersPage(canSeeOrdersPageConfig);
     rights.canEditProcesses(canEditProcessesConfig);
     rights.websRights(websRightsConfig);
@@ -75,8 +77,10 @@ const gcCrmImprovements = {
       tasks.disableResultButtons();
       tasks.addComment(tasksForms);
 
+      general.hideRightCardAddComments();
+
       if (tasksConfig.quickDelay.isEnabled === true) {
-        tasks.quickDelay(tasksConfig.quickDelay.options, tasksForms);
+        tasks.quickDelay(tasksForms);
       }
 
       if (hideTaskDelayBtnConfig.value === true) {

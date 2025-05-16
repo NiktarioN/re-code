@@ -24,7 +24,7 @@
 		"CancelReason[order_pos]": 5
 	},
 	{
-		"CancelReason[title]": "Не устроила цена",
+		"CancelReason[title]": "Дорого",
 		"CancelReason[order_pos]": 6
 	},
 	{
@@ -32,55 +32,55 @@
 		"CancelReason[order_pos]": 7
 	},
 	{
-		"CancelReason[title]": "Не целевой",
+		"CancelReason[title]": "Битая заявка",
 		"CancelReason[order_pos]": 8
 	},
 	{
-		"CancelReason[title]": "Отпала потребность",
+		"CancelReason[title]": "Не целевой",
 		"CancelReason[order_pos]": 9
 	},
 	{
-		"CancelReason[title]": "Выбрал другой продукт проекта",
+		"CancelReason[title]": "Выбрал другой продукт в проекте (какой?)",
 		"CancelReason[order_pos]": 10
 	},
 	{
-		"CancelReason[title]": "Уже проходил обучение",
+		"CancelReason[title]": "Выбрал другой проект (какой?)",
 		"CancelReason[order_pos]": 11
 	},
 	{
-		"CancelReason[title]": "Пойдет на следующий поток",
+		"CancelReason[title]": "Уже проходил / проходит обучение",
 		"CancelReason[order_pos]": 12
 	},
 	{
-		"CancelReason[title]": "Отказ по банковской рассрочке",
+		"CancelReason[title]": "Пойдет на следующий поток",
 		"CancelReason[order_pos]": 13
 	},
 	{
-		"CancelReason[title]": "Не выплачена внутр. рассрочка",
+		"CancelReason[title]": "Отказ по всем банковским рассрочкам",
 		"CancelReason[order_pos]": 14
 	},
 	{
-		"CancelReason[title]": "Создал заказ случайно",
+		"CancelReason[title]": "Не выплачена внутр. рассрочка",
 		"CancelReason[order_pos]": 15
 	},
 	{
-		"CancelReason[title]": "Вышел срок оплаты заказа",
+		"CancelReason[title]": "Только бесплатно",
 		"CancelReason[order_pos]": 16
 	},
 	{
-		"CancelReason[title]": "Вышел срок обработки заказа",
+		"CancelReason[title]": "Создал заявку случайно",
 		"CancelReason[order_pos]": 17
 	},
 	{
-		"CancelReason[title]": "Работа в другом заказе",
+		"CancelReason[title]": "Вышел срок оплаты заказа",
 		"CancelReason[order_pos]": 18
 	},
 	{
-		"CancelReason[title]": "Пользователь удален",
+		"CancelReason[title]": "Вышел срок обработки заказа",
 		"CancelReason[order_pos]": 19
 	},
 	{
-		"CancelReason[title]": "Тестирование",
+		"CancelReason[title]": "Работа в другом заказе",
 		"CancelReason[order_pos]": 20
 	},
 	{
@@ -92,15 +92,19 @@
 		"CancelReason[order_pos]": 22
 	},
 	{
+		"CancelReason[title]": "Пользователь удален",
+		"CancelReason[order_pos]": 95
+	},
+	{
 		"CancelReason[title]": "Заказ от сотрудника",
 		"CancelReason[order_pos]": 96
 	},
 	{
-		"CancelReason[title]": "Ошибка",
+		"CancelReason[title]": "Тестирование",
 		"CancelReason[order_pos]": 97
 	},
 	{
-		"CancelReason[title]": "Битая заявка",
+		"CancelReason[title]": "Ошибка",
 		"CancelReason[order_pos]": 98
 	},
 	{

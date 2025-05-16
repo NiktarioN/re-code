@@ -1,6 +1,24 @@
 [
 	{
 		"id": null,
+		"label": "Комментарии_к_заказу",
+		"type": "text",
+		"required": false,
+		"settings": {
+			"placeholder": "Напиши комментарии по заказу, чтобы вспомнить ключевые моменты обработки заказа",
+			"rows": "8"
+		},
+		"description": "[ CRM ] Комментарии менеджера по заказу при обработке лида",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "0",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
 		"label": "Сегментация_карточки",
 		"type": "select",
 		"required": false,

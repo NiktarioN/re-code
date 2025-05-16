@@ -1,11 +1,10 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-alert */
 
 import { isDealCreatePage, isCanbanDealsPage } from '../../../../utils/page-checker';
+import { validateOfferAddInput } from '../../../../utils/validate';
 
-const CONSTANTS = {
-  MESSAGES: {
-    OFFER_REQUIRED: 'Для создания заказа необходимо добавить минимум одно предложение',
-  },
+const CONFIG = {
   OLD_DEAL_CREATE: {
     SELECTORS: {
       OFFER_ID_FIELD: '[name="Position[0][offer_id]"]',
@@ -21,15 +20,23 @@ const CONSTANTS = {
   },
 };
 
+const MESSAGES = {
+  OFFER_REQUIRED: 'Для создания заказа необходимо добавить минимум одно предложение',
+};
+
 const validateOldDealCreate = () => {
-  const input = document.querySelector(CONSTANTS.OLD_DEAL_CREATE.SELECTORS.OFFER_ID_FIELD);
-  const button = document.querySelector(CONSTANTS.OLD_DEAL_CREATE.SELECTORS.ACTION_BUTTON);
+  const input = document.querySelector(CONFIG.OLD_DEAL_CREATE.SELECTORS.OFFER_ID_FIELD);
+  const button = document.querySelector(CONFIG.OLD_DEAL_CREATE.SELECTORS.ACTION_BUTTON);
+
+  if (!input || !button) {
+    return;
+  }
 
   button.addEventListener('click', (event) => {
-    const hasNoValue = !input.hasAttribute('value') || input.getAttribute('value') === '';
-    if (hasNoValue) {
+    const offers = validateOfferAddInput(input);
+    if (!offers.length) {
       event.preventDefault();
-      alert(CONSTANTS.MESSAGES.OFFER_REQUIRED);
+      alert(MESSAGES.OFFER_REQUIRED);
     }
   });
 };
@@ -41,12 +48,12 @@ const validateCanbanDealCreate = () => {
         return;
       }
 
-      const form = document.querySelector(CONSTANTS.CANBAN_DEAL_CREATE.SELECTORS.FORM);
+      const form = document.querySelector(CONFIG.CANBAN_DEAL_CREATE.SELECTORS.FORM);
       if (!form) {
         return;
       }
 
-      const actionButton = form.querySelector(CONSTANTS.CANBAN_DEAL_CREATE.SELECTORS.ACTION_BUTTON);
+      const actionButton = form.querySelector(CONFIG.CANBAN_DEAL_CREATE.SELECTORS.ACTION_BUTTON);
       if (!actionButton || actionButton.dataset.handlerAdded) {
         return;
       }
@@ -54,9 +61,9 @@ const validateCanbanDealCreate = () => {
       actionButton.dataset.handlerAdded = 'true';
 
       actionButton.addEventListener('mouseenter', () => {
-        const hasOfferButton = !!form.querySelector(CONSTANTS.CANBAN_DEAL_CREATE.SELECTORS.ADD_OFFER_BUTTON);
+        const hasOfferButton = !!form.querySelector(CONFIG.CANBAN_DEAL_CREATE.SELECTORS.ADD_OFFER_BUTTON);
         if (hasOfferButton) {
-          alert(CONSTANTS.MESSAGES.OFFER_REQUIRED);
+          alert(MESSAGES.OFFER_REQUIRED);
         }
       });
     });

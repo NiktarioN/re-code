@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import settings from '../../config/settings';
+import settings from '../../config/default-settings';
 import { isDealPage } from '../../../../utils/page-checker';
 import { isUserProfilePage, PLUGIN_NAME } from '../../config/constants';
 import { isNotEmptyArray } from '../../../../../utils/checks';

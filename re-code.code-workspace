@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "name": "getfit.getcourse.ru/chtm",
+      "path": "../../../Users/Никита/AppData/Roaming/Code/User/globalStorage/chatium.chatium-sync/getfit.getcourse.ru.chtm"
+    },
+    {
+      "name": "docstarclub.ru/chtm",
+      "path": "../../../Users/Никита/AppData/Roaming/Code/User/globalStorage/chatium.chatium-sync/docstarclub.ru.chtm"
+    },
+    {
+      "name": "techeducation.ru/chtm",
+      "path": "../../../Users/Никита/AppData/Roaming/Code/User/globalStorage/chatium.chatium-sync/techeducation.ru.chtm"
+    },
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "cSpell.ignoreWords": ["addfields"]
+  }
+}

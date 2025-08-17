@@ -3,6 +3,10 @@ const LOCAL_SETTINGS = {
     quickDelay: {
       useMoscowTime: false,
     },
+    autoNotify: {
+      isEnabled: false,
+      minutes: 5,
+    },
     draftComment: '',
     reloadAfterComment: false,
   },

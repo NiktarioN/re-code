@@ -58,19 +58,52 @@ const settings = {
     notMode: false,
     notAccessRedirectUrl: '/teach/control/stream',
   },
+
   canSeeOrdersPage: {
     idList: [],
     notMode: false,
     notAccessRedirectUrl: '/teach/control/stream',
   },
+
+  // Возможность добавлять комментарии через задачи
   addDealComments: {
     dealCommentsFieldId: undefined,
     mode: 'custom-field',
   },
+
+  // Валидация настроек предложения
   validateOfferSettings: {
-    tags: false,
+    isEnabled: false, // Включить валидацию
+    offerCode: {
+      isEnabled: false, // Включить валидацию кода предложения
+    },
+    cancelReason: {
+      isEnabled: false, // Включить валидацию причины отмены заказа
+      strictMode: false, // Использовать строгий режим. Ставит сам значения по умолчанию
+      ids: {
+        paid: undefined, // ID причины отмены для платного предложения
+        free: undefined, // ID причины отмены для бесплатного предложения
+      }
+    },
+    tags: {
+      isEnabled: false, // Включить валидацию тегов в предложении
+      requiredPrefixesTags: ['воронка_', 'тип_', 'продукт_'], // Префиксы тегов, которые должны быть в предложении
+      excludedPrefixesTags: ['тех_'], // Префиксы тегов, которые не проверяем в предложении
+    },
+    sendAdminMessage: {
+      isEnabled: false, // Включить валидацию отправки сообщения администратору о создании заказа
+      defaultValue: 0,
+      mode: 'all-offers', // Мод для валидации: all-offers | free-offers
+    },
+    sendUserMessage: {
+      isEnabled: false, // Включить валидацию отправки сообщения пользователю после создания заказа
+      defaultValue: 0,
+      mode: 'free-offers', // Мод для валидации: all-offers | free-offers
+    }
   },
+
   validateOfferChange: false,
+
   tasks: {
     quickDelay: {
       isEnabled: false,
@@ -89,6 +122,7 @@ const settings = {
       enableCommentLimit: true,
       enableButtonHighlight: false,
     },
+    changeDealStatus: true,
   },
   hideRightCardAddComments: false,
 };

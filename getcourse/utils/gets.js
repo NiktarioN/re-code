@@ -12,7 +12,7 @@ const getDealId = () => {
 
 const getUserId = () => {
   const attribute =
-    document.querySelector('.user-name [href*="/user/control/user/update/id/"]')?.getAttribute('href') || '';
+    document.querySelector('.gc-right-active-block .user-name [href*="/user/control/user/update/id/"]')?.getAttribute('href') || '';
   const match = attribute.match(/\/id\/(\d+)/);
 
   return match?.[1] || '';

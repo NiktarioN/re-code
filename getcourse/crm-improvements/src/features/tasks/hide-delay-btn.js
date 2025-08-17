@@ -1,4 +1,4 @@
-import settings from '../../config/settings';
+import settings from '../../config/default-settings';
 import { isPageWithTasks } from '../../config/constants';
 
 const CONFIG = {

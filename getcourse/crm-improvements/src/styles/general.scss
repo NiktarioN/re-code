@@ -124,7 +124,13 @@
 
 	&:focus {
 		outline: none !important;
+		border-color: transparent !important;
 	}
+}
+
+.recode-input-disabled {
+	opacity: 0.6;
+	pointer-events: none;
 }
 
 .recode-setting-wrapper {
@@ -234,4 +240,19 @@
 			display: none !important;
 		}
 	}
+}
+
+// Исправляем проблемы с виджетом чатов
+// .talks-widget-button {
+// 	bottom: 75px !important;
+// 	display: block !important;
+// }
+
+// Исправляем проблемы с виджетом чатов
+.help-widget-button {
+	display: none;
+}
+
+.talks-widget-button {
+	display: block;
 }

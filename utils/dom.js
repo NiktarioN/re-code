@@ -34,6 +34,8 @@ const createElement = (tag, props = {}) => {
       element.textContent = value;
     } else if (key === 'html') {
       element.innerHTML = value;
+    } else if (key === 'checked') {
+      element.checked = value;
     } else {
       element.setAttribute(key, value);
     }

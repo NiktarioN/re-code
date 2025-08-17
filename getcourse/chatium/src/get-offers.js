@@ -1,6 +1,6 @@
 /**
  * Plugin Name: get-offers
- * Description: API для работы с бонусными рублями в предложениях
+ * Description: API для работы с предложениями в проектах
  * Author: RE-CODE AGENCY
  * Author URL: https://techeducation.ru/y/8bbf221
  */
@@ -10,31 +10,20 @@ import { getOffers } from '@getcourse/sdk';
 const CONFIG = {
   PLUGIN_NAME: '[ RE-CODE AGENCY ] Метод «Получить настройки предложений в проекте»',
   MAX_LIMIT_OFFERS: 10000,
-
-  // Режим работы фильтра: 'exclude' - исключать, 'include' - включать
-  FILTER_MODE: 'exclude', // 'exclude' | 'include'
-
-  // Настройки для фильтрации (работают в зависимости от выбранного режима)
-  TITLES: [
-    'Регистрация',
-    'Технический продукт',
-    'Демо-доступ',
-    'Запись вебинара',
-    'Мини-курс',
-    'Начисление бонусных рублей',
-    'Скидка 20 %',
-    'бонусных рублей',
-    'доступ',
-  ],
-  TAGS: ['регистрация', 'Reg-0', 'tech'],
+  TITLES_LST: ['Заявка', 'Предзапись', 'Тариф', 'Консультация', 'Задать вопрос', 'Передать в ОП', 'Участник', 'С сайта'],
+  TAGS_LIST: ['ОП'],
   CASE_SENSITIVE: false,
+  FILTER_LOGIC: 'or', // 'or' | 'and'
+  TITLE_FILTER_MODE: 'include', // 'exclude' | 'include' | 'ignore'
+  TAG_FILTER_MODE: 'include', // 'exclude' | 'include' | 'ignore'
 };
 
 const MESSAGES = {
   SUCCESS: 'Успешно получены данные о предложениях в аккаунте',
-  INVALID_OFFERS: 'Некорректные данные о предложениях',
+  INVALID_OFFERS_TYPE: 'Некорректные данные: предложения должны быть массивом объектов',
+  EMPTY_OFFERS: 'В проекте не найдено ни одного предложения',
+  FILTERED_OFFERS_EMPTY: 'После фильтрации не найдено ни одного предложения',
   GENERAL_ERROR: 'Ошибка при попытке получить данные предложений в GetCourse',
-  INVALID_FILTER_MODE: 'Некорректный режим фильтрации',
 };
 
 const createSuccessResponse = (data) => ({
@@ -44,46 +33,81 @@ const createSuccessResponse = (data) => ({
   data,
 });
 
-const handleError = async (error) => ({
+const handleError = (error) => ({
   plugin: CONFIG.PLUGIN_NAME,
   success: false,
-  errors: error.message || MESSAGES.GENERAL_ERROR,
+  errors: error?.message || MESSAGES.GENERAL_ERROR,
 });
 
 const validateOffers = (offers) => {
   if (!Array.isArray(offers)) {
-    throw new Error(MESSAGES.INVALID_OFFERS);
+    throw new Error(MESSAGES.INVALID_OFFERS_TYPE);
+  }
+
+  if (offers.length === 0) {
+    throw new Error(MESSAGES.EMPTY_OFFERS);
   }
 };
 
-const normalizeString = (str) => (CONFIG.CASE_SENSITIVE ? str : str?.toLowerCase());
+const normalizeString = (str) => (CONFIG.CASE_SENSITIVE ? String(str ?? '') : String(str ?? '').toLowerCase());
 
 const hasMatch = (source, patterns) => {
-  if (!source || !patterns.length) return false;
-
+  if (!source || !patterns.length) {
+    return false;
+  }
   const normalizedSource = normalizeString(source);
-  return patterns.some(pattern => {
+
+  return patterns.some((pattern) => {
     const normalizedPattern = normalizeString(pattern);
     return normalizedSource.includes(normalizedPattern);
   });
 };
 
-const shouldFilterOffer = (offer) => {
-  const titleMatch = hasMatch(offer.title, CONFIG.TITLES);
-  const tagMatch = hasMatch(offer.tags?.join(','), CONFIG.TAGS);
-  const hasMatches = titleMatch || tagMatch;
-
-  switch (CONFIG.FILTER_MODE) {
-    case 'exclude': return hasMatches;
-    case 'include': return !hasMatches;
-    default: throw new Error(MESSAGES.INVALID_FILTER_MODE);
+const hasAnyTagMatch = (tags, patterns) => {
+  if (!Array.isArray(tags) || !tags.length) {
+    return false;
   }
+
+  return tags.some((tag) => hasMatch(tag, patterns));
 };
+
+const getByMode = (mode, match) => {
+  if (mode === 'ignore') {
+    return true;
+  }
+  if (mode === 'exclude') {
+    return !match;
+  }
+  return match;
+};
+
+const isOfferMatchByModes = (offer, filterModes = {}) => {
+  const {
+    titleMode = CONFIG.TITLE_FILTER_MODE,
+    tagMode = CONFIG.TAG_FILTER_MODE,
+    filterLogic = CONFIG.FILTER_LOGIC,
+  } = filterModes;
+
+  const titleMatch = titleMode !== 'ignore' ? hasMatch(offer.title, CONFIG.TITLES_LST) : true;
+  const tagMatch = tagMode !== 'ignore' ? hasAnyTagMatch(offer.tags, CONFIG.TAGS_LIST) : true;
+
+  const byTitle = getByMode(titleMode, titleMatch);
+  const byTag = getByMode(tagMode, tagMatch);
+
+  if (filterLogic === 'or') {
+    return byTitle || byTag;
+  }
+
+  return byTitle && byTag;
+};
+
+const filterOffersFlexible = (offers, filterModes = {}) => offers.filter((offer) => isOfferMatchByModes(offer, filterModes));
 
 const fetchOffers = async (ctx) => {
   const offers = await getOffers(ctx, {
     showParams: true,
-    limit: CONFIG.MAX_LIMIT_OFFERS
+    limit: CONFIG.MAX_LIMIT_OFFERS,
+    recodeSelectors: true,
   });
   validateOffers(offers);
   return offers;
@@ -91,34 +115,81 @@ const fetchOffers = async (ctx) => {
 
 const filterOffersByBonusCondition = (offers, canUseBonus) =>
   offers
-    .filter(offer =>
-      offer.final_price > 0 &&
-      offer.is_actual &&
-      Boolean(offer.paramsObject?.cannot_use_bonus) === !canUseBonus &&
-      !shouldFilterOffer(offer)
+    .filter(
+      (offer) =>
+        offer.final_price > 0 && offer.is_actual && Boolean(offer.paramsObject?.cannot_use_bonus) === !canUseBonus
     )
-    .map(offer => offer.id);
+    .map((offer) => offer.id);
 
 const filterFreeDealFinish = (offers) =>
-  offers.filter(offer =>
-    offer.is_actual &&
-    !offer.final_price &&
-    offer.paramsObject?.free_deal_finish &&
-    !shouldFilterOffer(offer)
+  offers.filter(
+    (offer) =>
+      offer.is_actual && !offer.final_price && offer.paramsObject?.free_deal_finish && isOfferMatchByModes(offer)
   );
 
 const getAllOffersHandler = async (ctx) => {
   try {
     const offers = await fetchOffers(ctx);
-    const filteredOffers = offers.filter(offer => !shouldFilterOffer(offer));
+    return createSuccessResponse(offers);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+const getBonusOffersHandler = (canUseBonus) => async (ctx) => {
+  try {
+    const offers = await fetchOffers(ctx);
+    const filteredOffers = filterOffersByBonusCondition(offers, canUseBonus);
+
+    if (filteredOffers.length === 0) {
+      throw new Error(MESSAGES.FILTERED_OFFERS_EMPTY);
+    }
+
     return createSuccessResponse(filteredOffers);
   } catch (error) {
     return handleError(error);
   }
 };
 
-// Остальные обработчики без изменений
+const getFreeDealFinishHandler = async (ctx) => {
+  try {
+    const offers = await fetchOffers(ctx);
+    const filteredOffers = filterFreeDealFinish(offers);
+
+    if (filteredOffers.length === 0) {
+      throw new Error(MESSAGES.FILTERED_OFFERS_EMPTY);
+    }
+
+    const result = filteredOffers.map((offer) => `https://${ctx.account.host}/pl/sales/offer/update?id=${offer.id}`);
+    return createSuccessResponse(result);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+const getFlexibleOffersHandler = async (ctx) => {
+  try {
+    const offers = await fetchOffers(ctx);
+    const {
+      titleMode = CONFIG.TITLE_FILTER_MODE,
+      tagMode = CONFIG.TAG_FILTER_MODE,
+      filterLogic = CONFIG.FILTER_LOGIC,
+    } = ctx.query || {};
+
+    const filtered = filterOffersFlexible(offers, { titleMode, tagMode, filterLogic });
+
+    if (filtered.length === 0) {
+      throw new Error(MESSAGES.FILTERED_OFFERS_EMPTY);
+    }
+
+    return createSuccessResponse(filtered);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
 app.get('/all', getAllOffersHandler);
 app.get('/can-use-bonuses', getBonusOffersHandler(true));
 app.get('/can-not-use-bonuses', getBonusOffersHandler(false));
 app.get('/free-deal-finish', getFreeDealFinishHandler);
+app.get('/flexible-offers', getFlexibleOffersHandler);

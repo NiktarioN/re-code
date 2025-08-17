@@ -5,27 +5,28 @@
  * Author URL: https://techeducation.ru/y/8bbf221
  */
 
-import { getGcUserData, setUserCustomFields } from '@getcourse/sdk';
+import { getGcUserData, getDealInfoWithParams, setUserCustomFields, updateDealInfo } from '@getcourse/sdk';
 
 const CONFIG = {
   PLUGIN_NAME: '[ RE-CODE AGENCY ] Метод «Установить часовой пояс в карточку пользователя»',
-  REQUIRED_PARAMS: ['userId'],
+  REQUIRED_PARAMS: ['dealId'],
   FIELDS: {
-    TIME_ZONE: 10714712,
-    RESPONSE: 10727741,
+    USER_TIME_ZONE: 10732289,
+    DEAL_TIME_ZONE: 'Часовой_пояс',
   },
+  MOSCOW_TIMEZONE: 3,
+  UPDATE_DEAL_FIELD: true,
 };
 
 const MESSAGES = {
   MISSING_REQUIRED_PARAMS: (params) => `Отсутствуют обязательные параметры в запросе: ${params}`,
-  INVALID_USER_ID: 'Некорректный идентификатор пользователя',
+  INVALID_DEAL_ID: 'Некорректный идентификатор заказ',
+  DEAL_NOT_FOUND: 'Заказ не найден',
   USER_NOT_FOUND: 'Пользователь не найден',
   NO_TIME_ZONE: 'У пользователя не определен часовой пояс',
   SUCCESS: (timeZone) => `Успешно определен часовой пояс пользователя: ${timeZone}`,
-  GENERAL_ERROR: 'Ошибка при попытке установить часовой пояс в карточке пользователя',
+  GENERAL_ERROR: 'Ошибка при попытке установить часовой пояс в карточке пользователя и обновить поле заказа',
 };
-
-const prepareData = (data) => (typeof data === 'object' ? JSON.stringify(data) : data);
 
 const validateParams = (params) => {
   const missingParams = CONFIG.REQUIRED_PARAMS.filter((param) => !params[param]);
@@ -35,22 +36,28 @@ const validateParams = (params) => {
   }
 };
 
-const handleError = async (error) => {
-  const errorMessage = {
-    plugin: `${CONFIG.PLUGIN_NAME}`,
-    success: false,
-    error: error.message || MESSAGES.GENERAL_ERROR,
-  };
+const handleError = (error) => ({
+  plugin: CONFIG.PLUGIN_NAME,
+  success: false,
+  error: error?.message || MESSAGES.GENERAL_ERROR,
+});
 
-  return errorMessage;
+const parseDealId = (dealIdStr) => {
+  const dealId = Number.parseInt(dealIdStr, 10);
+
+  if (Number.isNaN(dealId) || dealId <= 0) {
+    throw new Error(MESSAGES.INVALID_DEAL_ID);
+  }
+
+  return dealId;
 };
 
 const formatMoscowTimeZone = (timeZoneValue) => {
-  const moscowTimeZone = 3;
+  const moscowTimeZone = CONFIG.MOSCOW_TIMEZONE;
 
   const timeZone = typeof timeZoneValue === 'string' ? parseInt(timeZoneValue, 10) : timeZoneValue;
 
-  if (Number.isNaN(timeZone)) {
+  if (timeZone === undefined || timeZone === null || Number.isNaN(timeZone)) {
     return 'Не определен';
   }
 
@@ -70,51 +77,48 @@ const formatMoscowTimeZone = (timeZoneValue) => {
 const handleRequest = async (ctx, req) => {
   try {
     validateParams(req.query);
+    const dealId = parseDealId(req.query.dealId);
 
-    const { userId: userIdStr } = req.query;
-    const userId = parseInt(userIdStr, 10);
-
-    if (Number.isNaN(userId) || userId <= 0) {
-      throw new Error(MESSAGES.INVALID_USER_ID);
+    const dealInfo = await getDealInfoWithParams(ctx, dealId, { tags: false, customFields: false });
+    if (!dealInfo || !dealInfo.user_id) {
+      throw new Error(MESSAGES.DEAL_NOT_FOUND);
     }
 
+    const userId = dealInfo.user_id;
     const userInfo = await getGcUserData(ctx, { id: userId });
-    if (!userInfo) {
+    if (!userInfo || !userInfo.user) {
       throw new Error(MESSAGES.USER_NOT_FOUND);
     }
 
     const { timezone_offset: timeZoneOffset } = userInfo.user;
+    const formattedTimeZone = formatMoscowTimeZone(timeZoneOffset);
 
     const successMessage = {
       plugin: CONFIG.PLUGIN_NAME,
       success: true,
     };
 
-    if (timeZoneOffset === undefined || timeZoneOffset === null) {
-      successMessage.message = MESSAGES.NO_TIME_ZONE
-
-      await setUserCustomFields(ctx, {
-        userId,
-        fields: {
-          [CONFIG.FIELDS.TIME_ZONE]: 'Не определен',
-          [CONFIG.FIELDS.RESPONSE]: prepareData(successMessage),
-        },
-      });
-
-      return successMessage;
+    if (formattedTimeZone === 'Не определен') {
+      successMessage.message = MESSAGES.NO_TIME_ZONE;
+    } else {
+      successMessage.message = MESSAGES.SUCCESS(formattedTimeZone);
     }
-
-    const formattedTimeZone = formatMoscowTimeZone(timeZoneOffset);
-    successMessage.message = MESSAGES.SUCCESS(formattedTimeZone);
-    successMessage.userTimeZone = timeZoneOffset;
 
     await setUserCustomFields(ctx, {
       userId,
       fields: {
-        [CONFIG.FIELDS.TIME_ZONE]: formattedTimeZone,
-        [CONFIG.FIELDS.RESPONSE]: prepareData(successMessage),
+        [CONFIG.FIELDS.USER_TIME_ZONE]: formattedTimeZone,
       },
     });
+
+    if (CONFIG.UPDATE_DEAL_FIELD) {
+      await updateDealInfo(ctx, {
+        dealId,
+        addfields: {
+          [CONFIG.FIELDS.DEAL_TIME_ZONE]: [formattedTimeZone],
+        },
+      });
+    }
 
     return successMessage;
   } catch (error) {

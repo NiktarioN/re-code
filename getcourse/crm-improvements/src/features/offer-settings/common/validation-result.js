@@ -1,0 +1,1 @@
+export const createValidationResult = (success, message = null) => ({ success, message });

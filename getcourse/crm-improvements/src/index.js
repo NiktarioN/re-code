@@ -4,7 +4,7 @@
  */
 
 import { setConfig, initConfig } from './config/config';
-import { SELECTORS } from './config/constants';
+import { PLUGIN_NAME, SELECTORS } from './config/constants';
 import createOrderTask from './features/tasks/create-order-task';
 import improveTaskButtons from './features/tasks/improve-buttons';
 import moveTasksToTheTop from './features/tasks/move-tasks-top';
@@ -15,7 +15,7 @@ import hideSmsSenderType from './features/general/hide-sms-sender-type';
 import improveTasksForms from './features/tasks/improve-tasks';
 import hideSystemOrders from './features/orders/hide-system-orders';
 import addHints from './features/general/add-hints';
-import validateOfferSettings from './features/offer-settings/general';
+import { initOfferSettingsValidation } from './features/offer-settings';
 
 import * as general from './features/general/general';
 import * as orders from './features/orders/general';
@@ -27,10 +27,9 @@ import * as processes from './features/processes/general';
 const gcCrmImprovements = {
   init(options = {}) {
     if (this.config) {
-      throw new Error('RE-CODE STUDIO. Плагин gcCrmImprovements. Повторная инициализация функционала невозможна');
+      throw new Error(`${PLUGIN_NAME}. Повторная инициализация функционала невозможна`);
     }
 
-    console.log(options);
     this.config = setConfig(options);
     initConfig(this.config || {});
 
@@ -49,13 +48,10 @@ const gcCrmImprovements = {
       canEditProcesses: canEditProcessesConfig,
       websRights: websRightsConfig,
       addDealComments: addDealCommentsConfig,
-      validateOfferSettings: validateOfferSettingsConfig,
       dealCommentsFieldId,
       validateOfferChange: validateOfferChangeValue,
       tasks: tasksConfig,
     } = this.config || {};
-
-    validateOfferSettings(validateOfferSettingsConfig);
 
     general.watchFieldsInputChanges();
     general.addDateInCommentsField(dealCommentsFieldId);
@@ -76,6 +72,7 @@ const gcCrmImprovements = {
       tasks.hideTrash();
       tasks.disableResultButtons();
       tasks.addComment(tasksForms);
+      tasks.initAllTasksFormsEnhancements(tasksForms);
 
       general.hideRightCardAddComments();
 
@@ -92,6 +89,8 @@ const gcCrmImprovements = {
     if (dealHasChangedFieldId) {
       setDealHasChanged(dealHasChangedFieldId);
     }
+
+    initOfferSettingsValidation();
 
     orders.validateDealCreate();
     orders.setOrderCancelReason();

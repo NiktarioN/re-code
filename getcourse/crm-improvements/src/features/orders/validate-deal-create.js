@@ -21,7 +21,7 @@ const CONFIG = {
 };
 
 const MESSAGES = {
-  OFFER_REQUIRED: 'Для создания заказа необходимо добавить минимум одно предложение',
+  OFFER_REQUIRED: 'Для создания заказа необходимо выбрать минимум одно предложение',
 };
 
 const validateOldDealCreate = () => {

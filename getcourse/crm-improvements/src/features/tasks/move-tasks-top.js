@@ -1,4 +1,4 @@
-import settings from '../../config/settings';
+import settings from '../../config/default-settings';
 import { isUserProfilePage } from '../../config/constants';
 import { isDealPage } from '../../../../utils/page-checker';
 

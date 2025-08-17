@@ -18,6 +18,7 @@ const sendComment = async (type, text) => {
   validateComment(normalizedText);
 
   const id = type === 'deal' ? getDealId() : getUserId();
+  const fromUserId = getCurrentUserId() || getUserId();
 
   if (!id) {
     throw new Error(MESSAGES.ERROR_MISSING_ID(type));
@@ -26,7 +27,7 @@ const sendComment = async (type, text) => {
   const searchParams = toUrlSearchParams({
     objectId: id,
     objectType: type,
-    fromUserId: getCurrentUserId() || getUserId(),
+    fromUserId,
     text: normalizedText,
   });
 

@@ -2,7 +2,7 @@
 
 import { CONFIG } from './core/config';
 import { SELECTORS } from '../../../config/constants';
-import settings from '../../../config/settings';
+import { GLOBAL_CONFIG } from '../../../config/config';
 import { getLocalSetting, updateLocalSetting } from '../../../modules/local-settings-manager';
 import { createElement } from '../../../../../../utils/dom';
 import createCommentButton from './ui/comment-button';
@@ -71,7 +71,7 @@ const initCommentSystem = (targetElement) => {
 
 const init = (forms) => {
   forms.forEach((form) => {
-    const hasSearchWords = formHasSearchWords(form, settings.hideTasksInOrder.searchWords);
+    const hasSearchWords = formHasSearchWords(form, GLOBAL_CONFIG.hideTasksInOrder.searchWords);
     if (hasSearchWords) {
       return;
     }

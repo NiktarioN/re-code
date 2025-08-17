@@ -1,7 +1,7 @@
 // Убираем для объекта "Задачи" настройку "Вызов URL"
-#contextOperationstask label:has([value='common_get_url']) {
-	display: none !important;
-}
+// #contextOperationstask label:has([value='common_get_url']) {
+// 	display: none !important;
+// }
 
 // Добавляем возможность изменять размер как нам захочется
 #flowchart .block-modal-window textarea.form-control,
@@ -31,4 +31,28 @@
 #flowchart .block-modal-window [name='UpdateFieldOperation[updateValue][]'] {
 	width: 100%;
 	min-height: 125px;
+}
+
+// Выделяем select, который выбран
+#flowchart .block-modal-window label:has(select option:checked:not([value=''])) {
+	background: #d4edda;
+}
+
+// Улучшаем select где нужно выбрать поля для заполнения
+#flowchart .block-modal-window [data-operation-type='common_ask_fields'] {
+	.checkbox-list {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	label {
+		gap: 7px;
+		padding: 5px 0;
+		margin: 0 !important;
+	}
+
+	select {
+		margin: 0 !important;
+	}
 }

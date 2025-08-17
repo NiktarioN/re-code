@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-console */
 
-import settings from '../../../config/settings';
+import settings from '../../../config/default-settings';
 import { isDealPage } from '../../../../../utils/page-checker';
 import { getDealId } from '../../../../../utils/gets';
 import { orderStatusMap } from '../../../../../utils/helpers';

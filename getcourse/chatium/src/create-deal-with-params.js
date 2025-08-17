@@ -22,7 +22,7 @@ const MESSAGES = {
     `Недопустимый статус (${status}) в заказе. Используй только new (новый) или payed (завершен)`,
   GENERAL_ERROR: 'Ошибка при попытке создать заказ в GetCourse',
   USER_ID_REQUIRED: 'Необходимо указать userEmail или userGetCourseId в запросе',
-  INVALID_NUMERIC_PARAM: (param) => `Параметр ${param} должен быть числом`,
+  INVALID_NUMERIC_PARAM: (param) => `Параметр ${param} должен быть числом и больше 0`,
 };
 
 const VALID_DEAL_STATUSES = new Set([
@@ -51,7 +51,7 @@ const validateParams = (params) => {
   }
 
   if (params.dealStatus && !VALID_DEAL_STATUSES.has(params.dealStatus)) {
-    errors.push(MESSAGES.INVALID_DEAL_STATUS(params.dealStatus));
+    errors.push(MESSAGES.ERROR_DEAL_STATUS(params.dealStatus));
   }
 
   if (errors.length) {
@@ -65,11 +65,25 @@ const handleError = async (error) => ({
   errors: error.message || MESSAGES.GENERAL_ERROR,
 });
 
+const isPositiveNumber = (value) => {
+  const num = Number(value);
+  return value !== undefined && value !== null && String(value).trim() !== '' && !Number.isNaN(num) && num > 0;
+};
+
 const normalizeParams = (params) => {
   const normalizedParams = { ...params };
 
+  if (normalizedParams.userName) {
+    const userNameParts = normalizedParams.userName.trim().replace(/\s+/g, ' ').split(' ');
+
+    normalizedParams.firstName = userNameParts[0].trim() || '';
+    normalizedParams.lastName = userNameParts.slice(1).join(' ') || '';
+
+    delete normalizedParams.userName;
+  }
+
   CONFIG.NUMERIC_PARAMS.forEach((param) => {
-    if (params[param] && !Number.isNaN(Number(params[param]))) {
+    if (isPositiveNumber(params[param])) {
       normalizedParams[param] = Number(params[param]);
     } else if (params[param]) {
       throw new Error(MESSAGES.INVALID_NUMERIC_PARAM(param));
@@ -100,9 +114,11 @@ const prepareCustomFields = (params) => {
 };
 
 const createUserData = (params) => {
-  const { userEmail, userGetCourseId, userPhone } = params;
+  const { firstName, lastName, userEmail, userGetCourseId, userPhone } = params;
 
   return {
+    ...(firstName && { first_name: firstName }),
+    ...(lastName && { last_name: lastName }),
     ...(userGetCourseId && { id: userGetCourseId }),
     ...(userEmail && { email: userEmail }),
     ...(userPhone && { phone: userPhone }),
@@ -114,9 +130,9 @@ const createDealDetails = (params, customFields) => {
 
   return {
     offers: [{ offer_id: offerCode }],
-    ...(params.dealStatus && { deal_status: dealStatus }),
+    ...(dealStatus && { deal_status: dealStatus }),
     disable_notifications: false,
-    recalc_user_product: 1,
+    recalc_user_product: dealStatus === 'payed' ? 1 : 0,
     ...(tags?.length && { addtags: tags }),
     ...(comment && { deal_comment: comment }),
     ...(funnelId && { funnel_id: funnelId }),
@@ -133,8 +149,8 @@ const prepareDealData = (params, customFields) => ({
 const handleRequest = async (ctx, req) => {
   try {
     validateParams(req.query);
-    const params = normalizeParams(req.query);
 
+    const params = normalizeParams(req.query);
     const customFields = prepareCustomFields(req.query);
     const dealData = prepareDealData(params, customFields);
 

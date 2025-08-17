@@ -20,6 +20,7 @@ const menuData = {
   processesSettings: [
     { title: 'API', url: '/pl/saas/account/api' },
     { title: 'Логи аккаунта', url: '/chtm/s/dev/logs' },
+    { title: 'Логи событий', url: '/chtm/app/traffic/logs' },
     { title: 'Задачи аккаунта', url: '/chtm/app/dev/jobs' },
   ],
 };

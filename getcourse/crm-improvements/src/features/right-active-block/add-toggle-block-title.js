@@ -22,8 +22,8 @@ const addToggleBlockTitle = (rightActiveBlock) => {
     return;
   }
 
-  const toggleLinkOlreadyCreated = !!document.querySelector('.recode-toggle-block-title');
-  if (toggleLinkOlreadyCreated) {
+  const toggleLinkAlreadyCreated = !!document.querySelector('.recode-toggle-block-title');
+  if (toggleLinkAlreadyCreated) {
     return;
   }
 

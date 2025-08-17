@@ -1,4 +1,4 @@
-import settings from '../../config/settings';
+import settings from '../../config/default-settings';
 import { isEmployee, isTargetUserId } from '../../../../utils/checks';
 import { isNotEmptyArray, checkTargetPage } from '../../../../../utils/checks';
 import { isOneWebRoomPage, isOneWebSettingsPage, isWebsListPage } from '../../../../utils/page-checker';

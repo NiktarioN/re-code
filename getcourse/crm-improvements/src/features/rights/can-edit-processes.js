@@ -1,4 +1,4 @@
-import settings from '../../config/settings';
+import settings from '../../config/default-settings';
 import { isEmployee, isTargetUserId } from '../../../../utils/checks';
 import { isNotEmptyArray } from '../../../../../utils/checks';
 import { isProcessesEditorPage, isProcessEditorPage } from '../../../../utils/page-checker';

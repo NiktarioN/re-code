@@ -21,7 +21,7 @@ import addCopyProductButton from './features/cms/add-copy-product-button';
 import changeEmail from './features/general/change-email';
 import hideSmsSenderType from './features/general/hide-sms-sender-type';
 import addToggleCollapseExpand from './features/general/add-toggle-collapse-expand';
-import validateOfferSettings from './features/offer-settings/validate-settings';
+// import validateOfferSettings from './features/offer-settings/validate-settings';
 import hideTalksWidgetButton from './features/general/hide-talks-widget-button';
 import hideTopNotification from './features/general/hide-top-notification';
 import settingsFormController from './controlles/form-settings';
@@ -100,7 +100,7 @@ window.recode = {
 
       addCopyProductButton();
       changeEmail(changeEmailConfig);
-      validateOfferSettings();
+      // validateOfferSettings();
       hideTalksWidgetButton();
       hideTopNotification();
       hideTechProducts();

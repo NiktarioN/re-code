@@ -20,7 +20,7 @@ const CONFIG = {
 
 const MESSAGES = {
   MISSING_REQUIRED_PARAMS: (params) => `Отсутствуют обязательные параметры в запросе: ${params}`,
-  INVALID_NUMERIC_PARAM: (param) => `Параметр ${param} должен быть числом`,
+  INVALID_NUMERIC_PARAM: (param) => `Параметр ${param} должен быть числом и больше 0`,
   GENERAL_ERROR: 'Ошибка при попытке обновить заказ в GetCourse',
   SUCCESS: (dealId) => `Сделка с ID ${dealId} успешно обновлена`,
 };
@@ -41,11 +41,16 @@ const handleError = async (error) => ({
   errors: error.message || MESSAGES.GENERAL_ERROR,
 });
 
+const isPositiveNumber = (value) => {
+  const num = Number(value);
+  return value !== undefined && value !== null && String(value).trim() !== '' && !Number.isNaN(num) && num > 0;
+};
+
 const normalizeParams = (params) => {
   const normalizedParams = { ...params };
 
   CONFIG.NUMERIC_PARAMS.forEach((param) => {
-    if (params[param] && !Number.isNaN(Number(params[param]))) {
+    if (isPositiveNumber(params[param])) {
       normalizedParams[param] = Number(params[param]);
     } else if (params[param]) {
       throw new Error(MESSAGES.INVALID_NUMERIC_PARAM(param));

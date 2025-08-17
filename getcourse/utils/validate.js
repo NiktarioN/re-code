@@ -3,10 +3,22 @@ const validateOfferAddInput = (input) => {
 
   const values = rawValue.split(',').filter(Boolean);
   const uniqueValues = [...new Set(values)];
+  const newValue = uniqueValues.join(',');
 
-  input.value = uniqueValues.join(',');
+  if (input.value !== newValue) {
+    input.value = newValue;
+  }
 
   return uniqueValues;
 };
 
-export { validateOfferAddInput };
+const validateOfferSelection = (offerField) => {
+  if (!offerField) {
+    return false;
+  }
+
+  const offers = validateOfferAddInput(offerField);
+  return offers.length > 0;
+};
+
+export { validateOfferAddInput, validateOfferSelection };

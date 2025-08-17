@@ -38,6 +38,7 @@ const DOMAIN_CORRECTION_MAP = {
     'mail.du',
     'mail.r',
     'mail.u',
+    'meil.ru',
     'maul.ru',
     'mail.ri',
     'mail.tu',
@@ -176,7 +177,7 @@ const validateEmailAndAutoCorrect = (field) => {
   }
 };
 
-const app = (config) => {
+const init = (config) => {
   const offerUserChoice = config.offerUserChoice || settings.validateEmail.offerUserChoice;
   const emailFields = document.querySelectorAll(CONFIG.EMAIL_FIELDS_SELECTORS);
 
@@ -191,4 +192,4 @@ const app = (config) => {
   });
 };
 
-export default app;
+export default init;

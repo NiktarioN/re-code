@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-alert */
 
-import settings from '../../config/settings';
+import settings from '../../config/default-settings';
 import { PROJECT_NAME_SHORT, PROJECT_LINK, CSS_PREFIX } from '../../config/constants';
 import { currentUrl } from '../../../../../utils/url-utils';
 import { createSetting } from '../../../../utils/create';

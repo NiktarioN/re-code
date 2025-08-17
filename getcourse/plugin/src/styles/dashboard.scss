@@ -2,10 +2,14 @@
 	.text-block-wrapper {
 		flex-direction: column;
 		justify-content: center;
+		gap: 5px;
 
-		p:not(.recode-dashboard-title):not(:last-child) {
+		p {
 			margin: 0 !important;
-			margin-bottom: 3px !important;
+		}
+
+		.recode-dashboard-text {
+			text-align: center;
 		}
 	}
 

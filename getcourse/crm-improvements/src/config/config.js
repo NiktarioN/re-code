@@ -1,4 +1,4 @@
-import settings from './settings';
+import settings from './default-settings';
 
 const GLOBAL_CONFIG = {};
 
@@ -42,7 +42,37 @@ const setConfig = (options) => ({
   reloadOrderPage: options?.reloadOrderPage || settings.reloadOrder,
   addDealComments: options?.addDealComments || settings.addDealComments,
   dealCommentsFieldId: options?.dealCommentsFieldId || settings.dealCommentsFieldId,
-  validateOfferSettings: options?.validateOfferSettings || settings.validateOfferSettings,
+
+  validateOfferSettings: {
+    isEnabled: options?.validateOfferSettings?.isEnabled || settings.validateOfferSettings.isEnabled,
+    offerCode: {
+      isEnabled: options?.validateOfferSettings?.offerCode?.isEnabled || settings.validateOfferSettings.offerCode.isEnabled,
+    },
+    cancelReason: {
+      isEnabled: options?.validateOfferSettings?.cancelReason?.isEnabled || settings.validateOfferSettings.cancelReason.isEnabled,
+      strictMode: options?.validateOfferSettings?.cancelReason?.strictMode || settings.validateOfferSettings.cancelReason.strictMode,
+      ids: {
+        paid: options?.validateOfferSettings?.cancelReason?.ids?.paid || settings.validateOfferSettings.cancelReason.ids.paid,
+        free: options?.validateOfferSettings?.cancelReason?.ids?.free || settings.validateOfferSettings.cancelReason.ids.free,
+      }
+    },
+    tags: {
+      isEnabled: options?.validateOfferSettings?.tags?.isEnabled || settings.validateOfferSettings.tags.isEnabled,
+      requiredPrefixesTags: options?.validateOfferSettings?.tags?.requiredPrefixesTags || settings.validateOfferSettings.tags.requiredPrefixesTags,
+      excludedPrefixesTags: settings.validateOfferSettings.tags.excludedPrefixesTags
+    },
+    sendAdminMessage: {
+      isEnabled: options?.validateOfferSettings?.sendAdminMessage?.isEnabled || settings.validateOfferSettings.sendAdminMessage.isEnabled,
+      defaultValue: options?.validateOfferSettings?.sendAdminMessage?.defaultValue || settings.validateOfferSettings.sendAdminMessage.defaultValue,
+      mode: options?.validateOfferSettings?.sendAdminMessage?.mode || settings.validateOfferSettings.sendAdminMessage.mode,
+    },
+    sendUserMessage: {
+      isEnabled: options?.validateOfferSettings?.sendUserMessage?.isEnabled || settings.validateOfferSettings.sendUserMessage.isEnabled,
+      defaultValue: options?.validateOfferSettings?.sendUserMessage?.defaultValue || settings.validateOfferSettings.sendUserMessage.defaultValue,
+      mode: options?.validateOfferSettings?.sendUserMessage?.mode || settings.validateOfferSettings.sendUserMessage.mode,
+    }
+  },
+
   validateOfferChange: options?.validateOfferChange || settings.validateOfferChange,
   hideRightCardComments: options?.hideRightCardAddComments ?? settings.hideRightCardAddComments,
   tasks: {
@@ -55,6 +85,7 @@ const setConfig = (options) => ({
       enableButtonHighlight:
         options?.tasks?.comments?.enableButtonHighlight ?? settings.tasks.comments.enableButtonHighlight,
     },
+    changeDealStatus: options?.tasks?.changeDealStatus ?? settings.tasks.changeDealStatus,
   },
 });
 

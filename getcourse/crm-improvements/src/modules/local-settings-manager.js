@@ -2,8 +2,8 @@
 
 import { PLUGIN_NAME, LOCAL_STORAGE_KEY } from '../config/constants';
 import LOCAL_SETTINGS from '../config/local-settings';
+import getNestedValue from '../utils/get-nested-value';
 
-const getNestedValue = (obj, path) => path.split('.').reduce((acc, key) => acc?.[key], obj);
 const pathToObject = (path, value) =>
   path
     .split('.')

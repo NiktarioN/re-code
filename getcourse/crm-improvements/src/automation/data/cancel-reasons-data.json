@@ -24,7 +24,7 @@
 		"CancelReason[order_pos]": 5
 	},
 	{
-		"CancelReason[title]": "Дорого",
+		"CancelReason[title]": "Не устроила цена (дорого)",
 		"CancelReason[order_pos]": 6
 	},
 	{
@@ -80,7 +80,7 @@
 		"CancelReason[order_pos]": 19
 	},
 	{
-		"CancelReason[title]": "Работа в другом заказе",
+		"CancelReason[title]": "Работа в другом заказе (в каком?)",
 		"CancelReason[order_pos]": 20
 	},
 	{
@@ -88,8 +88,12 @@
 		"CancelReason[order_pos]": 21
 	},
 	{
-		"CancelReason[title]": "[тех] Перенос в другую карточку",
+		"CancelReason[title]": "[тех] Перенос на предыдущий поток",
 		"CancelReason[order_pos]": 22
+	},
+	{
+		"CancelReason[title]": "[тех] Перенос в другую карточку",
+		"CancelReason[order_pos]": 23
 	},
 	{
 		"CancelReason[title]": "Пользователь удален",

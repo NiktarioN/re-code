@@ -3,15 +3,13 @@
 	"env": {
 		"browser": true
 	},
-	"plugins": [
-		"compat"
-	],
-	"extends": [
-		"plugin:compat/recommended",
-		"airbnb-base",
-		"prettier"
-	],
+	"plugins": ["compat"],
+	"extends": ["plugin:compat/recommended", "airbnb-base", "prettier"],
 	"parserOptions": {
 		"ecmaVersion": "latest"
+	},
+	"rules": {
+		"no-console": "off",
+		"import/prefer-default-export": "off"
 	}
 }

@@ -5,6 +5,7 @@ const settings = {
   disableOfferAutoMessage: false,
   setOfferNds: true,
   changePaymentType: [],
+  changePaymentList: [],
   hideSystemOrders: {
     searchWords: [
       'Тест',

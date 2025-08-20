@@ -3,7 +3,7 @@
  * Description: Улучшение CRM GetCourse
  */
 
-import { setConfig, initConfig } from './config/config';
+import { initConfig, setConfig } from './config/config';
 import { PLUGIN_NAME, SELECTORS } from './config/constants';
 import createOrderTask from './features/tasks/create-order-task';
 import improveTaskButtons from './features/tasks/improve-buttons';
@@ -31,7 +31,7 @@ const gcCrmImprovements = {
     }
 
     this.config = setConfig(options);
-    initConfig(this.config || {});
+    initConfig(this.config);
 
     const {
       taskOrder: taskOrderConfig,

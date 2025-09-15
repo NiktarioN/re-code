@@ -1,0 +1,16 @@
+{
+	"root": true,
+	"env": {
+		"browser": true
+	},
+	"plugins": ["compat"],
+	"extends": ["plugin:compat/recommended", "airbnb-base", "prettier"],
+	"parserOptions": {
+		"ecmaVersion": "latest"
+	},
+	"rules": {
+		"no-param-reassign": "off",
+		"no-console": "off",
+		"import/prefer-default-export": "off"
+	}
+}

@@ -1,6 +1,26 @@
 [
 	{
 		"id": null,
+		"label": "Отменять_заказ_после_возврата",
+		"type": "checkbox",
+		"required": false,
+		"settings": {
+			"cols": 49,
+			"rows": 3,
+			"table_title": "",
+			"is_important": false
+		},
+		"description": "[ CRM ] Нужно ли отменять заказ после выполнения возврата. Заполняется вручную сотрудниками",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "0",
+		"key": "crm",
+		"object_type": "deal"
+	},
+	{
+		"id": null,
 		"label": "Ключевое_по_задаче",
 		"type": "string",
 		"required": false,
@@ -825,6 +845,25 @@
 		"show_in_table": false,
 		"hide_filled": false,
 		"hide": "1",
+		"key": "crm",
+		"object_type": "user"
+	},
+	{
+		"id": null,
+		"label": "Предпочитаемый_способ_связи",
+		"type": "select",
+		"required": false,
+		"settings": {
+			"valueList": "Звонки и сообщения\nТолько звонки\nТолько сообщения",
+			"showAllValues": false,
+			"emptyValueText": "Не выбран"
+		},
+		"description": "[ CRM ] Предпочитаемый способ связи. Используется для доп. информации в карточках задач. Заполняется через процесс, менеджером или клиентом",
+		"html_block": "",
+		"html_block_position": "",
+		"show_in_table": false,
+		"hide_filled": false,
+		"hide": "0",
 		"key": "crm",
 		"object_type": "user"
 	},

@@ -259,5 +259,12 @@
 		"Mission[object_type_id]": "42",
 		"tags": "CRM,КОНТРОЛЬ",
 		"Mission[type]": "manual"
+	},
+	{
+		"Mission[title]": "[ CRM ] Завершить все задачи [TECH]",
+		"Mission[description]": "Процесс, который завершает все задачи, проставляет значения в доп. полях и убирает из доски продаж\n\n[ ГДЕ ИСПОЛЬЗУЕТСЯ ]\nТолько на технической доске для заказов\n\n[ АВТОР ПРОЦЕССА ]\nНикита Трофимов (@NiktarioN — https://t.me/niktarion_channels)",
+		"Mission[object_type_id]": "42",
+		"tags": "CRM,ТЕХНИЧКА",
+		"Mission[type]": "manual"
 	}
 ]

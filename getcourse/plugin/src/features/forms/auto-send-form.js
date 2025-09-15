@@ -1,18 +1,23 @@
 import { currentUrl, hasSearchParam } from '../../../../../utils/url-utils';
 
+const CONFIG = {
+  SEARCH_PARAMS: ['autosendform', 'auto-send-form', 'auto_send_form'],
+};
+
 const autoSendForm = () => {
-	const hasSendFormParam = hasSearchParam(currentUrl.href, 'autosendform');
-	if (!hasSendFormParam) {
-		return;
-	}
+  const hasSendFormParam = CONFIG.SEARCH_PARAMS.some((param) => hasSearchParam(currentUrl.href, param));
+  console.log(hasSendFormParam);
+  if (!hasSendFormParam) {
+    return;
+  }
 
-	const form = document.querySelector('form.lt-form');
-	const button = form.querySelector('button[type="submit"]');
-	if (!form || !button) {
-		return;
-	}
+  const form = document.querySelector('form.lt-form');
+  const button = form.querySelector('button[type="submit"]');
+  if (!form || !button) {
+    return;
+  }
 
-	button.click();
+  button.click();
 };
 
 export default autoSendForm;

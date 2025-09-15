@@ -1,0 +1,37 @@
+<script data-plugin-name="Виджеты GetCourse на Bizon365 от RE-CODE"
+  src="https://tech-borodach.pro/packages/bizon365/getcourse-widgets/index.js"></script>
+
+<script>
+  recodeInitWidget({
+    widgetId: 'dd797cf8a43be1d88bc1ceb284c4fd0aa67af08f',
+    widgetSrc: 'https://techeducation.ru/pl/lite/widget/script?id=794504',
+    actionElementSelector: 'a[href*="getcourse-widget"]',
+  });
+
+  recodeInitAutoWidget({
+    widgetId: '49e651fde6b2d991058d02b9b885fb47abe96cad',
+    widgetSrc: 'https://techeducation.ru/pl/lite/widget/script?id=963259',
+    actionElementSelector: 'a[href*="auto-widget"]',
+  });
+
+  recodeInitTabWidget({
+    actionElementSelector: 'a[href*="tariffs"]',
+    tabs: [
+      {
+        title: 'Полная оплата',
+        widgetId: 'a0f55ec6b19a81786e4e4137e6d30634a9f16b0f',
+        widgetSrc: 'https://techeducation.ru/pl/lite/widget/script?id=963256',
+      },
+      {
+        title: 'Рассрочка',
+        widgetId: '49e651fde6b2d991058d02b9b885fb47abe96cad',
+        widgetSrc: 'https://techeducation.ru/pl/lite/widget/script?id=963259',
+      },
+      {
+        title: 'Предоплата',
+        widgetId: '9daf8ba0c5949eccd6e97176c08ee75a7ddfeab4',
+        widgetSrc: 'https://techeducation.ru/pl/lite/widget/script?id=963260',
+      },
+    ],
+  });
+</script>

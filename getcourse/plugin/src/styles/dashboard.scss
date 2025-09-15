@@ -1,3 +1,46 @@
+#funnelDashboard {
+	background-color: #f0f8ff;
+
+	// Меняем заголовки
+	.table > thead:first-child > tr:first-child {
+		position: relative;
+		border-bottom: 1px solid #ddd;
+	}
+
+	.table > thead:first-child > tr:first-child > td {
+		padding: 12px 8px;
+		background-color: #f5f5f5;
+
+		&::before {
+			content: '';
+			z-index: -1;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #f5f5f5;
+		}
+	}
+
+	.table > thead > tr > th {
+		border: none;
+	}
+
+	// Убираем разделитель в дашборде
+	.panel-visual-separator {
+		display: none;
+	}
+
+	.metrika-data-table .totals-row {
+		background-color: #f9f9f9;
+	}
+
+	.metrika-funnel-part {
+		border-color: #ddd;
+	}
+}
+
 .metrika-funnel-part-content {
 	.text-block-wrapper {
 		flex-direction: column;

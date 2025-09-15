@@ -1,0 +1,24 @@
+{
+	"name": "1",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"build": "npm run build:js && npm run build:css",
+		"build:js": "node scripts/build",
+		"build:css": "sass src/styles/index.scss build/index.css --no-source-map && postcss build/index.css --replace"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"cssnano": "^7.0.2",
+		"esbuild": "^7.0.5",
+		"postcss": "^8.4.38",
+		"postcss-cli": "^11.0.0",
+		"postcss-preset-env": "^9.5.14",
+		"sass": "^1.77.4",
+		"eslint": "^8.51.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-config-prettier": "^9.0.0",
+		"eslint-plugin-compat": "^4.2.0",
+		"eslint-plugin-import": "^2.28.1"
+	}
+}
